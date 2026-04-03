@@ -1,0 +1,82 @@
+[
+  {
+    "_id": "notif_001",
+    "userId": "usr_001",
+    "type": "badge_earned",
+    "title": "New Badge: Quiz Ace! 🏅",
+    "message": "You earned the Quiz Ace badge for scoring 100% on PM Fundamentals Check.",
+    "href": "/profile",
+    "read": false,
+    "createdAt": "2025-03-28T10:00:00Z"
+  },
+  {
+    "_id": "notif_002",
+    "userId": "usr_001",
+    "type": "quiz_result",
+    "title": "Quiz Passed! 🎯",
+    "message": "You scored 90% on PM Basics Check. Well done! Next: Agile & Scrum module.",
+    "href": "/learn/beginner",
+    "read": false,
+    "createdAt": "2025-03-28T09:30:00Z"
+  },
+  {
+    "_id": "notif_003",
+    "userId": "usr_001",
+    "type": "mentor_match",
+    "title": "Mentor Match Found! 🤝",
+    "message": "Marcus Johnson has accepted your mentorship request. Book your first session now.",
+    "href": "/mentorship/mentor_001",
+    "read": false,
+    "createdAt": "2025-03-27T14:00:00Z"
+  },
+  {
+    "_id": "notif_004",
+    "userId": "usr_001",
+    "type": "community_reply",
+    "title": "Marcus replied to your post",
+    "message": "Marcus Johnson replied to 'How did you choose your first PM certification?'",
+    "href": "/community/post_001",
+    "read": true,
+    "createdAt": "2025-03-22T09:00:00Z"
+  },
+  {
+    "_id": "notif_005",
+    "userId": "usr_001",
+    "type": "event_reminder",
+    "title": "Event Tomorrow: Agile Fundamentals Webinar 📅",
+    "message": "The Agile Fundamentals Webinar is tomorrow at 2:00 PM EST. Don't forget to join!",
+    "href": "/events/evt_002",
+    "read": true,
+    "createdAt": "2025-03-19T12:00:00Z"
+  },
+  {
+    "_id": "notif_006",
+    "userId": "usr_001",
+    "type": "streak_milestone",
+    "title": "7-Day Streak! 🔥",
+    "message": "You've been learning for 7 days straight! You earned +100 bonus points.",
+    "href": "/progress",
+    "read": true,
+    "createdAt": "2025-03-27T08:00:00Z"
+  },
+  {
+    "_id": "notif_007",
+    "userId": "usr_001",
+    "type": "new_content",
+    "title": "New Module Available 📚",
+    "message": "Risk Management & Mitigation has a new module: Risk Response Strategies",
+    "href": "/learn/intermediate",
+    "read": true,
+    "createdAt": "2025-03-15T10:00:00Z"
+  },
+  {
+    "_id": "notif_008",
+    "userId": "usr_002",
+    "type": "quiz_result",
+    "title": "Mock Exam Result: 78% 📊",
+    "message": "You scored 78% on Mock PMP Exam 1. Review your weak areas in the analytics dashboard.",
+    "href": "/learn/advanced/analytics",
+    "read": false,
+    "createdAt": "2025-03-28T11:00:00Z"
+  }
+]

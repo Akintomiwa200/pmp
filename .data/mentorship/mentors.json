@@ -1,0 +1,148 @@
+[
+  {
+    "_id": "mentor_001",
+    "mentorName": "Marcus Johnson",
+    "mentorId": "usr_003",
+    "expertise": ["PMP Prep", "Agile Transformation", "Stakeholder Management", "Enterprise PM"],
+    "industry": ["Technology", "Finance"],
+    "availability": "2 hours/week",
+    "sessionFormat": ["video", "chat"],
+    "rating": 4.9,
+    "reviewCount": 14,
+    "menteeCount": 3,
+    "maxMentees": 5,
+    "bio": "PMP-certified with 8 years leading enterprise software delivery at Fortune 500 companies. I've failed projects, saved failing projects, and built world-class PM teams. I mentor because I wish someone had done this for me when I was starting out.",
+    "languages": ["English"],
+    "timezone": "EST",
+    "isAccepting": true,
+    "yearsExp": 8,
+    "location": "Toronto, Canada",
+    "successStories": 12,
+    "badge": "Top Mentor",
+    "speciality": "PMP exam prep and Agile transformation in enterprise environments",
+    "reviews": [
+      { "author": "Priya S.", "rating": 5, "text": "Marcus gave me clarity I couldn't find anywhere else. After 2 sessions I had a solid 6-month study plan.", "date": "Feb 2025" },
+      { "author": "Jordan L.", "rating": 5, "text": "Incredibly direct and generous. He helped me land my first PM internship at Google.", "date": "Jan 2025" }
+    ],
+    "sessionTypes": [
+      { "name": "Introduction Call", "duration": "30 min", "desc": "Get to know each other, define your goals", "price": "Free" },
+      { "name": "Study Strategy Session", "duration": "60 min", "desc": "Build your personalised PMP study plan", "price": "$0 for members" },
+      { "name": "Monthly Mentorship", "duration": "2 hrs/mo", "desc": "Ongoing 1-on-1 with accountability", "price": "Premium" }
+    ]
+  },
+  {
+    "_id": "mentor_002",
+    "mentorName": "Dr. Amira Hassan",
+    "mentorId": "usr_004",
+    "expertise": ["Risk Management", "PRINCE2", "Government PM", "Change Management"],
+    "industry": ["Healthcare", "Government", "Finance"],
+    "availability": "1 hour/week",
+    "sessionFormat": ["video"],
+    "rating": 4.8,
+    "reviewCount": 9,
+    "menteeCount": 2,
+    "maxMentees": 4,
+    "bio": "15 years managing large-scale government and healthcare transformation programmes. PhD in Organisational Change. I specialise in helping PMs navigate complex stakeholder environments and regulatory compliance.",
+    "languages": ["English", "Arabic", "French"],
+    "timezone": "GMT",
+    "isAccepting": true,
+    "yearsExp": 15,
+    "location": "London, UK",
+    "successStories": 8,
+    "badge": "Expert Mentor",
+    "speciality": "High-stakes government and healthcare PM, risk management at scale",
+    "reviews": [
+      { "author": "Tom K.", "rating": 5, "text": "Dr. Hassan's depth of knowledge is extraordinary. She helped me navigate a very complex NHS project.", "date": "Mar 2025" }
+    ],
+    "sessionTypes": [
+      { "name": "Introduction Call", "duration": "30 min", "desc": "Assess fit and define objectives", "price": "Free" },
+      { "name": "Risk Review Session", "duration": "60 min", "desc": "Review your risk register together", "price": "$0 for members" }
+    ]
+  },
+  {
+    "_id": "mentor_003",
+    "mentorName": "Lisa Park",
+    "mentorId": "usr_005",
+    "expertise": ["Career Coaching", "Scrum", "Product Management", "Career Switching"],
+    "industry": ["Tech Startup", "E-commerce", "Product"],
+    "availability": "1 hour/week",
+    "sessionFormat": ["video", "chat"],
+    "rating": 4.8,
+    "reviewCount": 9,
+    "menteeCount": 4,
+    "maxMentees": 6,
+    "bio": "Former UX designer turned PM at two successful startups. I know exactly what it feels like to be an outsider trying to break into PM — because I was one. I focus on practical steps: portfolio building, interview prep, and getting your first PM role.",
+    "languages": ["English", "Korean"],
+    "timezone": "PST",
+    "isAccepting": true,
+    "yearsExp": 4,
+    "location": "San Francisco, USA",
+    "successStories": 7,
+    "badge": "Career Switcher Expert",
+    "speciality": "Transitioning into PM from non-technical backgrounds",
+    "reviews": [
+      { "author": "Emma W.", "rating": 5, "text": "Lisa completely changed how I approach interviews. Got my first PM role 3 months after working with her.", "date": "Feb 2025" }
+    ],
+    "sessionTypes": [
+      { "name": "Career Switch Strategy", "duration": "60 min", "desc": "Map your path from current role to PM", "price": "Free first session" },
+      { "name": "Interview Prep", "duration": "45 min", "desc": "Mock interviews and feedback", "price": "$0 for members" }
+    ]
+  },
+  {
+    "_id": "mentor_004",
+    "mentorName": "James Okafor",
+    "mentorId": "usr_006",
+    "expertise": ["Agile", "Scrum Master", "Remote PM", "NGO Project Management"],
+    "industry": ["Technology", "NGO", "Education"],
+    "availability": "2 hours/week",
+    "sessionFormat": ["video", "chat"],
+    "rating": 4.7,
+    "reviewCount": 6,
+    "menteeCount": 3,
+    "maxMentees": 6,
+    "bio": "Certified Scrum Master with 6 years running distributed teams across Africa, Europe, and the Americas. Expert in remote-first PM practices, async communication, and NGO project delivery with tight budgets.",
+    "languages": ["English", "Yoruba", "French"],
+    "timezone": "WAT",
+    "isAccepting": true,
+    "yearsExp": 6,
+    "location": "Lagos, Nigeria",
+    "successStories": 5,
+    "badge": null,
+    "speciality": "Remote PM, distributed team management, NGO/social impact projects",
+    "reviews": [
+      { "author": "Sofia M.", "rating": 5, "text": "James is the only mentor who truly understood the challenges of managing remote teams across time zones.", "date": "Jan 2025" }
+    ],
+    "sessionTypes": [
+      { "name": "Remote PM Strategy", "duration": "60 min", "desc": "Build your remote team playbook", "price": "Free first session" }
+    ]
+  },
+  {
+    "_id": "mentor_005",
+    "mentorName": "Sarah Chen",
+    "mentorId": "usr_007",
+    "expertise": ["PMP Prep", "Agile Coaching", "Tech PM", "OKRs", "Product Strategy"],
+    "industry": ["Technology", "SaaS", "FinTech"],
+    "availability": "3 hours/week",
+    "sessionFormat": ["video", "chat", "async"],
+    "rating": 4.9,
+    "reviewCount": 22,
+    "menteeCount": 5,
+    "maxMentees": 5,
+    "bio": "10+ years at Google, Stripe, and two unicorn startups. PMP and SAFe certified. I've built and led global PM teams and now focus on mentoring the next generation of tech PMs. Known for practical, no-fluff guidance.",
+    "languages": ["English", "Mandarin"],
+    "timezone": "SGT",
+    "isAccepting": false,
+    "yearsExp": 10,
+    "location": "Singapore",
+    "successStories": 18,
+    "badge": "Top Rated",
+    "speciality": "Tech PM career growth, PMP prep, OKR frameworks, leading PM teams",
+    "reviews": [
+      { "author": "Marcus J.", "rating": 5, "text": "Sarah's advice helped me make the jump from mid-level to senior PM in 6 months.", "date": "Dec 2024" },
+      { "author": "Priya S.", "rating": 5, "text": "The most practical mentor I've worked with. Everything she says is immediately actionable.", "date": "Nov 2024" }
+    ],
+    "sessionTypes": [
+      { "name": "Career Growth Session", "duration": "60 min", "desc": "Map your PM career trajectory", "price": "$0 for members" }
+    ]
+  }
+]

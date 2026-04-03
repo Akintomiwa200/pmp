@@ -1,0 +1,30 @@
+[
+  {
+    "_id": "survey_001",
+    "type": "nps",
+    "userId": "usr_001",
+    "score": 9,
+    "comment": "Really well structured learning paths. The beginner roadmap was exactly what I needed.",
+    "createdAt": "2025-03-15T10:00:00Z",
+    "source": "dashboard"
+  },
+  {
+    "_id": "survey_002",
+    "type": "nps",
+    "userId": "usr_002",
+    "score": 10,
+    "comment": "The mock exam and weak areas dashboard are incredible for PMP prep.",
+    "createdAt": "2025-03-20T14:00:00Z",
+    "source": "mockexam"
+  },
+  {
+    "_id": "survey_003",
+    "type": "module_feedback",
+    "userId": "usr_003",
+    "moduleId": "mod_001",
+    "rating": 5,
+    "comment": "Clear explanation of the Iron Triangle. Would love more real-world examples.",
+    "createdAt": "2025-03-22T09:00:00Z",
+    "source": "module"
+  }
+]

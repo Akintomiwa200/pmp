@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "req_001",
+    "menteeId": "usr_001",
+    "menteeName": "Alex Rivera",
+    "mentorId": "mentor_001",
+    "mentorName": "Marcus Johnson",
+    "status": "accepted",
+    "message": "Hi Marcus! I'm a marketing professional transitioning into PM. I'd love guidance on PMP prep and building my first PM portfolio.",
+    "goals": ["Get PMP certified", "Land my first PM role"],
+    "level": "beginner",
+    "createdAt": "2025-03-22T10:00:00Z",
+    "respondedAt": "2025-03-23T09:00:00Z"
+  },
+  {
+    "_id": "req_002",
+    "menteeId": "usr_002",
+    "menteeName": "Priya Sharma",
+    "mentorId": "mentor_001",
+    "mentorName": "Marcus Johnson",
+    "status": "pending",
+    "message": "I've been a PM for 2 years but want to level up to senior roles. Specifically need help with stakeholder management at the enterprise level.",
+    "goals": ["Improve current PM skills", "Build & lead a team"],
+    "level": "intermediate",
+    "createdAt": "2025-03-25T14:00:00Z",
+    "respondedAt": null
+  },
+  {
+    "_id": "req_003",
+    "menteeId": "usr_005",
+    "menteeName": "Emma Wilson",
+    "mentorId": "mentor_002",
+    "mentorName": "Dr. Amira Hassan",
+    "status": "declined",
+    "message": "Looking for PRINCE2 guidance for healthcare PM transition.",
+    "goals": ["Switch from another field"],
+    "level": "intermediate",
+    "createdAt": "2025-03-18T11:00:00Z",
+    "respondedAt": "2025-03-19T10:00:00Z",
+    "declineReason": "Not currently accepting healthcare-focused mentees as my capacity is full."
+  }
+]

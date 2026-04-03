@@ -1,0 +1,69 @@
+{
+  "_id": "sim_001",
+  "title": "Your First Project Simulation",
+  "subtitle": "Launch a Company Blog — End-to-End PM Experience",
+  "description": "Step into the role of a junior PM managing a real project. You'll create a charter, plan the work, manage stakeholders, and close the project. Each decision affects your project health.",
+  "totalSteps": 5,
+  "phases": [
+    {
+      "phase": "Initiation",
+      "step": 1,
+      "title": "Define the Project",
+      "scenario": "Your manager asks you to launch a company blog within 6 weeks. You have a designer, a developer, and a content writer on your team. Budget: $5,000.",
+      "task": "Create a project charter defining the project objectives, key deliverables, and stakeholders.",
+      "choices": [
+        { "id": "A", "text": "Write a detailed charter with objectives, scope, stakeholders, budget, timeline, and success criteria.", "points": 30, "outcome": "Excellent! A thorough charter gives your team clarity and gets formal sign-off from leadership." },
+        { "id": "B", "text": "Send a quick email summarising the project to the team and get started immediately.", "points": 5, "outcome": "Moving fast but skipping formal initiation. You'll likely face scope disagreements and unclear ownership later." },
+        { "id": "C", "text": "Ask for a kickoff meeting with all stakeholders before writing anything.", "points": 20, "outcome": "Good approach! Gathering input first improves your charter quality, though it adds a day." }
+      ]
+    },
+    {
+      "phase": "Planning",
+      "step": 2,
+      "title": "Plan the Work",
+      "scenario": "Your charter is approved. You need to plan 6 weeks of work across design, development, and content.",
+      "task": "Break down the project into tasks and create a schedule.",
+      "choices": [
+        { "id": "A", "text": "Build a full WBS, assign owners, set dependencies, and create a Gantt chart with milestones.", "points": 30, "outcome": "Thorough planning. Your team knows exactly what to do and when. This pays off during execution." },
+        { "id": "B", "text": "Create a simple Kanban board with To Do / In Progress / Done columns.", "points": 22, "outcome": "Lightweight but effective for a small team. Good choice for Agile-friendly projects." },
+        { "id": "C", "text": "Let the team members plan their own work and report back weekly.", "points": 8, "outcome": "Risky. Without shared planning, tasks may overlap or fall through the cracks." }
+      ]
+    },
+    {
+      "phase": "Execution",
+      "step": 3,
+      "title": "Manage a Change Request",
+      "scenario": "Week 3. The CEO sees the blog mockup and wants to add a podcast section. This would take an extra 2 weeks and $1,500.",
+      "task": "How do you handle this change request?",
+      "choices": [
+        { "id": "A", "text": "Evaluate the impact, document a change request, get approval from the sponsor before proceeding.", "points": 30, "outcome": "Perfect! Formal change control protects your baseline and keeps everyone aligned on the trade-offs." },
+        { "id": "B", "text": "Just add it — the CEO asked for it, so you have to do it.", "points": 5, "outcome": "Scope creep! Adding work without formal approval puts your timeline and budget at risk. The CEO may not realise the impact." },
+        { "id": "C", "text": "Add it to a Phase 2 backlog and explain why it can't be in the current scope.", "points": 25, "outcome": "Smart scope management! Negotiating scope boundaries and deferring to Phase 2 keeps the project on track." }
+      ]
+    },
+    {
+      "phase": "Monitoring",
+      "step": 4,
+      "title": "Track Performance",
+      "scenario": "Week 4. Development is 50% done but has used 70% of the dev budget. Content is on track.",
+      "task": "Your CPI for development is 0.71. What do you do?",
+      "choices": [
+        { "id": "A", "text": "Analyse root cause, raise a flag to the sponsor with options (reduce scope, add budget, accept the risk).", "points": 30, "outcome": "Excellent! Proactive communication and data-driven options are exactly what good PMs do." },
+        { "id": "B", "text": "Wait and see if the developer can speed up in the next 2 weeks.", "points": 5, "outcome": "Risky. CPI of 0.71 won't fix itself — waiting makes it worse and surprises stakeholders later." },
+        { "id": "C", "text": "Crash the schedule by bringing in a second developer at extra cost.", "points": 18, "outcome": "An option, but you've taken unilateral action on budget without sponsor approval. Log it as a corrective action." }
+      ]
+    },
+    {
+      "phase": "Closing",
+      "step": 5,
+      "title": "Close the Project",
+      "scenario": "Week 6. The blog is live! It got 500 visitors on day 1. Now you need to formally close the project.",
+      "task": "What do the closing activities include?",
+      "choices": [
+        { "id": "A", "text": "Get formal stakeholder acceptance, document lessons learned, archive project files, release team, celebrate!", "points": 30, "outcome": "Perfect closure! You've done it all — formal acceptance, knowledge transfer, team recognition." },
+        { "id": "B", "text": "Send a 'project complete' email and move on to the next project.", "points": 5, "outcome": "Informal closure misses lessons learned, formal acceptance, and leaves loose ends. Always document your close." },
+        { "id": "C", "text": "Write up the final project report and archive it, but skip the celebration — too busy.", "points": 20, "outcome": "Good documentation, but don't forget to recognise the team! Morale and retention matter." }
+      ]
+    }
+  ]
+}

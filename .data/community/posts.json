@@ -1,0 +1,162 @@
+[
+  {
+    "_id": "post_001",
+    "title": "How did you choose your first PM certification?",
+    "content": "Hi everyone! I'm a beginner and overwhelmed by the options — CAPM, PMP, PMI-ACP, PRINCE2... How did you all decide which one to pursue first? Any advice for someone just starting out?\n\nI'm currently in marketing and want to transition into a PM role within 12 months. I have no formal PM experience but I've been managing small internal projects informally.",
+    "authorId": "usr_001",
+    "authorName": "Alex Rivera",
+    "level": "beginner",
+    "category": "advice",
+    "tags": ["certification", "capm", "pmp", "beginner"],
+    "upvotes": 34,
+    "upvotedBy": ["usr_002", "usr_003", "usr_004", "usr_005"],
+    "isPinned": true,
+    "createdAt": "2025-03-20T10:00:00Z",
+    "replies": [
+      {
+        "_id": "rep_001_1",
+        "content": "Great question! I started with CAPM because it has fewer prerequisites. Once I had 3 years of PM experience, I went for PMP. Start where you are — CAPM is perfect for someone with no formal PM experience.",
+        "authorId": "usr_003",
+        "authorName": "Marcus Johnson",
+        "isExpert": true,
+        "upvotes": 12,
+        "upvotedBy": ["usr_001", "usr_002"],
+        "createdAt": "2025-03-20T15:30:00Z"
+      },
+      {
+        "_id": "rep_001_2",
+        "content": "I went PMI-ACP first since my company is Agile-heavy. Really depends on your industry! What sector are you targeting for your PM role?",
+        "authorId": "usr_002",
+        "authorName": "Priya Sharma",
+        "isExpert": false,
+        "upvotes": 8,
+        "upvotedBy": ["usr_001", "usr_004"],
+        "createdAt": "2025-03-20T16:45:00Z"
+      }
+    ]
+  },
+  {
+    "_id": "post_002",
+    "title": "Resources for learning Earned Value Management (EVM)?",
+    "content": "I'm preparing for PMP and EVM is killing me. CPI, SPI, EAC, TCPI... any resources, practice problems, or mnemonics that helped you master EVM formulas?\n\nI've read the PMBOK section three times and I still mix up EAC variants. Help!",
+    "authorId": "usr_002",
+    "authorName": "Priya Sharma",
+    "level": "advanced",
+    "category": "resources",
+    "tags": ["evm", "pmp", "formulas", "advanced"],
+    "upvotes": 28,
+    "upvotedBy": ["usr_001", "usr_003", "usr_005"],
+    "isPinned": true,
+    "createdAt": "2025-03-18T09:00:00Z",
+    "replies": [
+      {
+        "_id": "rep_002_1",
+        "content": "EVM finally clicked for me when I thought of it like a report card. CPI = are you getting value per dollar? SPI = are you getting value per planned unit? Everything else flows from EV. PMPath's flashcards helped a ton!",
+        "authorId": "usr_003",
+        "authorName": "Marcus Johnson",
+        "isExpert": true,
+        "upvotes": 15,
+        "upvotedBy": ["usr_002", "usr_001"],
+        "createdAt": "2025-03-18T14:00:00Z"
+      },
+      {
+        "_id": "rep_002_2",
+        "content": "The mock exam section here has great EVM practice. Also try the free EVM calculator tools online — working backwards from answers helped me understand the logic.",
+        "authorId": "usr_005",
+        "authorName": "Sofia Martinez",
+        "isExpert": false,
+        "upvotes": 9,
+        "upvotedBy": ["usr_002", "usr_001"],
+        "createdAt": "2025-03-19T10:30:00Z"
+      }
+    ]
+  },
+  {
+    "_id": "post_003",
+    "title": "Successfully transitioned to PM from Marketing! Here's what worked 🎉",
+    "content": "After 8 months of studying and networking, I just accepted a Junior PM role at a fintech startup! I want to share what actually worked:\n\n1. PMPath beginner path gave me solid foundations\n2. Doing the project simulation 3 times really drilled the lifecycle\n3. Mentorship with Marcus here was game-changing\n4. I focused my job search on companies that value Agile skills\n5. The PM glossary helped me speak the language in interviews\n\nTo everyone starting out — it's possible. Keep going!",
+    "authorId": "usr_001",
+    "authorName": "Alex Rivera",
+    "level": "beginner",
+    "category": "success_story",
+    "tags": ["career-switch", "marketing-to-pm", "success", "tips"],
+    "upvotes": 67,
+    "upvotedBy": ["usr_002", "usr_003", "usr_004", "usr_005"],
+    "isPinned": false,
+    "createdAt": "2025-03-25T11:00:00Z",
+    "replies": [
+      {
+        "_id": "rep_003_1",
+        "content": "Huge congratulations! This is exactly the kind of story that motivates everyone else here. Which fintech company if you don't mind sharing?",
+        "authorId": "usr_004",
+        "authorName": "Jordan Lee",
+        "isExpert": false,
+        "upvotes": 5,
+        "upvotedBy": ["usr_001"],
+        "createdAt": "2025-03-25T12:00:00Z"
+      },
+      {
+        "_id": "rep_003_2",
+        "content": "Alex worked incredibly hard. Well-deserved! This is what PMPath is all about.",
+        "authorId": "usr_003",
+        "authorName": "Marcus Johnson",
+        "isExpert": true,
+        "upvotes": 20,
+        "upvotedBy": ["usr_001", "usr_002", "usr_004"],
+        "createdAt": "2025-03-25T13:00:00Z"
+      }
+    ]
+  },
+  {
+    "_id": "post_004",
+    "title": "What's the real difference between a PM and a Scrum Master?",
+    "content": "I keep getting asked this in interviews and I keep stumbling. Can someone give a really clear explanation? My understanding is SM serves the team while PM serves the project, but I need a more nuanced answer.",
+    "authorId": "usr_004",
+    "authorName": "Jordan Lee",
+    "level": "beginner",
+    "category": "advice",
+    "tags": ["scrum-master", "pm-role", "agile", "interview"],
+    "upvotes": 19,
+    "upvotedBy": ["usr_001", "usr_002"],
+    "isPinned": false,
+    "createdAt": "2025-03-22T15:00:00Z",
+    "replies": [
+      {
+        "_id": "rep_004_1",
+        "content": "Great interview question! PM = manages the project (budget, scope, stakeholders, delivery). SM = serves the Scrum team (removes impediments, facilitates ceremonies, coaches practices). A PM thinks about WHAT and WHEN. A SM thinks about HOW the team works. In hybrid environments, one person can do both — but the mindsets are different.",
+        "authorId": "usr_003",
+        "authorName": "Marcus Johnson",
+        "isExpert": true,
+        "upvotes": 22,
+        "upvotedBy": ["usr_004", "usr_001", "usr_002"],
+        "createdAt": "2025-03-22T16:30:00Z"
+      }
+    ]
+  },
+  {
+    "_id": "post_005",
+    "title": "Risk register vs Issues log — when does a risk become an issue?",
+    "content": "I've been building risk registers but I'm confused about the exact trigger point. At what point does a risk get moved to the issues log? Is it when the risk event occurs? Or when you decide to act on it?",
+    "authorId": "usr_005",
+    "authorName": "Sofia Martinez",
+    "level": "intermediate",
+    "category": "advice",
+    "tags": ["risk-management", "issues-log", "intermediate", "pmbok"],
+    "upvotes": 14,
+    "upvotedBy": ["usr_001", "usr_003"],
+    "isPinned": false,
+    "createdAt": "2025-03-24T09:00:00Z",
+    "replies": [
+      {
+        "_id": "rep_005_1",
+        "content": "Simple rule: Risk = it might happen (probability >0%, <100%). Issue = it IS happening right now (100% certain). The moment a risk materialises — the uncertain event occurs — it becomes an issue. Move it to the issues log and trigger your response plan. Keep the risk register entry too for historical tracking.",
+        "authorId": "usr_002",
+        "authorName": "Priya Sharma",
+        "isExpert": false,
+        "upvotes": 11,
+        "upvotedBy": ["usr_005", "usr_001"],
+        "createdAt": "2025-03-24T10:00:00Z"
+      }
+    ]
+  }
+]

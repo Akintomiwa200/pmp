@@ -1,0 +1,131 @@
+[
+  {
+    "_id": "evt_001",
+    "title": "PMI Global Summit 2025",
+    "description": "The world's premier project management conference. 3 days of keynotes, workshops, and networking with 10,000+ PM professionals.",
+    "type": "conference",
+    "format": "hybrid",
+    "location": {
+      "city": "Chicago",
+      "country": "USA",
+      "venue": "McCormick Place",
+      "virtualLink": "https://pmi.org/summit/virtual"
+    },
+    "startDate": "2025-09-15T09:00:00Z",
+    "endDate": "2025-09-17T18:00:00Z",
+    "price": {
+      "inPerson": 1200,
+      "virtual": 399,
+      "memberDiscount": 20
+    },
+    "speakers": ["Marcus Johnson, PMP", "Dr. Sarah Lee", "Tom Richards"],
+    "topics": ["Leadership", "AI in PM", "Agile at Scale", "Change Management"],
+    "registrationUrl": "https://pmi.org/summit/register",
+    "maxAttendees": 10000,
+    "registeredCount": 6240,
+    "isFeatured": true,
+    "level": "all",
+    "organizer": "PMI",
+    "image": "/images/events/pmi-summit.jpg",
+    "tags": ["conference", "networking", "certification", "leadership"]
+  },
+  {
+    "_id": "evt_002",
+    "title": "Agile Fundamentals Webinar",
+    "description": "Free 90-minute webinar covering Agile principles, Scrum basics, and how to advocate for Agile adoption in your organization.",
+    "type": "webinar",
+    "format": "virtual",
+    "location": {
+      "virtualLink": "https://zoom.us/webinar/example"
+    },
+    "startDate": "2025-04-10T18:00:00Z",
+    "endDate": "2025-04-10T19:30:00Z",
+    "price": { "virtual": 0 },
+    "speakers": ["Lisa Park", "James Okafor"],
+    "topics": ["Agile", "Scrum", "Sprint Planning"],
+    "registrationUrl": "https://pmpath.app/events/agile-webinar",
+    "maxAttendees": 500,
+    "registeredCount": 312,
+    "isFeatured": true,
+    "level": "beginner",
+    "organizer": "PMPath Team",
+    "image": "/images/events/agile-webinar.jpg",
+    "tags": ["webinar", "agile", "free", "beginner"]
+  },
+  {
+    "_id": "evt_003",
+    "title": "PMP Study Group - Weekly Session",
+    "description": "Weekly virtual study group for PMP exam candidates. Review PMBOK concepts, tackle practice questions, and support each other.",
+    "type": "study_group",
+    "format": "virtual",
+    "location": {
+      "virtualLink": "https://meet.google.com/example"
+    },
+    "startDate": "2025-04-05T14:00:00Z",
+    "endDate": "2025-04-05T16:00:00Z",
+    "recurrence": "weekly",
+    "price": { "virtual": 0 },
+    "speakers": ["Community Led"],
+    "topics": ["PMP", "PMBOK", "Exam Prep"],
+    "registrationUrl": "https://pmpath.app/events/pmp-study-group",
+    "maxAttendees": 30,
+    "registeredCount": 22,
+    "isFeatured": false,
+    "level": "advanced",
+    "organizer": "PMPath Community",
+    "image": "/images/events/study-group.jpg",
+    "tags": ["study_group", "pmp", "free", "advanced", "weekly"]
+  },
+  {
+    "_id": "evt_004",
+    "title": "New York PM Meetup",
+    "description": "Monthly in-person meetup for NY-based PM professionals. Casual networking, lightning talks, and happy hour.",
+    "type": "meetup",
+    "format": "in_person",
+    "location": {
+      "city": "New York",
+      "country": "USA",
+      "venue": "WeWork - Times Square",
+      "address": "1460 Broadway, New York, NY 10036"
+    },
+    "startDate": "2025-04-18T18:30:00Z",
+    "endDate": "2025-04-18T21:00:00Z",
+    "price": { "inPerson": 15 },
+    "speakers": [],
+    "topics": ["Networking", "Career", "PM Tools"],
+    "registrationUrl": "https://meetup.com/nyc-pm",
+    "maxAttendees": 80,
+    "registeredCount": 54,
+    "isFeatured": false,
+    "level": "all",
+    "organizer": "NYC PM Community",
+    "image": "/images/events/nyc-meetup.jpg",
+    "tags": ["meetup", "networking", "new-york", "in-person"]
+  },
+  {
+    "_id": "evt_005",
+    "title": "Risk Management Workshop",
+    "description": "Half-day intensive workshop on risk identification, assessment matrices, and mitigation planning. Certificate of completion provided.",
+    "type": "workshop",
+    "format": "hybrid",
+    "location": {
+      "city": "London",
+      "country": "UK",
+      "venue": "Barbican Centre",
+      "virtualLink": "https://zoom.us/workshop/risk"
+    },
+    "startDate": "2025-05-02T09:00:00Z",
+    "endDate": "2025-05-02T13:00:00Z",
+    "price": { "inPerson": 89, "virtual": 49 },
+    "speakers": ["Dr. Amira Hassan"],
+    "topics": ["Risk Management", "Risk Register", "PMBOK"],
+    "registrationUrl": "https://pmpath.app/events/risk-workshop",
+    "maxAttendees": 120,
+    "registeredCount": 67,
+    "isFeatured": true,
+    "level": "intermediate",
+    "organizer": "PMPath Academy",
+    "image": "/images/events/risk-workshop.jpg",
+    "tags": ["workshop", "risk", "intermediate", "certificate"]
+  }
+]

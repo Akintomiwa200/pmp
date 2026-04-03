@@ -1,0 +1,67 @@
+[
+  {
+    "_id": "log_001",
+    "adminId": "admin_001",
+    "adminName": "Sarah Chen",
+    "action": "UPDATE_COURSE",
+    "resource": "courses",
+    "resourceId": "crs_001",
+    "details": "Updated course title and description",
+    "ipAddress": "192.168.1.1",
+    "userAgent": "Mozilla/5.0",
+    "createdAt": "2025-03-27T10:00:00Z",
+    "severity": "info"
+  },
+  {
+    "_id": "log_002",
+    "adminId": "admin_001",
+    "adminName": "Sarah Chen",
+    "action": "BAN_USER",
+    "resource": "users",
+    "resourceId": "usr_xxx",
+    "details": "User banned for spamming community forum",
+    "ipAddress": "192.168.1.1",
+    "userAgent": "Mozilla/5.0",
+    "createdAt": "2025-03-26T15:30:00Z",
+    "severity": "warning"
+  },
+  {
+    "_id": "log_003",
+    "adminId": "superadmin_001",
+    "adminName": "Super Admin",
+    "action": "CREATE_ADMIN",
+    "resource": "admins",
+    "resourceId": "admin_002",
+    "details": "Created new admin account for James Okafor",
+    "ipAddress": "10.0.0.1",
+    "userAgent": "Mozilla/5.0",
+    "createdAt": "2025-03-15T09:00:00Z",
+    "severity": "info"
+  },
+  {
+    "_id": "log_004",
+    "adminId": "admin_002",
+    "adminName": "James Okafor",
+    "action": "DELETE_POST",
+    "resource": "community",
+    "resourceId": "post_xxx",
+    "details": "Deleted post violating community guidelines",
+    "ipAddress": "192.168.2.5",
+    "userAgent": "Mozilla/5.0",
+    "createdAt": "2025-03-25T12:00:00Z",
+    "severity": "warning"
+  },
+  {
+    "_id": "log_005",
+    "adminId": "superadmin_001",
+    "adminName": "Super Admin",
+    "action": "SYSTEM_CONFIG_CHANGE",
+    "resource": "system",
+    "resourceId": "config",
+    "details": "Updated maintenance mode settings",
+    "ipAddress": "10.0.0.1",
+    "userAgent": "Mozilla/5.0",
+    "createdAt": "2025-03-20T08:00:00Z",
+    "severity": "critical"
+  }
+]

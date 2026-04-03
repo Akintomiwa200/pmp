@@ -1,0 +1,71 @@
+{
+  "overview": {
+    "totalUsers": 12847,
+    "activeUsersToday": 1423,
+    "activeUsersThisWeek": 5820,
+    "activeUsersThisMonth": 9340,
+    "newSignupsToday": 87,
+    "newSignupsThisWeek": 543,
+    "newSignupsThisMonth": 1820,
+    "totalCourseCompletions": 4320,
+    "avgCompletionRate": 71,
+    "totalQuizAttempts": 28940,
+    "avgQuizScore": 76,
+    "totalCommunityPosts": 1847,
+    "totalEventsRSVP": 3240,
+    "premiumSubscribers": 1240,
+    "revenueThisMonth": 9840,
+    "npsScore": 8.4,
+    "thirtyDayRetention": 54
+  },
+  "usersByLevel": [
+    { "level": "beginner", "count": 7420, "percentage": 58 },
+    { "level": "intermediate", "count": 3840, "percentage": 30 },
+    { "level": "advanced", "count": 1587, "percentage": 12 }
+  ],
+  "dailyActiveUsers": [
+    { "date": "2025-03-22", "users": 1120 },
+    { "date": "2025-03-23", "users": 1340 },
+    { "date": "2025-03-24", "users": 980 },
+    { "date": "2025-03-25", "users": 1560 },
+    { "date": "2025-03-26", "users": 1390 },
+    { "date": "2025-03-27", "users": 1480 },
+    { "date": "2025-03-28", "users": 1423 }
+  ],
+  "signupsByDay": [
+    { "date": "2025-03-22", "signups": 62 },
+    { "date": "2025-03-23", "signups": 78 },
+    { "date": "2025-03-24", "signups": 54 },
+    { "date": "2025-03-25", "signups": 91 },
+    { "date": "2025-03-26", "signups": 84 },
+    { "date": "2025-03-27", "signups": 97 },
+    { "date": "2025-03-28", "signups": 87 }
+  ],
+  "topCourses": [
+    { "id": "crs_001", "title": "PM Fundamentals", "enrollments": 3420, "completionRate": 78 },
+    { "id": "crs_002", "title": "Agile & Scrum", "enrollments": 2180, "completionRate": 65 },
+    { "id": "crs_005", "title": "Stakeholder Communication", "enrollments": 1680, "completionRate": 72 },
+    { "id": "crs_003", "title": "Risk Management", "enrollments": 1240, "completionRate": 68 },
+    { "id": "crs_004", "title": "PMP Bootcamp", "enrollments": 890, "completionRate": 58 }
+  ],
+  "geographicDistribution": [
+    { "country": "USA", "users": 4820, "percentage": 37 },
+    { "country": "UK", "users": 1540, "percentage": 12 },
+    { "country": "India", "users": 1920, "percentage": 15 },
+    { "country": "Canada", "users": 980, "percentage": 8 },
+    { "country": "Australia", "users": 640, "percentage": 5 },
+    { "country": "Other", "users": 2947, "percentage": 23 }
+  ],
+  "revenueByMonth": [
+    { "month": "Oct 2024", "revenue": 4200 },
+    { "month": "Nov 2024", "revenue": 5800 },
+    { "month": "Dec 2024", "revenue": 7200 },
+    { "month": "Jan 2025", "revenue": 8100 },
+    { "month": "Feb 2025", "revenue": 8950 },
+    { "month": "Mar 2025", "revenue": 9840 }
+  ],
+  "contentFlags": 12,
+  "pendingEventApprovals": 4,
+  "pendingJobApprovals": 7,
+  "openSupportTickets": 23
+}

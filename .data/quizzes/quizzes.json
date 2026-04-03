@@ -1,0 +1,222 @@
+[
+  {
+    "_id": "quiz_001",
+    "moduleId": "mod_001",
+    "title": "PM Fundamentals Check",
+    "passingScore": 70,
+    "timeLimit": 300,
+    "difficulty": "beginner",
+    "questions": [
+      {
+        "_id": "q_001_1",
+        "question": "Which of the following BEST describes a project?",
+        "type": "multiple_choice",
+        "options": ["Ongoing day-to-day operational activities", "A temporary endeavor creating a unique product or result", "Annual budget planning activities", "Recurring maintenance tasks"],
+        "correctAnswer": 1,
+        "explanation": "Projects are temporary (defined start and end) and produce unique deliverables — unlike operations which are ongoing and repetitive.",
+        "points": 10
+      },
+      {
+        "_id": "q_001_2",
+        "question": "The 'Iron Triangle' of project management refers to:",
+        "type": "multiple_choice",
+        "options": ["People, Process, Technology", "Scope, Time, Cost", "Plan, Execute, Review", "Risk, Quality, Communication"],
+        "correctAnswer": 1,
+        "explanation": "The Iron Triangle (Triple Constraint) = Scope, Time, Cost. Any change to one of these affects the others.",
+        "points": 10
+      },
+      {
+        "_id": "q_001_3",
+        "question": "What is the primary purpose of a Project Charter?",
+        "type": "multiple_choice",
+        "options": ["To track day-to-day tasks", "To formally authorize the project and identify the project manager", "To replace the project management plan", "To document lessons learned"],
+        "correctAnswer": 1,
+        "explanation": "The Project Charter formally authorizes the project, names the PM, and defines high-level scope and objectives.",
+        "points": 10
+      },
+      {
+        "_id": "q_001_4",
+        "question": "Which phase comes FIRST in the project management lifecycle?",
+        "type": "multiple_choice",
+        "options": ["Planning", "Executing", "Initiating", "Closing"],
+        "correctAnswer": 2,
+        "explanation": "Initiating is the first phase, where the project is defined and the charter is created.",
+        "points": 10
+      },
+      {
+        "_id": "q_001_5",
+        "question": "Who formally authorizes and funds a project?",
+        "type": "multiple_choice",
+        "options": ["The Project Manager", "The Scrum Master", "The Project Sponsor", "The Team Lead"],
+        "correctAnswer": 2,
+        "explanation": "The Project Sponsor champions the project, provides resources, and holds ultimate accountability for project success.",
+        "points": 10
+      }
+    ]
+  },
+  {
+    "_id": "quiz_002",
+    "moduleId": "mod_004",
+    "title": "Agile & Scrum Assessment",
+    "passingScore": 70,
+    "timeLimit": 400,
+    "difficulty": "beginner",
+    "questions": [
+      {
+        "_id": "q_002_1",
+        "question": "In Scrum, who is responsible for prioritizing the Product Backlog?",
+        "type": "multiple_choice",
+        "options": ["Scrum Master", "Product Owner", "Development Team", "Stakeholders"],
+        "correctAnswer": 1,
+        "explanation": "The Product Owner manages and prioritizes the Product Backlog, deciding what gets built and in what order.",
+        "points": 10
+      },
+      {
+        "_id": "q_002_2",
+        "question": "What is the maximum recommended time for a Daily Scrum?",
+        "type": "multiple_choice",
+        "options": ["5 minutes", "15 minutes", "30 minutes", "1 hour"],
+        "correctAnswer": 1,
+        "explanation": "The Daily Scrum (standup) is time-boxed to 15 minutes to keep it focused and efficient.",
+        "points": 10
+      },
+      {
+        "_id": "q_002_3",
+        "question": "Which Agile methodology uses columns and WIP limits to visualize workflow?",
+        "type": "multiple_choice",
+        "options": ["Scrum", "Kanban", "SAFe", "XP"],
+        "correctAnswer": 1,
+        "explanation": "Kanban uses a visual board with columns (To Do, In Progress, Done) and Work in Progress (WIP) limits.",
+        "points": 10
+      },
+      {
+        "_id": "q_002_4",
+        "question": "What is a Sprint Retrospective focused on?",
+        "type": "multiple_choice",
+        "options": ["Demonstrating work to stakeholders", "Planning the next sprint", "Inspecting the team's process and identifying improvements", "Reviewing the product backlog"],
+        "correctAnswer": 2,
+        "explanation": "The Retrospective is for the team to inspect how they worked together and create a plan for improvements in the next sprint.",
+        "points": 10
+      },
+      {
+        "_id": "q_002_5",
+        "question": "What does 'Definition of Done' mean in Scrum?",
+        "type": "multiple_choice",
+        "options": ["The sprint is complete", "A shared understanding of what 'complete' means for an increment", "The product is ready for launch", "All bugs have been fixed"],
+        "correctAnswer": 1,
+        "explanation": "The Definition of Done is a checklist of quality criteria that must be met before a Product Backlog item can be considered complete.",
+        "points": 10
+      }
+    ]
+  },
+  {
+    "_id": "quiz_003",
+    "moduleId": "mod_006",
+    "title": "Risk Management Quiz",
+    "passingScore": 70,
+    "timeLimit": 480,
+    "difficulty": "intermediate",
+    "questions": [
+      {
+        "_id": "q_003_1",
+        "question": "What is the difference between a risk and an issue?",
+        "type": "multiple_choice",
+        "options": ["They are the same thing", "A risk is a future uncertainty; an issue is a current problem", "An issue is planned; a risk is unplanned", "Risks are positive; issues are negative"],
+        "correctAnswer": 1,
+        "explanation": "A risk is an uncertain future event (might happen). An issue is a problem that has already occurred and requires immediate action.",
+        "points": 15
+      },
+      {
+        "_id": "q_003_2",
+        "question": "Which risk response strategy involves shifting the impact of a risk to a third party?",
+        "type": "multiple_choice",
+        "options": ["Avoid", "Mitigate", "Transfer", "Accept"],
+        "correctAnswer": 2,
+        "explanation": "Transfer shifts the financial impact to a third party — through insurance, warranties, or contract clauses. The risk still exists, but someone else bears the consequence.",
+        "points": 15
+      },
+      {
+        "_id": "q_003_3",
+        "question": "A stakeholder has HIGH power but LOW interest in your project. Your engagement strategy should be:",
+        "type": "multiple_choice",
+        "options": ["Manage Closely", "Keep Informed", "Keep Satisfied", "Monitor Only"],
+        "correctAnswer": 2,
+        "explanation": "High power/low interest stakeholders should be 'Keep Satisfied' — engage enough to prevent them from blocking the project but don't overwhelm them.",
+        "points": 15
+      },
+      {
+        "_id": "q_003_4",
+        "question": "Expected Monetary Value (EMV) for a risk is calculated as:",
+        "type": "multiple_choice",
+        "options": ["Probability + Impact", "Probability × Impact (in $)", "Impact / Probability", "Probability − Impact"],
+        "correctAnswer": 1,
+        "explanation": "EMV = Probability × Impact ($). Example: 30% chance of $100k loss = EMV of -$30k. Used in decision tree analysis.",
+        "points": 15
+      },
+      {
+        "_id": "q_003_5",
+        "question": "Which technique uses anonymous rounds of expert input to identify and prioritize risks?",
+        "type": "multiple_choice",
+        "options": ["Brainstorming", "SWOT Analysis", "Delphi Technique", "Checklist Analysis"],
+        "correctAnswer": 2,
+        "explanation": "The Delphi Technique uses anonymous expert questionnaires in multiple rounds until consensus is reached, reducing bias from group dynamics.",
+        "points": 15
+      }
+    ]
+  },
+  {
+    "_id": "quiz_004",
+    "moduleId": "mod_008",
+    "title": "PMP Certification Practice",
+    "passingScore": 75,
+    "timeLimit": 720,
+    "difficulty": "advanced",
+    "questions": [
+      {
+        "_id": "q_004_1",
+        "question": "A project has BAC=$200,000, EV=$80,000, AC=$110,000. What is the CPI?",
+        "type": "multiple_choice",
+        "options": ["0.55", "0.73", "1.10", "0.40"],
+        "correctAnswer": 1,
+        "explanation": "CPI = EV/AC = $80,000/$110,000 = 0.73. The project is over budget (getting only $0.73 of value per $1 spent).",
+        "points": 20
+      },
+      {
+        "_id": "q_004_2",
+        "question": "Using the same figures (BAC=$200k, EV=$80k, AC=$110k), what is the EAC?",
+        "type": "multiple_choice",
+        "options": ["$200,000", "$274,000", "$230,000", "$310,000"],
+        "correctAnswer": 1,
+        "explanation": "EAC = BAC/CPI = $200,000/0.727 = $274,967 ≈ $274,000. The project is forecast to overrun by about $74k.",
+        "points": 20
+      },
+      {
+        "_id": "q_004_3",
+        "question": "According to PMBOK 7, which principle focuses on recognizing that projects exist within complex, interrelated systems?",
+        "type": "multiple_choice",
+        "options": ["Stewardship", "Value Delivery", "Systems Thinking", "Adaptability"],
+        "correctAnswer": 2,
+        "explanation": "The Systems Thinking principle recognizes that projects exist within complex environments with interrelated components. Changes in one area affect others.",
+        "points": 20
+      },
+      {
+        "_id": "q_004_4",
+        "question": "A key stakeholder requests a scope change after baseline approval. The PM should FIRST:",
+        "type": "multiple_choice",
+        "options": ["Implement it immediately since it's a key stakeholder", "Reject it to protect the baseline", "Evaluate impact and submit through Integrated Change Control", "Escalate to the project sponsor without evaluation"],
+        "correctAnswer": 2,
+        "explanation": "All changes, regardless of source, must go through Integrated Change Control (ICC). Evaluate impact on scope, time, cost, and quality before deciding.",
+        "points": 20
+      },
+      {
+        "_id": "q_004_5",
+        "question": "What does TCPI measure?",
+        "type": "multiple_choice",
+        "options": ["Total Cost Performance Indicator", "The cost efficiency needed to complete remaining work within budget", "Time Cost Performance Index", "The variance between planned and actual cost"],
+        "correctAnswer": 1,
+        "explanation": "TCPI = (BAC-EV)/(BAC-AC). It measures the required cost efficiency to complete the remaining work within the original budget. TCPI > 1 means you need to be more efficient than you've been.",
+        "points": 20
+      }
+    ]
+  }
+]

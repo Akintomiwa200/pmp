@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /superadmin/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /_next/
+
+Sitemap: https://pmpath.app/sitemap.xml

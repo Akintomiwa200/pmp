@@ -1,0 +1,117 @@
+[
+  {
+    "_id": "mod_001", "courseId": "crs_001", "title": "What is Project Management?", "order": 1,
+    "duration": "18 min", "type": "video+article", "isPreview": true, "completedBy": ["usr_001"],
+    "content": {
+      "videoUrl": "https://www.youtube.com/embed/jFpFPBDCgFk",
+      "articleMarkdown": "## What is Project Management?\n\nProject management is the discipline of planning, organizing, and managing resources to bring about the successful completion of specific project goals and objectives.\n\n### A Project vs Operations\n- **Project**: Temporary endeavor producing a unique result (building an app, launching a product)\n- **Operations**: Ongoing, repetitive work (customer support, payroll processing)\n\n### The Iron Triangle\nEvery project is constrained by three factors:\n- **Scope** — What work is included?\n- **Time** — When must it be done?\n- **Cost** — How much can be spent?\n\nChange one, and the others are affected.\n\n### Why PM Matters\nOrganizations using formal PM waste 28× less money (PMI Pulse 2024). PMs are the connective tissue of successful teams.",
+      "downloadables": [
+        { "name": "PM Fundamentals Cheatsheet.pdf", "url": "/downloads/pm-fundamentals.pdf" },
+        { "name": "Iron Triangle Explainer.pdf", "url": "/downloads/iron-triangle.pdf" }
+      ]
+    },
+    "quiz": "quiz_001"
+  },
+  {
+    "_id": "mod_002", "courseId": "crs_001", "title": "The PM Lifecycle: 5 Phases", "order": 2,
+    "duration": "22 min", "type": "video+article", "isPreview": false, "completedBy": ["usr_001"],
+    "content": {
+      "videoUrl": "https://www.youtube.com/embed/5Y-tFxCRXis",
+      "articleMarkdown": "## The 5 Process Groups\n\n### 1. Initiating\nFormal authorisation of the project. Key output: **Project Charter**.\n\n### 2. Planning\nDefine scope, schedule, budget, risks, resources, and communications. Key output: **Project Management Plan**.\n\n### 3. Executing\nCoordinate people, deliver the work, manage stakeholders.\n\n### 4. Monitoring & Controlling\nTrack actual vs planned. Take corrective action. Key tool: **Earned Value Management**.\n\n### 5. Closing\nFormal acceptance, lessons learned, archive documents, release team.\n\n> 💡 These groups overlap — monitoring runs throughout the entire project.",
+      "downloadables": [{ "name": "PM Lifecycle Diagram.pdf", "url": "/downloads/pm-lifecycle.pdf" }]
+    },
+    "quiz": "quiz_001"
+  },
+  {
+    "_id": "mod_003", "courseId": "crs_001", "title": "Agile vs Waterfall: Choosing Right", "order": 3,
+    "duration": "25 min", "type": "video+article", "isPreview": false, "completedBy": [],
+    "content": {
+      "videoUrl": "https://www.youtube.com/embed/5FuHGVSj7SY",
+      "articleMarkdown": "## Agile vs Waterfall\n\n### Waterfall\n- Linear phases: Requirements → Design → Build → Test → Deploy\n- Best for: Fixed scope, regulated industries, construction\n- Risk: Late testing discovers expensive errors\n\n### Agile\n- Iterative sprints, continuous delivery\n- Best for: Software, products with evolving requirements\n- Risk: Hard to predict final cost/date\n\n### Hybrid\nMany organisations combine both. Use Waterfall for planning/governance, Agile for delivery.\n\n### Decision Framework\n- Do requirements change frequently? → Agile\n- Is scope fixed and documented? → Waterfall\n- Is quality/compliance paramount? → PRINCE2 or hybrid",
+      "downloadables": [{ "name": "Agile vs Waterfall Guide.pdf", "url": "/downloads/agile-waterfall.pdf" }]
+    },
+    "quiz": "quiz_002"
+  },
+  {
+    "_id": "mod_004", "courseId": "crs_002", "title": "Scrum Framework Deep Dive", "order": 1,
+    "duration": "30 min", "type": "video+article", "isPreview": true, "completedBy": [],
+    "content": {
+      "videoUrl": "https://www.youtube.com/embed/2Vt7Ik8Ublw",
+      "articleMarkdown": "## The Scrum Framework\n\n### Three Roles\n- **Product Owner**: Owns the backlog. Defines priorities. Represents the business.\n- **Scrum Master**: Servant-leader. Removes blockers. Coaches Agile practices.\n- **Development Team**: Self-organising. 3-9 members. Cross-functional.\n\n### Five Events\n1. **Sprint** (1-4 weeks): The heartbeat of Scrum\n2. **Sprint Planning**: What gets done this sprint?\n3. **Daily Scrum** (15 min max): Sync, not status report\n4. **Sprint Review**: Demo to stakeholders\n5. **Retrospective**: How do we improve?\n\n### Three Artifacts\n- **Product Backlog**: The ordered to-do list\n- **Sprint Backlog**: What's committed for this sprint\n- **Increment**: The working product at sprint end",
+      "downloadables": [{ "name": "Scrum Reference Card.pdf", "url": "/downloads/scrum-reference.pdf" }]
+    },
+    "quiz": "quiz_002"
+  },
+  {
+    "_id": "mod_005", "courseId": "crs_002", "title": "User Stories & Backlog Refinement", "order": 2,
+    "duration": "28 min", "type": "video+article", "isPreview": false, "completedBy": [],
+    "content": {
+      "videoUrl": "https://www.youtube.com/embed/SWDhGSZv8PM",
+      "articleMarkdown": "## Writing Great User Stories\n\n### The Formula\n> As a **[user type]**, I want **[goal]** so that **[benefit]**.\n\n### Example\n> As a **job seeker**, I want to **filter PM jobs by remote/in-person** so that **I only see relevant opportunities**.\n\n### Acceptance Criteria\nDefines what 'done' means for the story. Use BDD format:\n- GIVEN [context] WHEN [action] THEN [outcome]\n\n### Story Points\nRelative effort estimation. Use Fibonacci sequence: 1, 2, 3, 5, 8, 13.\n\n### Backlog Refinement\nOngoing grooming: split large stories, clarify acceptance criteria, re-estimate, reprioritise.",
+      "downloadables": [{ "name": "User Story Template.docx", "url": "/downloads/user-story-template.docx" }]
+    },
+    "quiz": "quiz_002"
+  },
+  {
+    "_id": "mod_006", "courseId": "crs_003", "title": "Identifying & Categorising Risks", "order": 1,
+    "duration": "35 min", "type": "video+article", "isPreview": true, "completedBy": [],
+    "content": {
+      "videoUrl": "https://www.youtube.com/embed/QpbBEBKl2oM",
+      "articleMarkdown": "## Risk Identification\n\n### Risk vs Issue\n- **Risk**: Uncertain future event (might happen)\n- **Issue**: Problem happening now (is happening)\n\n### Risk Categories (PESTLE)\n- **P**olitical, **E**conomic, **S**ocial, **T**echnological, **L**egal, **E**nvironmental\n\n### Identification Techniques\n1. **Brainstorming**: Team workshop, no filtering\n2. **Delphi**: Anonymous expert rounds\n3. **SWOT**: Strengths, Weaknesses, Opportunities, Threats\n4. **Checklist**: Historical risks from similar projects\n5. **Interviews**: One-on-one with SMEs\n\n### The Risk Register\n| Field | Description |\n|-------|-------------|\n| ID | Unique identifier |\n| Description | What could happen |\n| Probability | H / M / L |\n| Impact | H / M / L |\n| Score | P × I |\n| Owner | Who monitors it |\n| Response | Strategy chosen |",
+      "downloadables": [
+        { "name": "Risk Register Template.xlsx", "url": "/downloads/risk-register.xlsx" },
+        { "name": "Risk ID Checklist.pdf", "url": "/downloads/risk-checklist.pdf" }
+      ]
+    },
+    "quiz": "quiz_003"
+  },
+  {
+    "_id": "mod_007", "courseId": "crs_003", "title": "Risk Response Strategies", "order": 2,
+    "duration": "28 min", "type": "video+article", "isPreview": false, "completedBy": [],
+    "content": {
+      "videoUrl": "https://www.youtube.com/embed/jp0M0msRMNc",
+      "articleMarkdown": "## Risk Response Strategies\n\n### For Negative Risks (Threats)\n1. **Avoid**: Change plan to eliminate the risk\n2. **Transfer**: Shift impact to third party (insurance, contracts)\n3. **Mitigate**: Reduce probability or impact\n4. **Accept**: Acknowledge and monitor (passive) or create contingency (active)\n5. **Escalate**: Raise to programme/sponsor level\n\n### For Positive Risks (Opportunities)\n1. **Exploit**: Make it happen (assign best resources)\n2. **Share**: Partner with another party\n3. **Enhance**: Increase probability or impact\n4. **Accept**: Take it if it comes\n\n### Contingency vs Management Reserve\n- **Contingency**: Known unknowns (within PM authority)\n- **Management Reserve**: Unknown unknowns (needs sponsor approval)",
+      "downloadables": [{ "name": "Risk Response Matrix.pdf", "url": "/downloads/risk-response.pdf" }]
+    },
+    "quiz": "quiz_003"
+  },
+  {
+    "_id": "mod_008", "courseId": "crs_004", "title": "PMBOK 7 — 12 Principles & 8 Domains", "order": 1,
+    "duration": "50 min", "type": "video+article", "isPreview": true, "completedBy": [],
+    "content": {
+      "videoUrl": "https://www.youtube.com/embed/v5_52I7u0xg",
+      "articleMarkdown": "## PMBOK 7 Overview\n\nPMBOK 7 (2021) is a major shift from process-based to **principles-based** PM.\n\n### 12 PM Principles\n1. Stewardship — Be ethical and responsible\n2. Team — Build high-performing teams\n3. Stakeholders — Engage proactively\n4. Value — Focus on outcomes, not outputs\n5. Systems Thinking — See the bigger picture\n6. Leadership — Lead, don't just manage\n7. Tailoring — Adapt your approach\n8. Quality — Build quality in from the start\n9. Complexity — Navigate ambiguity confidently\n10. Risk — Balance opportunities and threats\n11. Adaptability & Resiliency — Embrace change\n12. Change Management — Enable the future state\n\n### 8 Performance Domains\n1. Stakeholders\n2. Team\n3. Development Approach & Lifecycle\n4. Planning\n5. Project Work\n6. Delivery\n7. Measurement\n8. Uncertainty",
+      "downloadables": [
+        { "name": "PMBOK 7 Summary.pdf", "url": "/downloads/pmbok7-summary.pdf" },
+        { "name": "12 Principles Quick Ref.pdf", "url": "/downloads/principles-ref.pdf" }
+      ]
+    },
+    "quiz": "quiz_004"
+  },
+  {
+    "_id": "mod_009", "courseId": "crs_004", "title": "EVM: Mastering the Formulas", "order": 2,
+    "duration": "45 min", "type": "video+article", "isPreview": false, "completedBy": [],
+    "content": {
+      "videoUrl": "https://www.youtube.com/embed/4vJMKVGwjb0",
+      "articleMarkdown": "## Earned Value Management\n\n### The Three Key Metrics\n- **PV** (Planned Value): Budgeted cost of scheduled work\n- **EV** (Earned Value): Budgeted cost of work performed\n- **AC** (Actual Cost): Actual cost of work performed\n\n### Performance Indices\n- **CPI** = EV ÷ AC → >1 = under budget ✓\n- **SPI** = EV ÷ PV → >1 = ahead of schedule ✓\n\n### Variances\n- **CV** = EV – AC (negative = over budget)\n- **SV** = EV – PV (negative = behind schedule)\n\n### Forecasting\n- **EAC** = BAC ÷ CPI (most common)\n- **ETC** = EAC – AC\n- **VAC** = BAC – EAC\n- **TCPI** = (BAC–EV) ÷ (BAC–AC)\n\n### Example\nBAC=$100k, PV=$40k, EV=$35k, AC=$45k\n- CPI = 35/45 = **0.78** (over budget!)\n- SPI = 35/40 = **0.875** (behind schedule!)\n- EAC = 100/0.78 = **$128k** (forecast to overrun by $28k)",
+      "downloadables": [
+        { "name": "EVM Formula Sheet.pdf", "url": "/downloads/evm-formulas.pdf" },
+        { "name": "EVM Practice Problems.xlsx", "url": "/downloads/evm-practice.xlsx" }
+      ]
+    },
+    "quiz": "quiz_004"
+  },
+  {
+    "_id": "mod_010", "courseId": "crs_005", "title": "Stakeholder Identification & Power/Interest Grid", "order": 1,
+    "duration": "30 min", "type": "video+article", "isPreview": true, "completedBy": [],
+    "content": {
+      "videoUrl": "https://www.youtube.com/embed/mw5eDRQ4RI4",
+      "articleMarkdown": "## Stakeholder Management\n\n### Definition\nA stakeholder is anyone who may affect, be affected by, or perceive themselves to be affected by your project.\n\n### The Stakeholder Register\nFor each stakeholder, document:\n- Name, role, contact info\n- Level of influence (High/Medium/Low)\n- Level of interest (High/Medium/Low)\n- Current vs desired engagement\n- Communication preferences\n\n### Power/Interest Grid\n| | Low Interest | High Interest |\n|---|---|---|\n| **High Power** | Keep Satisfied | Manage Closely |\n| **Low Power** | Monitor | Keep Informed |\n\n### Engagement Levels (PMBOK)\n1. Unaware → 2. Resistant → 3. Neutral → 4. Supportive → 5. Leading\n\nYour job: Move stakeholders toward Supportive or Leading.",
+      "downloadables": [
+        { "name": "Stakeholder Register Template.xlsx", "url": "/downloads/stakeholder-register.xlsx" },
+        { "name": "Communication Plan Template.docx", "url": "/downloads/comm-plan.docx" }
+      ]
+    },
+    "quiz": "quiz_003"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "admin_001",
+    "userId": "usr_admin_001",
+    "name": "Sarah Chen",
+    "email": "admin@pmpath.app",
+    "role": "admin",
+    "permissions": ["manage_courses", "manage_events", "manage_community", "manage_jobs", "view_analytics", "moderate_content"],
+    "createdAt": "2024-01-01T00:00:00Z",
+    "lastLoginAt": "2025-03-28T08:00:00Z",
+    "isActive": true,
+    "createdBy": "superadmin_001"
+  },
+  {
+    "_id": "admin_002",
+    "userId": "usr_admin_002",
+    "name": "James Okafor",
+    "email": "content@pmpath.app",
+    "role": "admin",
+    "permissions": ["manage_courses", "manage_events", "moderate_content"],
+    "createdAt": "2024-03-15T00:00:00Z",
+    "lastLoginAt": "2025-03-27T14:30:00Z",
+    "isActive": true,
+    "createdBy": "superadmin_001"
+  }
+]
