@@ -18,14 +18,15 @@ const nextConfig: NextConfig = {
   },
 
   // ── Experimental ───────────────────────────────────────────────────────────
+  serverExternalPackages: [],
+  serverActions: {
+    allowedOrigins: [
+      "localhost:3000",
+      process.env.NEXT_PUBLIC_APP_URL?.replace("https://", "") ?? "pmpath.app",
+    ],
+    bodySizeLimit: "4mb",
+  },
   experimental: {
-    serverActions: {
-      allowedOrigins: [
-        "localhost:3000",
-        process.env.NEXT_PUBLIC_APP_URL?.replace("https://", "") ?? "pmpath.app",
-      ],
-      bodySizeLimit: "4mb",
-    },
     optimizePackageImports: [
       "lucide-react",
       "framer-motion",
