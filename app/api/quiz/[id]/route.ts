@@ -6,22 +6,14 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params; // await the promise
+    const { id } = await params;
     const quiz = await getQuizById(id);
-
-    if (!quiz) {
-      return NextResponse.json(
-        { success: false, error: "Quiz not found" },
-        { status: 404 }
-      );
-    }
+    if (!quiz)
+      return NextResponse.json({ success: false, error: "Quiz not found" }, { status: 404 });
 
     return NextResponse.json({ success: true, data: quiz });
   } catch (err) {
     console.error("GET quiz error:", err);
-    return NextResponse.json(
-      { success: false, error: "Failed to fetch quiz" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: false, error: "Failed to fetch quiz" }, { status: 500 });
   }
 }
