@@ -64,7 +64,7 @@
     "stripe": "^18.5.0",
     "@stripe/stripe-js": "^8.1.0",
     "resend": "^6.0.1",
-    "react-email": "^4.3.3",
+    "react-email": "5.2.10",
     "marked": "^16.4.1",
     "dompurify": "3.3.2",
     "copy-to-clipboard": "^3.3.3",
