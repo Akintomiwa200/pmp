@@ -10,7 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "next": "16.1.6",
+    "next": "16.1.5",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "next-auth": "^4.24.13",
@@ -66,7 +66,7 @@
     "resend": "^6.0.1",
     "react-email": "^4.3.3",
     "marked": "^16.4.1",
-    "dompurify": "^3.3.0",
+    "dompurify": "3.3.2",
     "copy-to-clipboard": "^3.3.3",
     "qrcode": "^1.5.4",
     "sharp": "^0.34.4",
@@ -94,7 +94,7 @@
     "@vitejs/plugin-react": "^5.1.0",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
-    "happy-dom": "^20.0.8",
+    "happy-dom": "20.8.8",
     "tsx": "^4.20.6",
     "@next/bundle-analyzer": "^16.1.6",
     "cross-env": "^10.1.0"
