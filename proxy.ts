@@ -1,10 +1,12 @@
-// middleware.ts
+// proxy.ts
 import NextAuth from "next-auth";
 import { authConfig } from "@/lib/auth.config";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export default NextAuth(authConfig).auth((req) => {
+const { auth } = NextAuth(authConfig);
+
+export default auth((req) => {
   const { pathname } = req.nextUrl;
   const user = req.auth?.user as Record<string, unknown> | undefined;
   const isLoggedIn = !!user;
@@ -14,7 +16,10 @@ export default NextAuth(authConfig).auth((req) => {
   if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true") {
     const isMaintenancePage = pathname === "/maintenance";
     const isApiRoute = pathname.startsWith("/api");
-    const isAdminRoute = pathname.startsWith("/admin") || pathname.startsWith("/superadmin");
+    const isAdminRoute =
+      pathname.startsWith("/admin") ||
+      pathname.startsWith("/superadmin");
+
     if (!isMaintenancePage && !isApiRoute && !isAdminRoute) {
       return NextResponse.redirect(new URL("/maintenance", req.url));
     }
@@ -22,29 +27,56 @@ export default NextAuth(authConfig).auth((req) => {
 
   // SuperAdmin routes
   if (pathname.startsWith("/superadmin")) {
-    if (!isLoggedIn) return NextResponse.redirect(new URL("/auth/login?from=superadmin", req.url));
-    if (role !== "superadmin") return NextResponse.redirect(new URL("/dashboard", req.url));
+    if (!isLoggedIn) {
+      return NextResponse.redirect(
+        new URL("/auth/login?from=superadmin", req.url)
+      );
+    }
+    if (role !== "superadmin") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
     return NextResponse.next();
   }
 
   // Admin routes
   if (pathname.startsWith("/admin")) {
-    if (!isLoggedIn) return NextResponse.redirect(new URL("/auth/login?from=admin", req.url));
-    if (role !== "admin" && role !== "superadmin") return NextResponse.redirect(new URL("/dashboard", req.url));
+    if (!isLoggedIn) {
+      return NextResponse.redirect(
+        new URL("/auth/login?from=admin", req.url)
+      );
+    }
+    if (role !== "admin" && role !== "superadmin") {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
     return NextResponse.next();
   }
 
-  // Protected user routes
-  const protectedRoutes = ["/dashboard", "/profile", "/settings", "/progress", "/certificates", "/notifications", "/mentorship/requests"];
+  // Protected routes
+  const protectedRoutes = [
+    "/dashboard",
+    "/profile",
+    "/settings",
+    "/progress",
+    "/certificates",
+    "/notifications",
+    "/mentorship/requests",
+  ];
+
   if (protectedRoutes.some((r) => pathname.startsWith(r))) {
     if (!isLoggedIn) {
       const callbackUrl = encodeURIComponent(pathname);
-      return NextResponse.redirect(new URL(`/auth/login?callbackUrl=${callbackUrl}`, req.url));
+      return NextResponse.redirect(
+        new URL(`/auth/login?callbackUrl=${callbackUrl}`, req.url)
+      );
     }
   }
 
-  // Already logged-in users visiting auth pages
-  if (isLoggedIn && (pathname.startsWith("/auth/login") || pathname.startsWith("/auth/signup"))) {
+  // Logged in users shouldn't visit auth pages
+  if (
+    isLoggedIn &&
+    (pathname.startsWith("/auth/login") ||
+      pathname.startsWith("/auth/signup"))
+  ) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
