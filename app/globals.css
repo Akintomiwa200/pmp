@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
 
 /* ── CSS Variables ───────────────────────────────────────────────────────── */
 :root {
@@ -37,7 +36,7 @@
 }
 
 /* ── Base Styles ─────────────────────────────────────────────────────────── */
-@layer base {
+
   *, *::before, *::after { box-sizing: border-box; }
 
   html {
@@ -105,10 +104,10 @@
   .dark input, .dark textarea, .dark select {
     @apply bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-500;
   }
-}
+
 
 /* ── Components ──────────────────────────────────────────────────────────── */
-@layer components {
+
 
   /* ─── Level Badges ────────────────────────────────── */
   .badge-beginner {
@@ -218,10 +217,10 @@
     background: #0d1424;
     border: 1px solid #1e2a3d;
   }
-}
+
 
 /* ── Utilities ───────────────────────────────────────────────────────────── */
-@layer utilities {
+
   .text-balance { text-wrap: balance; }
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
@@ -253,7 +252,7 @@
   .animation-delay-500 { animation-delay: 500ms; }
   .animation-delay-700 { animation-delay: 700ms; }
   .animation-delay-1000 { animation-delay: 1000ms; }
-}
+
 
 /* ── Print Styles ────────────────────────────────────────────────────────── */
 @media print {
