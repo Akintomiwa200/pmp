@@ -35,7 +35,9 @@ function JobCard({ job }: { job: Job }) {
     <div className="card dark:bg-slate-800 dark:border-slate-700 p-5 space-y-4 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200">
       <div className="flex items-start gap-4">
         <div className="w-12 h-12 rounded-2xl bg-surface-1 dark:bg-slate-700 border border-surface-3 dark:border-slate-600 flex items-center justify-center text-2xl shrink-0">
-          {job.logo ? <img src={job.logo} alt={job.company} className="w-full h-full object-contain" /> : <Building size={20} className="text-ink-subtle" />}
+          {(job as any).logo 
+            ? <img src={(job as any).logo} alt={job.company} className="w-full h-full object-contain" /> 
+            : <Building size={20} className="text-ink-subtle" />}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
@@ -44,7 +46,7 @@ function JobCard({ job }: { job: Job }) {
               <p className="text-sm text-ink-muted mt-0.5">{job.company}</p>
             </div>
             <div className="flex flex-col items-end gap-1.5 shrink-0">
-              {job.isFeatured && (
+              {(job as any).isFeatured && (
                 <span className="flex items-center gap-1 text-[10px] font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 px-2 py-0.5 rounded-full">
                   <Star size={8} />Featured
                 </span>
@@ -92,7 +94,7 @@ export default async function JobsPage() {
   const jobs = await getJobs();
 
   const remoteJobs = jobs.filter(j => j.isRemote);
-  const featuredJobs = jobs.filter(j => j.isFeatured);
+  const featuredJobs = jobs.filter(j => (j as any).isFeatured);
   const entryJobs = jobs.filter(j => j.level === "entry" || j.level === "intern");
 
   const levels = ["All", "Intern", "Entry", "Mid", "Senior", "Lead"];
@@ -149,46 +151,59 @@ export default async function JobsPage() {
       <div className="grid lg:grid-cols-4 gap-8">
         {/* Sidebar filters */}
         <aside className="lg:col-span-1 space-y-5">
-          {/* ...Sidebar filters remain the same... */}
+          {/* Search */}
+          <div className="card dark:bg-slate-800 dark:border-slate-700 p-4">
+            <div className="relative">
+              <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-subtle" />
+              <input className="input text-sm pl-9 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100" placeholder="Search jobs..." />
+            </div>
+          </div>
+
+          {/* Level filter */}
+          <div className="card dark:bg-slate-800 dark:border-slate-700 p-4">
+            <p className="text-xs font-bold text-ink-subtle uppercase tracking-wider mb-3">Experience Level</p>
+            <div className="space-y-1">
+              {levels.map((l, i) => (
+                <button key={l}
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-sm transition-colors ${i === 0 ? "bg-brand-50 dark:bg-brand-950/30 text-brand-700 dark:text-brand-400 font-semibold" : "text-ink-muted dark:text-slate-400 hover:bg-surface-1 dark:hover:bg-slate-700"}`}>
+                  {l}
+                  <span className="text-xs bg-surface-2 dark:bg-slate-600 px-1.5 py-0.5 rounded-full text-ink-subtle">
+                    {l === "All" ? jobs.length : jobs.filter(j => j.level.toLowerCase() === l.toLowerCase()).length}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Type filter */}
+          <div className="card dark:bg-slate-800 dark:border-slate-700 p-4">
+            <p className="text-xs font-bold text-ink-subtle uppercase tracking-wider mb-3">Job Type</p>
+            <div className="space-y-1">
+              {types.map((t, i) => (
+                <button key={t}
+                  className={`w-full text-left px-3 py-2 rounded-xl text-sm transition-colors ${i === 0 ? "bg-brand-50 dark:bg-brand-950/30 text-brand-700 dark:text-brand-400 font-semibold" : "text-ink-muted dark:text-slate-400 hover:bg-surface-1 dark:hover:bg-slate-700"}`}>
+                  {t}
+                  <span className="text-xs bg-surface-2 dark:bg-slate-600 px-1.5 py-0.5 rounded-full text-ink-subtle">
+                    {t === "All Types" ? jobs.length : jobs.filter(j => (TYPE_LABELS[j.type] ?? j.type) === t).length}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
         </aside>
 
         {/* Job listings */}
         <div className="lg:col-span-3 space-y-4">
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-ink-muted">{jobs.length} jobs found</p>
-            <select className="input max-w-[160px] text-sm py-2 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100">
-              <option>Most Recent</option>
-              <option>Featured First</option>
-              <option>Salary: High to Low</option>
-              <option>Entry Level First</option>
-            </select>
-          </div>
-
-          {/* Featured */}
           {featuredJobs.length > 0 && (
             <div>
               <p className="text-xs font-bold text-amber-600 uppercase tracking-wider mb-3">⭐ Featured Listings</p>
               {featuredJobs.map(job => <JobCard key={job._id} job={job} />)}
             </div>
           )}
-
-          {/* All jobs */}
           <div>
-            {featuredJobs.length > 0 && <p className="text-xs font-bold text-ink-subtle uppercase tracking-wider mb-3 mt-4">All Listings</p>}
             <div className="space-y-4">
-              {jobs.filter(j => !j.isFeatured).map(job => <JobCard key={job._id} job={job} />)}
+              {jobs.filter(j => !(j as any).isFeatured).map(job => <JobCard key={job._id} job={job} />)}
             </div>
-          </div>
-
-          {/* Career tip */}
-          <div className="card dark:bg-slate-800 dark:border-slate-700 p-5 bg-blue-50 dark:bg-blue-950/20 border-blue-100 dark:border-blue-900">
-            <h3 className="font-semibold text-ink dark:text-slate-100 mb-2 text-sm">💡 Career Tip</h3>
-            <p className="text-sm text-ink-muted mb-3">
-              Complete the PM Fundamentals course and project simulation before applying for entry-level roles. Hiring managers notice structured preparation.
-            </p>
-            <Link href="/learn/beginner" className="text-sm text-brand-600 font-semibold hover:underline flex items-center gap-1">
-              Start the course <ChevronRight size={13} />
-            </Link>
           </div>
         </div>
       </div>
