@@ -1,80 +1,52 @@
 @import "tailwindcss";
 
-/* =========================================================
-   PM Transition App Design System — Tailwind CSS v4
-   Fully compatible with Next.js 15 + Vercel
-========================================================= */
-
+/* =========================
+   Root Theme Tokens
+========================= */
 :root {
-  --radius: 0.75rem;
+  --radius: 12px;
   --nav-height: 64px;
 
-  --color-bg: #f8fafc;
-  --color-surface-1: #ffffff;
-  --color-surface-2: #f1f5f9;
-  --color-surface-3: #e2e8f0;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-2: #f1f5f9;
+  --surface-3: #e2e8f0;
 
-  --color-border: #e2e8f0;
+  --border: #e2e8f0;
 
-  --color-ink: #0f172a;
-  --color-ink-muted: #475569;
-  --color-ink-subtle: #94a3b8;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-subtle: #94a3b8;
 
-  --color-brand: #16a34a;
-  --color-brand-400: #4ade80;
-  --color-brand-500: #22c55e;
-  --color-brand-600: #16a34a;
-  --color-brand-700: #15803d;
-  --color-brand-900: #14532d;
-  --color-brand-light: #f0fdf4;
+  --brand: #16a34a;
+  --brand-hover: #15803d;
+  --brand-light: #f0fdf4;
 
   color-scheme: light;
 }
 
 .dark {
-  --color-bg: #0f172a;
-  --color-surface-1: #1e293b;
-  --color-surface-2: #0f172a;
-  --color-surface-3: #334155;
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-2: #0f172a;
+  --surface-3: #334155;
 
-  --color-border: #334155;
+  --border: #334155;
 
-  --color-ink: #f1f5f9;
-  --color-ink-muted: #94a3b8;
-  --color-ink-subtle: #475569;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-subtle: #475569;
 
-  --color-brand: #22c55e;
-  --color-brand-400: #4ade80;
-  --color-brand-500: #22c55e;
-  --color-brand-600: #16a34a;
-  --color-brand-700: #15803d;
-  --color-brand-900: #052e16;
-  --color-brand-light: #052e16;
+  --brand: #22c55e;
+  --brand-hover: #16a34a;
+  --brand-light: #052e16;
 
   color-scheme: dark;
 }
 
-/* =========================================================
-   Tailwind v4 semantic theme mapping
-========================================================= */
-@theme inline {
-  --font-body: Inter, ui-sans-serif, system-ui, sans-serif;
-  --font-display: Inter, ui-sans-serif, system-ui, sans-serif;
-
-  --color-ink: var(--color-ink);
-  --color-ink-muted: var(--color-ink-muted);
-  --color-ink-subtle: var(--color-ink-subtle);
-
-  --color-surface-1: var(--color-surface-1);
-  --color-surface-2: var(--color-surface-2);
-  --color-surface-3: var(--color-surface-3);
-
-  --color-brand: var(--color-brand);
-}
-
-/* =========================================================
+/* =========================
    Base
-========================================================= */
+========================= */
 *,
 *::before,
 *::after {
@@ -83,26 +55,25 @@
 
 html {
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
 }
 
 body {
   min-height: 100dvh;
-  font-family: var(--font-body);
-  background: var(--color-bg);
-  color: var(--color-ink);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
+/* =========================
+   Typography
+========================= */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-display);
   line-height: 1.15;
   text-wrap: balance;
 }
@@ -111,165 +82,85 @@ p {
   text-wrap: pretty;
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-brand);
-  outline-offset: 3px;
-  border-radius: 6px;
-}
-
-/* =========================================================
-   Accessibility
-========================================================= */
-.skip-to-main {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  padding: 0.5rem 1rem;
-  background: var(--color-brand-600);
-  color: white;
-  font-size: 0.875rem;
-  font-weight: 600;
-  border-bottom-right-radius: 1rem;
-  transform: translateY(-100%);
-  transition: transform 0.2s;
-}
-
-.skip-to-main:focus {
-  transform: translateY(0);
-}
-
-/* =========================================================
-   Selection + Scrollbar
-========================================================= */
-::selection {
-  background: #bbf7d0;
-  color: #14532d;
-}
-
-.dark ::selection {
-  background: #14532d;
-  color: #bbf7d0;
-}
-
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-surface-3);
-  border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-ink-subtle);
-}
-
-/* =========================================================
-   Reusable Components
-========================================================= */
+/* =========================
+   Shared Components
+========================= */
 .card {
-  background: var(--color-surface-1);
-  border: 1px solid var(--color-surface-3);
-  border-radius: 1rem;
-  transition: all 0.2s ease;
+  background: var(--surface);
+  border: 1px solid var(--surface-3);
+  border-radius: 16px;
+  transition: 0.2s ease;
 }
 
 .card-hover:hover {
   transform: translateY(-2px);
 }
 
+.input {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--surface-3);
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--brand);
+}
+
 .btn-primary {
-  @apply inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white;
-  background: var(--color-brand-600);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  padding: 10px 20px;
+  background: var(--brand);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .btn-primary:hover {
-  background: var(--color-brand-700);
+  background: var(--brand-hover);
 }
 
 .btn-secondary {
-  @apply inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold;
-  background: var(--color-surface-1);
-  color: var(--color-ink);
-  border: 1px solid var(--color-surface-3);
-}
-
-.btn-ghost {
-  @apply inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-medium;
-  color: var(--color-ink-muted);
-}
-
-.btn-danger {
-  @apply inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white;
-  background: #dc2626;
-}
-
-.input {
-  @apply w-full rounded-xl px-4 py-2.5 text-sm outline-none;
-  border: 1px solid var(--color-surface-3);
-  background: var(--color-surface-1);
-  color: var(--color-ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  padding: 10px 20px;
+  border: 1px solid var(--surface-3);
+  background: var(--surface);
+  color: var(--text);
 }
 
 .nav-link {
-  @apply flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium;
-  color: var(--color-ink-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  padding: 8px 12px;
+  color: var(--text-muted);
 }
 
 .nav-link-active {
-  @apply flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium;
-  color: var(--color-brand-700);
-  background: var(--color-brand-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  padding: 8px 12px;
+  color: var(--brand);
+  background: var(--brand-light);
 }
 
-.progress-bar {
-  height: 0.5rem;
-  border-radius: 999px;
-  background: var(--color-surface-2);
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(to right, var(--color-brand-500), var(--color-brand-400));
-}
-
-/* =========================================================
-   Content / prose
-========================================================= */
-.prose-pm {
-  font-size: 0.875rem;
-  line-height: 1.7;
-  color: var(--color-ink-muted);
-}
-
-.prose-pm h2,
-.prose-pm h3,
-.prose-pm strong {
-  color: var(--color-ink);
-}
-
-/* =========================================================
-   Utilities
-========================================================= */
+/* =========================
+   Utility Classes
+========================= */
 .text-balance {
   text-wrap: balance;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 .gradient-text {
@@ -279,38 +170,36 @@ p {
 }
 
 .glass {
-  background: rgb(255 255 255 / 0.8);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
-  border: 1px solid rgb(255 255 255 / 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .dark .glass {
-  background: rgb(15 23 42 / 0.8);
+  background: rgba(15, 23, 42, 0.8);
 }
 
-/* =========================================================
-   Print
-========================================================= */
-@media print {
-  .no-print {
-    display: none !important;
-  }
-
-  body {
-    background: white !important;
-    color: black !important;
-  }
+/* =========================
+   Scrollbar
+========================= */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-/* =========================================================
-   Reduced motion
-========================================================= */
+::-webkit-scrollbar-thumb {
+  background: var(--surface-3);
+  border-radius: 999px;
+}
+
+/* =========================
+   Reduced Motion
+========================= */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
