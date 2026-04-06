@@ -5,51 +5,84 @@ import { UsersStore } from "@/lib/dataStore";
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const user = await getUserById(params.id);
+    const { id } = await params;
+    const user = await getUserById(id);
+
     if (!user) {
-      return NextResponse.json({ success: false, error: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { success: false, error: "User not found" },
+        { status: 404 }
+      );
     }
+
+    // Remove sensitive info
     const { password: _pw, ...safeUser } = user as Record<string, unknown> & { password?: string };
+
     return NextResponse.json({ success: true, data: safeUser });
-  } catch {
-    return NextResponse.json({ success: false, error: "Failed to fetch user" }, { status: 500 });
+  } catch (err) {
+    console.error("GET user error:", err);
+    return NextResponse.json(
+      { success: false, error: "Failed to fetch user" },
+      { status: 500 }
+    );
   }
 }
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await req.json();
+
     // Don't allow password update through this route
     const { password: _pw, ...safeUpdates } = body;
 
-    const updated = UsersStore.update(params.id, safeUpdates);
+    const updated = UsersStore.update(id, safeUpdates);
+
     if (!updated) {
-      return NextResponse.json({ success: false, error: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { success: false, error: "User not found" },
+        { status: 404 }
+      );
     }
+
     const { password: _p, ...safeUser } = updated as Record<string, unknown> & { password?: string };
     return NextResponse.json({ success: true, data: safeUser });
-  } catch {
-    return NextResponse.json({ success: false, error: "Failed to update user" }, { status: 500 });
+  } catch (err) {
+    console.error("PATCH user error:", err);
+    return NextResponse.json(
+      { success: false, error: "Failed to update user" },
+      { status: 500 }
+    );
   }
 }
 
 export async function DELETE(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const deleted = UsersStore.delete(params.id);
+    const { id } = await params;
+    const deleted = UsersStore.delete(id);
+
     if (!deleted) {
-      return NextResponse.json({ success: false, error: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { success: false, error: "User not found" },
+        { status: 404 }
+      );
     }
+
     return NextResponse.json({ success: true, message: "User deleted successfully" });
-  } catch {
-    return NextResponse.json({ success: false, error: "Failed to delete user" }, { status: 500 });
+  } catch (err) {
+    console.error("DELETE user error:", err);
+    return NextResponse.json(
+      { success: false, error: "Failed to delete user" },
+      { status: 500 }
+    );
   }
 }
