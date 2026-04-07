@@ -1,9 +1,70 @@
 // app/page.tsx
+"use client";
+
+
 import Link from "next/link";
-import { ArrowRight, BookOpen, Users, Calendar, Briefcase, Star, Flame, CheckCircle2, ChevronRight, Globe, TrendingUp, Award, Zap, Shield, Clock } from "lucide-react";
-import { getCourses, getEvents } from "@/lib/db";
-import type { Course, PMEvent } from "@/types";
-import { formatDateShort } from "@/lib/utils";
+import { 
+  ArrowRight, BookOpen, Users, Calendar, Briefcase, Star, 
+  CheckCircle2, ChevronRight, Globe, TrendingUp, Award, 
+  Zap, Shield, Sparkles, Trophy,FileText,
+} from "lucide-react";
+import Navbar from '../components/layout/Navbar'
+import Footer from '../components/layout/Footer'
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+
+// Static data - no database calls
+const staticCourses = [
+  { _id: "1", level: "beginner", title: "PM Fundamentals" },
+  { _id: "2", level: "beginner", title: "Project Lifecycle" },
+  { _id: "3", level: "beginner", title: "Agile Basics" },
+  { _id: "4", level: "intermediate", title: "Risk Management" },
+  { _id: "5", level: "intermediate", title: "Stakeholder Communication" },
+  { _id: "6", level: "intermediate", title: "Kanban & Scrum" },
+  { _id: "7", level: "intermediate", title: "Resource Planning" },
+  { _id: "8", level: "advanced", title: "PMP Exam Prep" },
+  { _id: "9", level: "advanced", title: "PMBOK 7 Mastery" },
+];
+
+const staticEvents = [
+  {
+    _id: "1",
+    title: "PM Career Transition Workshop",
+    description: "Learn how to successfully transition into a project management career from any background.",
+    startDate: new Date("2024-12-15"),
+    format: "virtual",
+    organizer: "PMI Chapter",
+    registeredCount: 245,
+    isFeatured: true,
+    registrationUrl: "#"
+  },
+  {
+    _id: "2",
+    title: "Agile & Scrum Masterclass",
+    description: "Deep dive into Agile methodologies and Scrum framework with hands-on exercises.",
+    startDate: new Date("2024-12-20"),
+    format: "virtual",
+    organizer: "Agile Experts",
+    registeredCount: 189,
+    isFeatured: true,
+    registrationUrl: "#"
+  },
+  {
+    _id: "3",
+    title: "PMP Certification Bootcamp",
+    description: "Intensive 3-day bootcamp to prepare you for the PMP certification exam.",
+    startDate: new Date("2025-01-10"),
+    format: "hybrid",
+    organizer: "PM Mastery",
+    registeredCount: 156,
+    isFeatured: true,
+    registrationUrl: "#"
+  }
+];
+
+function formatDateShort(date: Date): string {
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
 
 function ProgressRingMini({ pct, color }: { pct: number; color: string }) {
   const r = 16, circ = 2 * Math.PI * r, dash = (pct / 100) * circ;
@@ -14,203 +75,420 @@ function ProgressRingMini({ pct, color }: { pct: number; color: string }) {
         <circle cx="20" cy="20" r={r} fill="none" stroke={color} strokeWidth="4"
           strokeDasharray={`${dash} ${circ}`} strokeLinecap="round" />
       </svg>
-      <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-ink">{pct}%</span>
+      <span className="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-gray-900">{pct}%</span>
     </div>
   );
 }
 
+
 function Hero() {
   return (
-    <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-white">
-      {/* Mesh blobs — editorial style from Image 3 */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-8%] left-[18%] w-[700px] h-[700px] rounded-full blur-[140px] opacity-25"
-          style={{ background: "radial-gradient(circle, #bbf7d0, transparent 70%)" }} />
-        <div className="absolute top-[5%] left-[5%] w-[350px] h-[350px] rounded-full blur-[80px] opacity-15"
-          style={{ background: "radial-gradient(circle, #86efac, transparent 70%)" }} />
-        <div className="absolute bottom-[5%] right-[8%] w-[450px] h-[450px] rounded-full blur-[100px] opacity-15"
-          style={{ background: "radial-gradient(circle, #dbeafe, transparent 70%)" }} />
-        <div className="absolute inset-0 opacity-[0.025]"
-          style={{ backgroundImage: "radial-gradient(#0f172a 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-        {[[8,5],[92,5],[5,85],[90,90],[50,12],[15,50],[85,45]].map(([x,y],i) => (
-          <div key={i} className="absolute opacity-15" style={{ left:`${x}%`, top:`${y}%` }}>
-            <span className="text-slate-400 text-xl font-light select-none">+</span>
-          </div>
-        ))}
+    <section className="relative overflow-hidden bg-white">
+      {/* Green grid background */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(34,197,94,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.06)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,black,transparent)]" />
+      
+      {/* Subtle color splashes */}
+      <div className="absolute inset-0">
+        <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-emerald-100/40 blur-[120px]" />
+        <div className="absolute right-20 top-40 h-60 w-60 rounded-full bg-cyan-100/30 blur-[100px]" />
+        <div className="absolute bottom-10 left-10 h-64 w-64 rounded-full bg-green-100/30 blur-[100px]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-24">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-brand-200 bg-brand-50 px-4 py-2 text-sm font-medium text-brand-700">
-              <Flame size={14} className="text-brand-500" />
-              12,400+ aspiring PMs · Join free today
-            </div>
-            <h1 className="text-6xl sm:text-7xl font-display font-bold leading-[1.04] tracking-tight text-ink">
-              Building{" "}
-              <em className="not-italic" style={{ background: "linear-gradient(135deg,#16a34a,#0891b2)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
-                Confident
-              </em>
-              {" "}Project Managers.
-            </h1>
-            <p className="text-xl text-slate-500 leading-relaxed max-w-lg font-light">
-              Structured paths, mentorship, and real-world tools to guide you from complete beginner to{" "}
-              <strong className="font-semibold text-ink">PMP-certified professional.</strong>
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/auth/signup"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-[0.98]"
-                style={{ background: "linear-gradient(135deg,#16a34a,#0d9488)" }}>
-                Start Learning Free <ArrowRight size={18} />
-              </Link>
-              <Link href="/learn/beginner"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-base font-semibold text-ink border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 transition-all">
-                Browse Courses
-              </Link>
-            </div>
-            <div className="flex flex-wrap items-center gap-6 pt-2">
-              <div className="flex -space-x-2.5">
-                {[["A","#16a34a"],["P","#2563eb"],["M","#7c3aed"],["J","#0891b2"],["L","#f97316"]].map(([l,c],i) => (
-                  <div key={i} className="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold shadow-sm" style={{ background: c }}>{l}</div>
-                ))}
-              </div>
-              <div>
-                <div className="flex items-center gap-0.5 mb-0.5">
-                  {[1,2,3,4,5].map(i => <Star key={i} size={13} className="fill-amber-400 text-amber-400" />)}
-                  <span className="ml-1.5 text-sm font-bold text-ink">4.9</span>
-                </div>
-                <p className="text-xs text-slate-400">2,400+ learner reviews</p>
-              </div>
-              <div className="h-8 w-px bg-slate-200" />
-              <div>
-                <p className="text-sm font-bold text-ink">87%</p>
-                <p className="text-xs text-slate-400">land a PM role in 6 months</p>
-              </div>
-            </div>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-36 pb-20">
+        {/* Center Hero Content */}
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-2 text-sm font-medium text-green-700">
+            <Sparkles size={14} className="text-green-600" />
+            12,400+ aspiring PMs · Start learning today
           </div>
 
-          {/* Dashboard preview card */}
-          <div className="hidden lg:block relative">
-            <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 p-7 space-y-5 animate-float">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs text-slate-400">Welcome back,</p>
-                  <p className="font-display font-bold text-lg text-ink">Alex Rivera 👋</p>
+          <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
+            Building{" "}
+            <span className="bg-gradient-to-r from-green-600 to-cyan-600 bg-clip-text text-transparent">
+              Confident
+            </span>{" "}
+            Project Managers.
+          </h1>
+
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-gray-600 sm:text-lg lg:text-xl">
+            Structured paths, mentorship, and real-world tools to guide you
+            from complete beginner to{" "}
+            <span className="font-semibold text-gray-900">
+              PMP-certified professional.
+            </span>
+          </p>
+
+          {/* CTA */}
+          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <Link
+              href="/learn/beginner"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-cyan-600 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-green-200/50 transition hover:scale-[1.02] hover:shadow-xl"
+            >
+              Start Learning Now <ArrowRight size={18} />
+            </Link>
+
+            <Link
+              href="/learn"
+              className="inline-flex items-center justify-center rounded-2xl border border-gray-200 bg-white px-8 py-4 text-sm font-semibold text-gray-700 shadow-sm transition hover:border-green-300 hover:bg-green-50/50 hover:text-green-700"
+            >
+              Explore Courses
+            </Link>
+          </div>
+
+          {/* Social proof */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
+            <div className="flex -space-x-2">
+              {["A", "P", "M", "J", "L"].map((l, i) => (
+                <div
+                  key={i}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-green-500 to-cyan-500 text-xs font-bold text-white shadow-md"
+                >
+                  {l}
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-orange-50 border border-orange-200 rounded-full">
-                  <Flame size={13} className="text-orange-500" />
-                  <span className="text-xs font-bold text-orange-700">7 day streak</span>
-                </div>
-              </div>
-              <div className="grid grid-cols-4 gap-3">
-                {[{p:25,l:"PM Basics",c:"#16a34a"},{p:50,l:"Agile",c:"#2563eb"},{p:75,l:"Risk",c:"#7c3aed"},{p:100,l:"Foundations",c:"#0891b2"}].map((item) => (
-                  <div key={item.l} className="flex flex-col items-center gap-1.5">
-                    <ProgressRingMini pct={item.p} color={item.c} />
-                    <span className="text-[9px] text-slate-400 text-center">{item.l}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                {[{v:"12",l:"Modules"},{v:"1,240",l:"Points"},{v:"#847",l:"Rank"}].map((s) => (
-                  <div key={s.l} className="text-center p-2.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <p className="text-sm font-bold text-ink">{s.v}</p>
-                    <p className="text-[10px] text-slate-400">{s.l}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="flex items-center gap-3 p-3 bg-brand-50 rounded-2xl border border-brand-100">
-                <div className="w-8 h-8 bg-brand-600 rounded-xl flex items-center justify-center shrink-0">
-                  <BookOpen size={14} className="text-white" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-semibold text-ink truncate">Next: Stakeholder Mapping</p>
-                  <p className="text-[10px] text-slate-400">Module 4 · 25 min</p>
-                </div>
-                <ChevronRight size={14} className="text-brand-600 shrink-0" />
-              </div>
+              ))}
             </div>
-            <div className="absolute -top-4 -right-4 bg-white border border-slate-100 shadow-lg rounded-2xl px-3.5 py-2.5 animate-float" style={{ animationDelay: "1.2s" }}>
-              <div className="flex items-center gap-2"><span className="text-xl">🎯</span><div><p className="text-[11px] font-bold text-ink">Quiz Ace!</p><p className="text-[9px] text-slate-400">100% score</p></div></div>
+
+            <div>
+              <div className="flex items-center gap-1">
+                {[1, 2, 3, 4, 5].map((i) => (
+                  <Star
+                    key={i}
+                    size={14}
+                    className="fill-amber-400 text-amber-400"
+                  />
+                ))}
+                <span className="ml-2 text-sm font-bold text-gray-900">4.9</span>
+              </div>
+              <p className="text-xs text-gray-500">2,400+ learner reviews</p>
             </div>
-            <div className="absolute -bottom-4 -left-4 bg-white border border-slate-100 shadow-lg rounded-2xl px-3.5 py-2.5 animate-float" style={{ animationDelay: "2.4s" }}>
-              <div className="flex items-center gap-2"><span className="text-xl">🏅</span><div><p className="text-[11px] font-bold text-ink">Week Warrior</p><p className="text-[9px] text-slate-400">7-day streak</p></div></div>
+
+            <div className="hidden h-8 w-px bg-gray-200 sm:block" />
+
+            <div>
+              <p className="text-sm font-bold text-gray-900">87%</p>
+              <p className="text-xs text-gray-500">
+                land a PM role in 6 months
+              </p>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Ticker */}
-      <div className="absolute bottom-0 inset-x-0 border-t border-slate-100 bg-white/60 backdrop-blur-sm py-3 overflow-hidden">
-        <div className="flex items-center gap-10 text-xs text-slate-400 font-medium px-8 whitespace-nowrap">
-          {["PM Fundamentals","Agile & Scrum","Risk Management","PMP Certification","Stakeholder Communication","Kanban Boards","PMBOK 7","Sprint Planning","EVM Formulas","Change Management"].map(t => (
-            <span key={t} className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-brand-400" />{t}</span>
-          ))}
+        
+          {/* Product showcase card */}
+        <div className="mx-auto mt-16 max-w-5xl">
+          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-green-700 via-green-500 to-cyan-400 p-10 pb-8">
+              <div className="relative my-5 text-center">
+                 <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-2 text-sm font-medium text-green-700">
+                    Wall of Love
+                </div>
+                <h2 className="text-4xl w-96 mx-auto my-2 text-white text-center font-bold">
+                  Powering the world's most productive teams
+                </h2>
+              </div>
+
+
+            {/* Grid overlay */}
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+            {/* App window */}
+            <div className="relative overflow-hidden rounded-xl bg-white shadow-2xl">
+              
+              {/* Title bar */}
+              <div className="flex items-center gap-1.5 border-b border-gray-200 bg-gray-100 px-4 py-2.5">
+                <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
+                <div className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
+                <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
+                <span className="mx-auto text-xs font-medium text-gray-500">PMPath Learning Hub</span>
+              </div>
+
+              <div className="flex h-96">
+                {/* Sidebar */}
+                <div className="w-48 shrink-0 bg-[#1e1f2e] p-3">
+                  <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-white/40">Channels</p>
+                  {["pm-foundations", "agile-scrum", "stakeholder-maps", "pmp-mock-exams"].map((ch, i) => (
+                    <div key={ch} className={`flex items-center gap-1.5 rounded px-2 py-1 text-[13px] ${i === 0 ? "bg-white/10 text-white font-medium" : "text-white/50"}`}>
+                      <span className="opacity-60">#</span> {ch}
+                    </div>
+                  ))}
+                  <p className="mb-2 mt-3 px-2 text-[10px] font-semibold uppercase tracking-widest text-white/40">Direct Messages</p>
+                  {[["Coach Sarah", true], ["Study Group", true], ["Alex M.", false]].map(([name, online]) => (
+                    <div key={name} className="flex items-center gap-2 px-2 py-1">
+                      <div className={`h-2 w-2 rounded-full ${online ? "bg-green-400" : "bg-gray-500"}`} />
+                      <span className="text-[13px] text-white/60">{name}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Chat area */}
+                <div className="flex flex-1 flex-col">
+                  <div className="flex items-center justify-between border-b border-gray-100 px-4 py-2.5">
+                    <span className="text-sm font-semibold text-gray-900"># pm-foundations</span>
+                    <span className="text-xs text-gray-400">4 learners</span>
+                  </div>
+
+                  <div className="flex flex-1 flex-col gap-4 overflow-hidden px-4 py-3">
+                    {[
+                      { init: "SS", color: "bg-indigo-600", name: "Coach Sarah", time: "10:02 AM", msg: "Module 2 is live — Stakeholder Mapping with the power-interest matrix. Start when ready!" },
+                      { init: "AM", color: "bg-sky-500", name: "Alex M.", time: "10:04 AM", msg: "Done the exercise — mapped 6 stakeholders for my mock project.", file: "stakeholder-matrix-draft.pdf" },
+                      { init: "NJ", color: "bg-emerald-500", name: "Nina J.", time: "10:08 AM", msg: "PMP mock exam scores attached. Let me know if we need another session!" },
+                    ].map(({ init, color, name, time, msg, file }) => (
+                      <div key={name} className="flex gap-2.5">
+                        <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${color} text-[11px] font-bold text-white`}>{init}</div>
+                        <div>
+                          <div className="mb-1 flex items-baseline gap-2">
+                            <span className="text-[13px] font-semibold text-gray-900">{name}</span>
+                            <span className="text-[11px] text-gray-400">{time}</span>
+                          </div>
+                          <p className="text-[13px] leading-relaxed text-gray-700">{msg}</p>
+                          {file && (
+                            <div className="mt-1.5 inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-2.5 py-1.5">
+                              <div className="flex h-5 w-5 items-center justify-center rounded bg-indigo-600 text-white">
+                                <FileText size={10} />
+                              </div>
+                              <span className="text-[12px] text-gray-600">{file}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="border-t border-gray-100 px-4 py-2.5">
+                    <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-[13px] text-gray-400">
+                      Message #pm-foundations...
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Customer logos */}
+            <div className="relative mt-5 text-center">
+              <p className="mb-3 text-[11px] text-white/50">Our learners come from</p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {["KPMG", "Deloitte", "Shell", "MTN", "Access Bank", "GTB", "UBA"].map((co) => (
+                  <div key={co} className="rounded-md border border-white/20 bg-white/15 px-3 py-1 text-[12px] font-semibold text-white/85">
+                    {co}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
-}
+} 
+
+
+
+
 
 function StatsStrip() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
+
+  const stats = [
+    { v: "12,400+", l: "Active Learners", i: Users },
+    { v: "5", l: "Structured Courses", i: BookOpen },
+    { v: "87%", l: "Career Transition Rate", i: TrendingUp },
+    { v: "200+", l: "PM Events Yearly", i: Calendar },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 120, damping: 12, duration: 0.6 },
+    },
+  };
+
   return (
-    <section className="bg-ink py-14">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {[{v:"12,400+",l:"Active Learners",i:Users},{v:"5",l:"Structured Courses",i:BookOpen},{v:"87%",l:"Career Transition Rate",i:TrendingUp},{v:"200+",l:"PM Events Yearly",i:Calendar}].map((s) => (
-            <div key={s.l} className="text-center">
-              <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-3">
-                <s.i size={20} className="text-brand-400" />
-              </div>
-              <p className="font-display text-3xl font-bold text-white mb-0.5">{s.v}</p>
-              <p className="text-sm text-white/50">{s.l}</p>
-            </div>
-          ))}
-        </div>
+    <section className="relative overflow-hidden bg-gradient-to-r from-gray-900 to-gray-800 py-20 md:py-28">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-green-500/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
+        >
+          <span className="inline-block px-4 py-1.5 text-xs font-medium tracking-wider text-green-400/80 bg-white/5 rounded-full border border-white/10 backdrop-blur-sm">
+            OUR IMPACT IN NUMBERS
+          </span>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+        >
+          {stats.map((s, idx) => {
+            const Icon = s.i;
+            return (
+              <motion.div
+                key={s.l}
+                variants={itemVariants}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                className="relative group"
+              >
+                <div className="relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/10 shadow-2xl overflow-hidden text-center">
+                  <div className={`absolute inset-0 bg-gradient-to-br from-green-500 to-cyan-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ delay: idx * 0.12 + 0.3, duration: 0.5, type: "spring", stiffness: 100 }}
+                    className="mb-5"
+                  >
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-cyan-500/20 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                      <Icon size={24} className="text-green-400 group-hover:text-green-300 transition-colors" />
+                    </div>
+                  </motion.div>
+
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: idx * 0.12 + 0.4, duration: 0.5 }}
+                    className="text-4xl md:text-5xl font-bold text-white mb-2"
+                  >
+                    {s.v}
+                  </motion.p>
+
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : {}}
+                    transition={{ delay: idx * 0.12 + 0.5, duration: 0.5 }}
+                    className="text-sm md:text-base text-gray-400 font-medium"
+                  >
+                    {s.l}
+                  </motion.p>
+
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-green-500/50 to-transparent"
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    animate={isInView ? { scaleX: 1, opacity: 1 } : {}}
+                    transition={{ delay: idx * 0.1 + 0.6, duration: 0.8 }}
+                  />
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
 }
 
-function LearningPaths({ courses }: { courses: Course[] }) {
+
+function LearningPaths() {
   const paths = [
-    { level:"beginner", emoji:"🌱", title:"Beginner Path", sub:"Start from zero", desc:"No experience needed. Build the PM foundation from fundamentals to your first project simulation.", color:"#16a34a", bg:"from-green-50 to-emerald-50/80", border:"border-green-100", href:"/learn/beginner", outcomes:["PM Lifecycle & Roles","Agile vs Waterfall","Project Charter","First Simulation"] },
-    { level:"intermediate", emoji:"📈", title:"Intermediate", sub:"Level up", desc:"Deepen expertise with risk management, stakeholder strategy, and advanced Agile with real case studies.", color:"#2563eb", bg:"from-blue-50 to-cyan-50/80", border:"border-blue-100", href:"/learn/intermediate", outcomes:["Risk Register","Stakeholder Maps","Kanban Builder","Resource Planning"] },
-    { level:"advanced", emoji:"🏆", title:"Advanced & PMP", sub:"Get certified", desc:"Comprehensive PMP prep: 200+ practice questions, mock exams, flashcards, and PMBOK 7 mastery.", color:"#7c3aed", bg:"from-purple-50 to-pink-50/80", border:"border-purple-100", href:"/learn/advanced", outcomes:["PMBOK 7 Deep Dive","Mock PMP Exams","EVM Calculations","Study Groups"] },
+    { 
+      level:"beginner", 
+      emoji:"🌱", 
+      title:"Beginner Path", 
+      sub:"Start from zero", 
+      desc:"No experience needed. Build the PM foundation from fundamentals to your first project simulation.",
+      color:"#16a34a", 
+      bg:"from-green-50 to-emerald-50/80", 
+      border:"border-green-100", 
+      href:"/learn/beginner", 
+      outcomes:["PM Lifecycle & Roles","Agile vs Waterfall","Project Charter","First Simulation"],
+      courses: 3
+    },
+    { 
+      level:"intermediate", 
+      emoji:"📈", 
+      title:"Intermediate", 
+      sub:"Level up", 
+      desc:"Deepen expertise with risk management, stakeholder strategy, and advanced Agile with real case studies.",
+      color:"#2563eb", 
+      bg:"from-blue-50 to-cyan-50/80", 
+      border:"border-blue-100", 
+      href:"/learn/intermediate", 
+      outcomes:["Risk Register","Stakeholder Maps","Kanban Builder","Resource Planning"],
+      courses: 4
+    },
+    { 
+      level:"advanced", 
+      emoji:"🏆", 
+      title:"Advanced & PMP", 
+      sub:"Get certified", 
+      desc:"Comprehensive PMP prep: 200+ practice questions, mock exams, flashcards, and PMBOK 7 mastery.",
+      color:"#7c3aed", 
+      bg:"from-purple-50 to-pink-50/80", 
+      border:"border-purple-100", 
+      href:"/learn/advanced", 
+      outcomes:["PMBOK 7 Deep Dive","Mock PMP Exams","EVM Calculations","Study Groups"],
+      courses: 2
+    },
   ];
 
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-600 mb-4"><BookOpen size={12} />Learning Paths</p>
-          <h2 className="text-5xl font-display font-bold text-ink mb-5">Find Your<br /><em className="not-italic" style={{ color:"#16a34a" }}>Starting Point.</em></h2>
-          <p className="text-slate-500 max-w-lg mx-auto text-lg font-light">Every path is tailored to where you are now — not where you think you should be.</p>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-medium mb-6">
+            <BookOpen size={14} />
+            Learning Paths
+          </div>
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-5">
+            Find Your{" "}
+            <span className="bg-gradient-to-r from-green-600 to-cyan-600 bg-clip-text text-transparent">
+              Starting Point
+            </span>
+          </h2>
+          <p className="text-gray-500 max-w-2xl mx-auto text-lg">
+            Every path is tailored to where you are now — not where you think you should be.
+          </p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {paths.map((path) => (
-            <div key={path.level} className={`relative bg-gradient-to-br ${path.bg} border ${path.border} rounded-3xl p-7 space-y-5 hover:-translate-y-1 transition-all duration-300 group`}>
+            <Link 
+              href={path.href} 
+              key={path.level} 
+              className={`relative bg-gradient-to-br ${path.bg} border ${path.border} rounded-3xl p-7 space-y-5 hover:-translate-y-2 transition-all duration-300 group cursor-pointer block`}
+            >
               <div className="flex items-start justify-between">
-                <span className="text-5xl">{path.emoji}</span>
-                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full border" style={{ background: path.color+"15", color: path.color, borderColor: path.color+"30" }}>{path.sub}</span>
+                <span className="text-5xl group-hover:scale-110 transition-transform">{path.emoji}</span>
+                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full border bg-white/60" style={{ color: path.color, borderColor: path.color+"30" }}>
+                  {path.sub}
+                </span>
               </div>
               <div>
-                <h3 className="text-xl font-display font-bold text-ink mb-2">{path.title}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{path.desc}</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{path.title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{path.desc}</p>
               </div>
               <ul className="space-y-2">
                 {path.outcomes.map(o => (
-                  <li key={o} className="flex items-center gap-2 text-sm text-ink">
-                    <CheckCircle2 size={13} style={{ color: path.color }} className="shrink-0" />{o}
+                  <li key={o} className="flex items-center gap-2 text-sm text-gray-900">
+                    <CheckCircle2 size={13} style={{ color: path.color }} className="shrink-0" />
+                    {o}
                   </li>
                 ))}
               </ul>
-              <div className="flex items-center justify-between pt-2 border-t border-slate-200">
-                <span className="text-xs text-slate-400">{courses.filter(c=>c.level===path.level).length} courses</span>
-                <Link href={path.href} className="flex items-center gap-1.5 text-sm font-semibold group-hover:gap-2.5 transition-all" style={{ color: path.color }}>
+              <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+                <span className="text-xs text-gray-400">{path.courses} courses available</span>
+                <span className="flex items-center gap-1.5 text-sm font-semibold group-hover:gap-2.5 transition-all" style={{ color: path.color }}>
                   Explore <ArrowRight size={14} />
-                </Link>
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -218,45 +496,70 @@ function LearningPaths({ courses }: { courses: Course[] }) {
   );
 }
 
-function FeaturedEvents({ events }: { events: PMEvent[] }) {
-  const featured = events.filter(e => e.isFeatured).slice(0, 3);
+function FeaturedEvents() {
+  const featured = staticEvents.filter(e => e.isFeatured).slice(0, 3);
   return (
     <section className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-12">
           <div>
-            <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-600 mb-3"><Calendar size={12} />Upcoming Events</p>
-            <h2 className="text-4xl font-display font-bold text-ink">Don't Miss These</h2>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-medium mb-6">
+              <Calendar size={14} />
+              Upcoming Events
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              Join the{" "}
+              <span className="bg-gradient-to-r from-green-600 to-cyan-600 bg-clip-text text-transparent">
+                Community
+              </span>
+            </h2>
           </div>
-          <Link href="/events" className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-slate-400 hover:text-ink transition-colors">View all <ChevronRight size={15} /></Link>
+          <Link href="/events" className="hidden sm:flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-green-600 transition-colors group">
+            View all events 
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid md:grid-cols-3 gap-6">
           {featured.map((event) => (
-            <div key={event._id} className="border border-slate-100 rounded-3xl p-5 hover:border-slate-200 hover:shadow-md transition-all duration-200 space-y-4 group">
+            <div key={event._id} className="border border-gray-200 rounded-2xl p-6 hover:border-green-200 hover:shadow-lg transition-all duration-200 space-y-4 group bg-white">
               <div className="flex items-center justify-between">
-                <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${event.format==="virtual"?"bg-blue-50 text-blue-700 border-blue-200":event.format==="in_person"?"bg-green-50 text-green-700 border-green-200":"bg-purple-50 text-purple-700 border-purple-200"}`}>
-                  <Globe size={9} className="inline mr-1" />
-                  {event.format==="in_person"?"In Person":event.format.charAt(0).toUpperCase()+event.format.slice(1)}
+                <span className={`text-xs font-semibold px-3 py-1.5 rounded-full ${
+                  event.format === "virtual" 
+                    ? "bg-blue-50 text-blue-700 border border-blue-200" 
+                    : event.format === "in_person" 
+                    ? "bg-green-50 text-green-700 border border-green-200" 
+                    : "bg-purple-50 text-purple-700 border border-purple-200"
+                }`}>
+                  <Globe size={10} className="inline mr-1" />
+                  {event.format === "in_person" ? "In Person" : event.format.charAt(0).toUpperCase() + event.format.slice(1)}
                 </span>
-                <span className="text-xs text-slate-400">{formatDateShort(event.startDate)}</span>
+                <span className="text-sm text-gray-500 font-medium">{formatDateShort(event.startDate)}</span>
               </div>
               <div>
-                <h3 className="font-semibold text-ink mb-1 line-clamp-2 leading-snug">{event.title}</h3>
-                <p className="text-sm text-slate-400 line-clamp-2">{event.description}</p>
+                <h3 className="font-semibold text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-green-600 transition-colors">
+                  {event.title}
+                </h3>
+                <p className="text-sm text-gray-500 line-clamp-2">{event.description}</p>
               </div>
-              <div className="flex items-center justify-between pt-1">
+              <div className="flex items-center justify-between pt-2">
                 <div>
-                  <p className="text-[10px] text-slate-400">By {event.organizer}</p>
-                  <p className="text-xs font-semibold text-ink">{event.registeredCount.toLocaleString()} registered</p>
+                  <p className="text-xs text-gray-400 mb-1">By {event.organizer}</p>
+                  <p className="text-sm font-semibold text-gray-900">{event.registeredCount.toLocaleString()}+ attending</p>
                 </div>
-                <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer"
-                  className="text-xs font-semibold px-4 py-2 rounded-xl text-white hover:-translate-y-0.5 transition-all"
-                  style={{ background:"linear-gradient(135deg,#16a34a,#0d9488)" }}>
-                  RSVP
+                <a 
+                  href={event.registrationUrl} 
+                  className="text-sm font-semibold px-5 py-2.5 rounded-xl text-white bg-gradient-to-r from-green-600 to-cyan-600 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                >
+                  Register
                 </a>
               </div>
             </div>
           ))}
+        </div>
+        <div className="mt-8 text-center sm:hidden">
+          <Link href="/events" className="inline-flex items-center gap-2 text-green-600 font-medium">
+            View all events <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </section>
@@ -265,30 +568,42 @@ function FeaturedEvents({ events }: { events: PMEvent[] }) {
 
 function FeatureGrid() {
   const features = [
-    { icon:BookOpen, title:"Structured Learning", desc:"3 proficiency levels with bite-sized lessons, videos, and downloadable resources.", c1:"#16a34a", c2:"bg-green-50" },
-    { icon:Zap, title:"Adaptive Quizzes", desc:"AI-driven assessments that identify weak areas and personalise your study path.", c1:"#f59e0b", c2:"bg-amber-50" },
-    { icon:Users, title:"Mentorship Matching", desc:"AI-paired with experienced PMs based on your goals, industry, and learning style.", c1:"#7c3aed", c2:"bg-purple-50" },
-    { icon:Calendar, title:"Events & Networking", desc:"Webinars, conferences, and meetups with 200+ PM events tracked per year.", c1:"#2563eb", c2:"bg-blue-50" },
-    { icon:Briefcase, title:"PM Job Board", desc:"Curated entry-level roles, internships, and freelance gigs updated daily.", c1:"#0891b2", c2:"bg-teal-50" },
-    { icon:Award, title:"Certification Prep", desc:"200+ PMP practice questions, timed mock exams, and PMBOK 7 flashcards.", c1:"#e11d48", c2:"bg-rose-50" },
-    { icon:Shield, title:"Progress Tracking", desc:"Gamified streaks, badges, and exportable certificates for every course.", c1:"#16a34a", c2:"bg-green-50" },
-    { icon:Globe, title:"Global Community", desc:"Discussion boards segmented by level. Share wins, get unstuck, grow together.", c1:"#f97316", c2:"bg-orange-50" },
+    { icon: BookOpen, title: "Structured Learning", desc: "3 proficiency levels with bite-sized lessons, videos, and downloadable resources.", color: "#16a34a", bg: "bg-green-50" },
+    { icon: Zap, title: "Adaptive Quizzes", desc: "AI-driven assessments that identify weak areas and personalise your study path.", color: "#f59e0b", bg: "bg-amber-50" },
+    { icon: Users, title: "Mentorship Matching", desc: "AI-paired with experienced PMs based on your goals, industry, and learning style.", color: "#7c3aed", bg: "bg-purple-50" },
+    { icon: Calendar, title: "Events & Networking", desc: "Webinars, conferences, and meetups with 200+ PM events tracked per year.", color: "#2563eb", bg: "bg-blue-50" },
+    { icon: Briefcase, title: "PM Job Board", desc: "Curated entry-level roles, internships, and freelance gigs updated daily.", color: "#0891b2", bg: "bg-teal-50" },
+    { icon: Award, title: "Certification Prep", desc: "200+ PMP practice questions, timed mock exams, and PMBOK 7 flashcards.", color: "#e11d48", bg: "bg-rose-50" },
+    { icon: Shield, title: "Progress Tracking", desc: "Gamified streaks, badges, and exportable certificates for every course.", color: "#16a34a", bg: "bg-green-50" },
+    { icon: Globe, title: "Global Community", desc: "Discussion boards segmented by level. Share wins, get unstuck, grow together.", color: "#f97316", bg: "bg-orange-50" },
   ];
+  
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-600 mb-4"><Star size={12} />Platform Features</p>
-          <h2 className="text-5xl font-display font-bold text-ink mb-5">Everything You Need<br /><em className="not-italic text-slate-300">to Succeed.</em></h2>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-medium mb-6">
+            <Sparkles size={14} />
+            Platform Features
+          </div>
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-5">
+            Everything You Need{" "}
+            <span className="bg-gradient-to-r from-green-600 to-cyan-600 bg-clip-text text-transparent">
+              to Succeed
+            </span>
+          </h2>
+          <p className="text-gray-500 max-w-2xl mx-auto text-lg">
+            Powerful tools and resources designed to accelerate your PM career journey.
+          </p>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {features.map((f) => (
-            <div key={f.title} className="bg-white rounded-2xl p-5 border border-slate-100 hover:border-slate-200 hover:shadow-md transition-all duration-200">
-              <div className={`w-9 h-9 rounded-xl ${f.c2} flex items-center justify-center mb-4`}>
-                <f.icon size={18} style={{ color: f.c1 }} />
+            <div key={f.title} className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-green-200 hover:shadow-lg transition-all duration-200 group">
+              <div className={`w-12 h-12 rounded-xl ${f.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                <f.icon size={20} style={{ color: f.color }} />
               </div>
-              <h3 className="font-semibold text-ink mb-2 text-sm">{f.title}</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">{f.desc}</p>
+              <h3 className="font-semibold text-gray-900 mb-2">{f.title}</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
@@ -299,28 +614,64 @@ function FeatureGrid() {
 
 function Testimonials() {
   const quotes = [
-    { n:"Priya S.", r:"Now PM at Stripe", t:"PMPath gave me the structure I needed. The beginner path was perfect for a career switcher like me.", a:"P" },
-    { n:"Marcus J.", r:"PMP Certified, 1st attempt", t:"The mock exams and flashcards in the advanced path are the best prep I found. Passed first try!", a:"M" },
-    { n:"Jordan L.", r:"PM Intern at Google", t:"The mentorship matching connected me with someone in exactly the industry I wanted. Changed everything.", a:"J" },
+    { 
+      name: "Priya S.", 
+      role: "PM at Stripe", 
+      text: "PMPath gave me the structure I needed. The beginner path was perfect for a career switcher like me.", 
+      avatar: "P",
+      color: "#16a34a"
+    },
+    { 
+      name: "Marcus J.", 
+      role: "PMP Certified", 
+      text: "The mock exams and flashcards in the advanced path are the best prep I found. Passed first try!", 
+      avatar: "M",
+      color: "#2563eb"
+    },
+    { 
+      name: "Jordan L.", 
+      role: "PM at Google", 
+      text: "The mentorship matching connected me with someone in exactly the industry I wanted. Changed everything.", 
+      avatar: "J",
+      color: "#7c3aed"
+    },
   ];
+  
   return (
-    <section className="py-24 bg-ink relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage:"radial-gradient(#ffffff 1px, transparent 0)", backgroundSize:"32px 32px" }} />
+    <section className="py-24 bg-gradient-to-r from-gray-900 to-gray-800 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(#ffffff 1.5px, transparent 0)", backgroundSize: "40px 40px" }} />
+      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="text-center mb-12">
-          <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-3">Success Stories</p>
-          <h2 className="text-4xl font-display font-bold text-white">Real Transitions.<br /><em className="not-italic text-brand-400">Real Results.</em></h2>
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white/80 text-sm font-medium mb-6">
+            <Trophy size={14} className="text-green-400" />
+            Success Stories
+          </div>
+          <h2 className="text-5xl md:text-6xl font-bold text-white mb-5">
+            Real Transitions.{" "}
+            <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
+              Real Results.
+            </span>
+          </h2>
+          <p className="text-gray-300 max-w-2xl mx-auto text-lg">
+            Join thousands of successful PMs who launched their careers with PMPath.
+          </p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {quotes.map(q => (
-            <div key={q.n} className="p-6 rounded-3xl space-y-4" style={{ background:"#ffffff0d", border:"1px solid #ffffff15" }}>
-              <div className="flex text-brand-400 gap-0.5">{[1,2,3,4,5].map(i => <Star key={i} size={14} className="fill-brand-400" />)}</div>
-              <p className="text-white/80 text-sm leading-relaxed">"{q.t}"</p>
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-sm shrink-0" style={{ background:"linear-gradient(135deg,#16a34a,#0891b2)" }}>{q.a}</div>
+            <div key={q.name} className="p-7 rounded-2xl space-y-4 bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all">
+              <div className="flex text-amber-400 gap-0.5">
+                {[1,2,3,4,5].map(i => <Star key={i} size={16} className="fill-current" />)}
+              </div>
+              <p className="text-white/90 text-base leading-relaxed">"{q.text}"</p>
+              <div className="flex items-center gap-3 pt-2">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0 bg-gradient-to-br" style={{ background: `linear-gradient(135deg, ${q.color}, #0d9488)` }}>
+                  {q.avatar}
+                </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">{q.n}</p>
-                  <p className="text-xs text-white/40">{q.r}</p>
+                  <p className="font-semibold text-white">{q.name}</p>
+                  <p className="text-sm text-white/50">{q.role}</p>
                 </div>
               </div>
             </div>
@@ -331,47 +682,62 @@ function Testimonials() {
   );
 }
 
-function CTA() {
+function CTASection() {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full blur-[120px] opacity-10" style={{ background:"radial-gradient(circle,#bbf7d0,#dbeafe)" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full blur-[120px] opacity-20 bg-gradient-to-r from-green-100 via-cyan-100 to-purple-100" />
       </div>
-      <div className="relative max-w-3xl mx-auto px-4 text-center space-y-8">
-        <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-600"><Zap size={12} />Start Today</p>
-        <h2 className="text-6xl font-display font-bold text-ink leading-tight">
-          Your PM Career<br /><em className="not-italic" style={{ color:"#16a34a" }}>Starts Here.</em>
+      <div className="relative max-w-4xl mx-auto px-4 text-center space-y-8">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-medium">
+          <Zap size={14} />
+          Start Your Journey Today
+        </div>
+        <h2 className="text-5xl md:text-7xl font-bold text-gray-900 leading-tight">
+          Your PM Career{" "}
+          <span className="bg-gradient-to-r from-green-600 to-cyan-600 bg-clip-text text-transparent">
+            Starts Here
+          </span>
         </h2>
-        <p className="text-xl text-slate-400 font-light leading-relaxed">Free forever for core content. No credit card. No excuses.</p>
+        <p className="text-xl text-gray-500 max-w-2xl mx-auto">
+          Free forever for core content. No credit card required. Start learning in minutes.
+        </p>
         <div className="flex flex-wrap gap-4 justify-center">
-          <Link href="/auth/signup"
-            className="inline-flex items-center gap-2 text-base font-semibold text-white shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all rounded-2xl"
-            style={{ background:"linear-gradient(135deg,#16a34a,#0d9488)", padding:"14px 40px" }}>
+          <Link 
+            href="/learn/beginner"
+            className="inline-flex items-center gap-2 text-base font-semibold text-white shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all rounded-2xl px-10 py-4 bg-gradient-to-r from-green-600 to-cyan-600"
+          >
             Get Started Free <ArrowRight size={18} />
           </Link>
-          <Link href="/learn/beginner"
-            className="inline-flex items-center gap-2 text-base font-semibold text-ink border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 transition-all rounded-2xl"
-            style={{ padding:"14px 32px" }}>
-            View Courses
+          <Link 
+            href="/learn"
+            className="inline-flex items-center gap-2 text-base font-semibold text-gray-900 border-2 border-gray-200 hover:border-green-300 bg-white hover:bg-gray-50 transition-all rounded-2xl px-8 py-4"
+          >
+            Browse All Courses
           </Link>
         </div>
-        <p className="text-sm text-slate-400">Free forever for core · Premium from $9/mo · Cancel anytime</p>
+        <p className="text-sm text-gray-400">
+          ✓ Free forever for core · ✓ Premium from $9/mo · ✓ Cancel anytime
+        </p>
       </div>
     </section>
   );
 }
 
-export default async function HomePage() {
-  const [courses, events] = await Promise.all([getCourses(), getEvents()]);
+export default function HomePage() {
   return (
     <>
-      <Hero />
-      <StatsStrip />
-      <LearningPaths courses={courses} />
-      <FeaturedEvents events={events} />
-      <FeatureGrid />
-      <Testimonials />
-      <CTA />
+      <Navbar />
+      <main>
+        <Hero />
+        <StatsStrip />
+        <LearningPaths />
+        <FeaturedEvents />
+        <FeatureGrid />
+        <Testimonials />
+        <CTASection />
+      </main>
+      <Footer />
     </>
   );
 }

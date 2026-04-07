@@ -1,14 +1,36 @@
 // proxy.ts
-import NextAuth from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { authConfig } from "@/lib/auth.config";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const { auth } = NextAuth(authConfig);
+// Simple in-memory cache for sessions
+const sessionCache = new Map<string, any>();
+const CACHE_TTL = 1000 * 30; // 30 seconds
 
-export default auth((req) => {
+function getCacheKey(req: NextRequest) {
+  return req.cookies.get("__Secure-next-auth.session-token")?.value || "";
+}
+
+async function getCachedSession(req: NextRequest) {
+  const key = getCacheKey(req);
+  if (!key) return null;
+
+  const cached = sessionCache.get(key);
+  if (cached && Date.now() < cached.expiry) {
+    return cached.session;
+  }
+
+  const session = await getServerSession(authConfig, req, undefined);
+  sessionCache.set(key, { session, expiry: Date.now() + CACHE_TTL });
+  return session;
+}
+
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const user = req.auth?.user as Record<string, unknown> | undefined;
+
+  const session = await getCachedSession(req);
+  const user = session?.user;
   const isLoggedIn = !!user;
   const role = user?.role as string | undefined;
 
@@ -81,7 +103,7 @@ export default auth((req) => {
   }
 
   return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: [

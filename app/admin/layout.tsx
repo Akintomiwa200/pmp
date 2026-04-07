@@ -3,13 +3,15 @@ import Link from "next/link";
 import {
   LayoutDashboard, Users, BookOpen, Calendar, MessageSquare,
   Briefcase, BarChart3, Settings, Shield, Bell, Search,
-  ChevronDown, Zap, LogOut
+  ChevronDown, Zap, LogOut, Clock
 } from "lucide-react";
 
 const adminNav = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/courses", label: "Courses", icon: BookOpen },
+  { href: "/admin/quizzes", label: "Quizzes", icon: Zap },
+  { href: "/admin/exams/new", label: "Schedule Exam", icon: Clock },
   { href: "/admin/events", label: "Events", icon: Calendar },
   { href: "/admin/community", label: "Community", icon: MessageSquare },
   { href: "/admin/jobs", label: "Jobs", icon: Briefcase },

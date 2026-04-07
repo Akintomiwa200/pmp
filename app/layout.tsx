@@ -1,8 +1,6 @@
 // app/layout.tsx
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import { ThemeProvider, ThemeScript } from "@/components/providers/ThemeProvider";
 import { TTSProvider, TTSBar } from "@/components/providers/TTSProvider";
 import { Toaster } from "react-hot-toast";
@@ -66,35 +64,19 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <ThemeScript />
-      </head>
       <body className="transition-colors duration-200">
+        <ThemeScript />
         <ThemeProvider>
           <TTSProvider>
-            <Navbar />
-            <main className="min-h-[calc(100dvh-var(--nav-height))]">
-              {children}
-            </main>
-            <Footer />
+            <main className="min-h-screen">{children}</main>
             <TTSBar />
-            <Toaster
-              position="bottom-right"
-              toastOptions={{
-                duration: 4000,
-                style: {
-                  borderRadius: "12px",
-                  fontFamily: "var(--font-body, DM Sans, sans-serif)",
-                  fontSize: "14px",
-                  boxShadow: "0 4px 24px -4px rgba(0,0,0,0.12)",
-                  background: "var(--color-white, #fff)",
-                  color: "var(--color-ink, #0f172a)",
-                },
-              }}
-            />
           </TTSProvider>
         </ThemeProvider>
       </body>
