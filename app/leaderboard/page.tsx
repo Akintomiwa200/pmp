@@ -1,11 +1,33 @@
-// app/leaderboard/page.tsx
 "use client";
 import { useState } from "react";
 import { Trophy, Flame, Star, TrendingUp, Award, Medal, Crown } from "lucide-react";
 
+// -----------------------------
+// Types
+// -----------------------------
 type Period = "weekly" | "monthly" | "alltime";
 
-const LEADERBOARD = {
+type User = {
+  rank: number;
+  name: string;
+  avatar: string;
+  points: number;
+  streak: number;
+  level: "beginner" | "intermediate" | "advanced";
+  badges: number;
+  change: number;
+};
+
+type LeaderboardData = {
+  weekly: User[];
+  monthly: User[];
+  alltime: User[];
+};
+
+// -----------------------------
+// Leaderboard Data
+// -----------------------------
+const LEADERBOARD: LeaderboardData = {
   weekly: [
     { rank: 1, name: "Marcus Johnson", avatar: "M", points: 2840, streak: 90, level: "advanced", badges: 8, change: 0 },
     { rank: 2, name: "Priya Sharma", avatar: "P", points: 2120, streak: 30, level: "intermediate", badges: 5, change: 2 },
@@ -21,11 +43,15 @@ const LEADERBOARD = {
   monthly: [],
   alltime: [],
 };
-// Use same data for other periods (demo)
+
+// Generate monthly & alltime data
 LEADERBOARD.monthly = LEADERBOARD.weekly.map((u, i) => ({ ...u, points: u.points * 4, rank: i + 1 }));
 LEADERBOARD.alltime = LEADERBOARD.weekly.map((u, i) => ({ ...u, points: u.points * 12, rank: i + 1 }));
 
-const LEVEL_COLORS: Record<string, string> = {
+// -----------------------------
+// Constants
+// -----------------------------
+const LEVEL_COLORS: Record<User["level"], string> = {
   beginner: "#16a34a",
   intermediate: "#2563eb",
   advanced: "#7c3aed",
@@ -37,6 +63,9 @@ const RANK_STYLES: Record<number, { bg: string; text: string; icon: React.Elemen
   3: { bg: "from-orange-50 to-amber-50 border-orange-200", text: "text-orange-700", icon: Award, iconColor: "text-orange-400" },
 };
 
+// -----------------------------
+// Component
+// -----------------------------
 export default function LeaderboardPage() {
   const [period, setPeriod] = useState<Period>("weekly");
   const data = LEADERBOARD[period];
@@ -79,12 +108,15 @@ export default function LeaderboardPage() {
           </div>
           <p className="text-sm font-semibold text-ink truncate">{top3[1]?.name.split(" ")[0]}</p>
           <p className="text-xs text-ink-subtle">{top3[1]?.points.toLocaleString()} pts</p>
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block" style={{ color: LEVEL_COLORS[top3[1]?.level], background: LEVEL_COLORS[top3[1]?.level] + "15" }}>
+          <span
+            className="text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block"
+            style={{ color: LEVEL_COLORS[top3[1]?.level], background: LEVEL_COLORS[top3[1]?.level] + "15" }}
+          >
             {top3[1]?.level}
           </span>
         </div>
 
-        {/* 1st place — tallest */}
+        {/* 1st place */}
         <div className={`card p-5 text-center bg-gradient-to-b ${RANK_STYLES[1].bg} border order-2 -mt-4 shadow-lg`}>
           <Crown size={24} className="text-amber-500 mx-auto mb-2" />
           <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-bold text-xl mx-auto mb-2 shadow-md">
@@ -106,26 +138,16 @@ export default function LeaderboardPage() {
           </div>
           <p className="text-sm font-semibold text-ink truncate">{top3[2]?.name.split(" ")[0]}</p>
           <p className="text-xs text-ink-subtle">{top3[2]?.points.toLocaleString()} pts</p>
-          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block" style={{ color: LEVEL_COLORS[top3[2]?.level], background: LEVEL_COLORS[top3[2]?.level] + "15" }}>
+          <span
+            className="text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block"
+            style={{ color: LEVEL_COLORS[top3[2]?.level], background: LEVEL_COLORS[top3[2]?.level] + "15" }}
+          >
             {top3[2]?.level}
           </span>
         </div>
       </div>
 
-      {/* Your position callout */}
-      <div className="card p-4 mb-6 bg-brand-50 border-brand-200 flex items-center gap-4">
-        <div className="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold text-sm shrink-0">#4</div>
-        <div className="flex-1">
-          <p className="text-sm font-semibold text-ink">You're ranked #4 this week</p>
-          <p className="text-xs text-ink-muted">880 more points to reach #3 • Keep your 7-day streak going!</p>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <Flame size={14} className="text-orange-500" />
-          <span className="text-sm font-bold text-orange-700">7</span>
-        </div>
-      </div>
-
-      {/* Full table */}
+      {/* Full table for rest */}
       <div className="card overflow-hidden">
         {rest.map((user) => (
           <div
@@ -143,8 +165,10 @@ export default function LeaderboardPage() {
             </div>
 
             {/* Avatar */}
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold shrink-0"
-              style={{ background: `linear-gradient(135deg, ${LEVEL_COLORS[user.level]}, ${LEVEL_COLORS[user.level]}99)` }}>
+            <div
+              className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-bold shrink-0"
+              style={{ background: `linear-gradient(135deg, ${LEVEL_COLORS[user.level]}, ${LEVEL_COLORS[user.level]}99)` }}
+            >
               {user.avatar}
             </div>
 
@@ -154,7 +178,10 @@ export default function LeaderboardPage() {
                 <p className={`text-sm font-semibold ${user.name === "Alex Rivera" ? "text-brand-700" : "text-ink"}`}>
                   {user.name} {user.name === "Alex Rivera" && <span className="text-[10px] font-normal text-brand-500">(You)</span>}
                 </p>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full capitalize" style={{ color: LEVEL_COLORS[user.level], background: LEVEL_COLORS[user.level] + "15" }}>
+                <span
+                  className="text-[10px] font-bold px-1.5 py-0.5 rounded-full capitalize"
+                  style={{ color: LEVEL_COLORS[user.level], background: LEVEL_COLORS[user.level] + "15" }}
+                >
                   {user.level}
                 </span>
               </div>
