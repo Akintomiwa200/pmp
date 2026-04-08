@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useAnimation } from "framer-motion";
 import { useRef } from "react";
 
 // Static data - no database calls
@@ -282,118 +282,55 @@ function Hero() {
 
 
 
-
-
 function StatsStrip() {
+
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  const stats = [
-    { v: "12,400+", l: "Active Learners", i: Users },
-    { v: "5", l: "Structured Courses", i: BookOpen },
-    { v: "87%", l: "Career Transition Rate", i: TrendingUp },
-    { v: "200+", l: "PM Events Yearly", i: Calendar },
-  ];
+  const partners = [Users, BookOpen, TrendingUp, Calendar, Briefcase, Globe]; // Icons as placeholders
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+      y: 0,
+      transition: { staggerChildren: 0.15 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: "spring", stiffness: 120, damping: 12, duration: 0.6 },
-    },
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-r from-gray-900 to-gray-800 py-20 md:py-28">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-green-500/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <span className="inline-block px-4 py-1.5 text-xs font-medium tracking-wider text-green-400/80 bg-white/5 rounded-full border border-white/10 backdrop-blur-sm">
-            OUR IMPACT IN NUMBERS
-          </span>
-        </motion.div>
+    <section className="bg-white py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+        <h2 className="text-center text-2xl font-semibold text-gray-900 mb-10">
+          Our Trusted Partners
+        </h2>
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+          className="flex items-center justify-center space-x-12 overflow-x-auto scrollbar-hide"
         >
-          {stats.map((s, idx) => {
-            const Icon = s.i;
-            return (
-              <motion.div
-                key={s.l}
-                variants={itemVariants}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                className="relative group"
-              >
-                <div className="relative bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/10 shadow-2xl overflow-hidden text-center">
-                  <div className={`absolute inset-0 bg-gradient-to-br from-green-500 to-cyan-500 opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: idx * 0.12 + 0.3, duration: 0.5, type: "spring", stiffness: 100 }}
-                    className="mb-5"
-                  >
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-cyan-500/20 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
-                      <Icon size={24} className="text-green-400 group-hover:text-green-300 transition-colors" />
-                    </div>
-                  </motion.div>
-
-                  <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: idx * 0.12 + 0.4, duration: 0.5 }}
-                    className="text-4xl md:text-5xl font-bold text-white mb-2"
-                  >
-                    {s.v}
-                  </motion.p>
-
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={isInView ? { opacity: 1 } : {}}
-                    transition={{ delay: idx * 0.12 + 0.5, duration: 0.5 }}
-                    className="text-sm md:text-base text-gray-400 font-medium"
-                  >
-                    {s.l}
-                  </motion.p>
-
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-green-500/50 to-transparent"
-                    initial={{ scaleX: 0, opacity: 0 }}
-                    animate={isInView ? { scaleX: 1, opacity: 1 } : {}}
-                    transition={{ delay: idx * 0.1 + 0.6, duration: 0.8 }}
-                  />
-                </div>
-              </motion.div>
-            );
-          })}
+          {partners.map((Icon, idx) => (
+            <motion.div
+              key={idx}
+              variants={itemVariants}
+              className="flex-shrink-0 w-20 h-20 flex items-center justify-center bg-gray-50 rounded-lg shadow-sm"
+            >
+              <Icon size={32} className="text-gray-700" />
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
   );
 }
+
 
 
 function LearningPaths() {
@@ -457,7 +394,9 @@ function LearningPaths() {
             Every path is tailored to where you are now — not where you think you should be.
           </p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+
+        {/* Cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
           {paths.map((path) => (
             <Link 
               href={path.href} 
@@ -482,19 +421,28 @@ function LearningPaths() {
                   </li>
                 ))}
               </ul>
-              <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+              <div className="pt-2 border-t border-gray-200">
                 <span className="text-xs text-gray-400">{path.courses} courses available</span>
-                <span className="flex items-center gap-1.5 text-sm font-semibold group-hover:gap-2.5 transition-all" style={{ color: path.color }}>
-                  Explore <ArrowRight size={14} />
-                </span>
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Central Explore Button */}
+        <div className="text-center">
+          <Link 
+            href="/learn" 
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-green-600 to-cyan-600 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
+          >
+            Explore All Paths <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </section>
   );
 }
+
+
 
 function FeaturedEvents() {
   const featured = staticEvents.filter(e => e.isFeatured).slice(0, 3);
@@ -566,46 +514,115 @@ function FeaturedEvents() {
   );
 }
 
+
 function FeatureGrid() {
-  const features = [
-    { icon: BookOpen, title: "Structured Learning", desc: "3 proficiency levels with bite-sized lessons, videos, and downloadable resources.", color: "#16a34a", bg: "bg-green-50" },
-    { icon: Zap, title: "Adaptive Quizzes", desc: "AI-driven assessments that identify weak areas and personalise your study path.", color: "#f59e0b", bg: "bg-amber-50" },
-    { icon: Users, title: "Mentorship Matching", desc: "AI-paired with experienced PMs based on your goals, industry, and learning style.", color: "#7c3aed", bg: "bg-purple-50" },
-    { icon: Calendar, title: "Events & Networking", desc: "Webinars, conferences, and meetups with 200+ PM events tracked per year.", color: "#2563eb", bg: "bg-blue-50" },
-    { icon: Briefcase, title: "PM Job Board", desc: "Curated entry-level roles, internships, and freelance gigs updated daily.", color: "#0891b2", bg: "bg-teal-50" },
-    { icon: Award, title: "Certification Prep", desc: "200+ PMP practice questions, timed mock exams, and PMBOK 7 flashcards.", color: "#e11d48", bg: "bg-rose-50" },
-    { icon: Shield, title: "Progress Tracking", desc: "Gamified streaks, badges, and exportable certificates for every course.", color: "#16a34a", bg: "bg-green-50" },
-    { icon: Globe, title: "Global Community", desc: "Discussion boards segmented by level. Share wins, get unstuck, grow together.", color: "#f97316", bg: "bg-orange-50" },
-  ];
-  
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-24 px-6 relative overflow-hidden">
+      {/* subtle green/cyan grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(34,197,94,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+      <div className="max-w-7xl mx-auto relative">
+        {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-medium mb-6">
-            <Sparkles size={14} />
-            Platform Features
+          <div className="inline-block bg-emerald-50 text-cyan-700 text-xs font-medium tracking-widest px-6 py-2 rounded-full border border-emerald-100 mb-6">
+            FEATURES
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-5">
-            Everything You Need{" "}
-            <span className="bg-gradient-to-r from-green-600 to-cyan-600 bg-clip-text text-transparent">
-              to Succeed
-            </span>
+
+          <h2 className="text-5xl md:text-6xl font-semibold text-slate-900 mb-4">
+            The PM learning stack
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-lg">
-            Powerful tools and resources designed to accelerate your PM career journey.
+
+          <p className="text-slate-500 text-xl max-w-2xl mx-auto">
+            Everything you need to transition into project management with confidence.
           </p>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {features.map((f) => (
-            <div key={f.title} className="bg-white rounded-2xl p-6 border border-gray-200 hover:border-green-200 hover:shadow-lg transition-all duration-200 group">
-              <div className={`w-12 h-12 rounded-xl ${f.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                <f.icon size={20} style={{ color: f.color }} />
+
+        <div className="space-y-8">
+          {/* Card 1 */}
+          <div className="bg-cyan-800 rounded-3xl border border-emerald-500/20 p-8 lg:p-12">
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              <div>
+                <h3 className="text-3xl md:text-4xl font-semibold leading-tight mb-5 text-white">
+                  Focus on learning,
+                  <br />
+                  not searching
+                </h3>
+
+                <p className="text-slate-300 text-lg leading-relaxed mb-8 max-w-xl">
+                  Eliminate confusion with structured paths, curated resources,
+                  simulations, and guided progress built specifically for PM career transitions.
+                </p>
+
+                <button className="bg-cyan-800 hover:bg-cyan-500 transition-all duration-200 text-white font-medium px-8 py-3.5 rounded-2xl text-sm">
+                  Start learning free
+                </button>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">{f.title}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{f.desc}</p>
+
+              {/* Right preview */}
+              <div className="bg-slate-950 rounded-2xl overflow-hidden border border-cyan-500/10 shadow-xl">
+                <div className="bg-slate-900 px-5 py-3 flex items-center gap-2 border-b border-cyan-500/10">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 bg-red-500 rounded-full" />
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full" />
+                    <div className="w-3 h-3 bg-emerald-500 rounded-full" />
+                  </div>
+                </div>
+
+                <div className="p-8 space-y-6">
+                  {["PM", "AG", "QA"].map((user) => (
+                    <div key={user} className="flex items-center gap-4">
+                      <div className="w-10 h-10 bg-cyan-600 rounded-2xl flex items-center justify-center text-sm font-bold text-white">
+                        {user}
+                      </div>
+                      <div className="h-3 bg-slate-700 rounded-full flex-1" />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          ))}
+          </div>
+
+          {/* Card 2 */}
+          <div className="bg-cyan-800 rounded-3xl border border-emerald-500/20 p-8 lg:p-12">
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+             
+
+              <div className="space-y-4">
+                {[
+                  "Project simulations",
+                  "Agile board practice",
+                  "Stakeholder scenarios",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="bg-slate-900 rounded-2xl px-6 py-5 flex items-center gap-4 border border-cyan-500/10"
+                  >
+                    <div className="w-10 h-10 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-lg text-cyan-300">
+                      ✓
+                    </div>
+                    <span className="text-slate-200">{item}</span>
+                  </div>
+                ))}
+              </div>
+
+               <div>
+                <h3 className="text-3xl md:text-4xl font-semibold leading-tight mb-5 text-white">
+                  Practice with real
+                  <br />
+                  PM workflows
+                </h3>
+
+                <p className="text-slate-300 text-lg leading-relaxed mb-8 max-w-xl">
+                  Work through simulations, stakeholder exercises, Agile boards,
+                  and PMP prep environments designed to mirror real PM teams.
+                </p>
+
+                <button className="border border-cyan-500 hover:bg-cyan-500/10 transition-all text-cyan-400 font-medium px-8 py-3.5 rounded-2xl text-sm">
+                  Explore simulations
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -638,7 +655,7 @@ function Testimonials() {
   ];
   
   return (
-    <section className="py-24 bg-gradient-to-r from-gray-900 to-gray-800 relative overflow-hidden">
+    <section className="py-24 bg-cyan-800 relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(#ffffff 1.5px, transparent 0)", backgroundSize: "40px 40px" }} />
       </div>
