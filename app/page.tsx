@@ -104,7 +104,7 @@ function Hero() {
 
           <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
             Building{" "}
-            <span className="bg-gradient-to-r from-green-600 to-cyan-600 bg-clip-text text-transparent">
+            <span className="bg-cyan-600 bg-clip-text text-transparent">
               Confident
             </span>{" "}
             Project Managers.
@@ -122,7 +122,7 @@ function Hero() {
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/learn/beginner"
-              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-600 to-cyan-600 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-green-200/50 transition hover:scale-[1.02] hover:shadow-xl"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-600 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-green-200/50 transition hover:scale-[1.02] hover:shadow-xl"
             >
               Start Learning Now <ArrowRight size={18} />
             </Link>
@@ -141,7 +141,7 @@ function Hero() {
               {["A", "P", "M", "J", "L"].map((l, i) => (
                 <div
                   key={i}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-gradient-to-br from-green-500 to-cyan-500 text-xs font-bold text-white shadow-md"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-cyan-500 text-xs font-bold text-white shadow-md"
                 >
                   {l}
                 </div>
@@ -176,7 +176,7 @@ function Hero() {
         
           {/* Product showcase card */}
         <div className="mx-auto mt-16 max-w-5xl">
-          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-green-700 via-green-500 to-cyan-400 p-10 pb-8">
+          <div className="relative overflow-hidden rounded-[2rem] bg-cyan-400 p-10 pb-8">
               <div className="relative my-5 text-center">
                  <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-2 text-sm font-medium text-green-700">
                     Wall of Love
@@ -212,7 +212,7 @@ function Hero() {
                   ))}
                   <p className="mb-2 mt-3 px-2 text-[10px] font-semibold uppercase tracking-widest text-white/40">Direct Messages</p>
                   {[["Coach Sarah", true], ["Study Group", true], ["Alex M.", false]].map(([name, online]) => (
-                    <div key={name} className="flex items-center gap-2 px-2 py-1">
+                    <div key={String(name)} className="flex items-center gap-2 px-2 py-1">
                       <div className={`h-2 w-2 rounded-full ${online ? "bg-green-400" : "bg-gray-500"}`} />
                       <span className="text-[13px] text-white/60">{name}</span>
                     </div>
@@ -386,7 +386,7 @@ function LearningPaths() {
           </div>
           <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-5">
             Find Your{" "}
-            <span className="bg-gradient-to-r from-green-600 to-cyan-600 bg-clip-text text-transparent">
+            <span className="bg-cyan-600 bg-clip-text text-transparent">
               Starting Point
             </span>
           </h2>
@@ -432,7 +432,7 @@ function LearningPaths() {
         <div className="text-center">
           <Link 
             href="/learn" 
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-green-600 to-cyan-600 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-cyan-600 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
           >
             Explore All Paths <ArrowRight size={16} />
           </Link>
@@ -457,7 +457,7 @@ function FeaturedEvents() {
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
               Join the{" "}
-              <span className="bg-gradient-to-r from-green-600 to-cyan-600 bg-clip-text text-transparent">
+              <span className="bg-cyan-600 bg-clip-text text-transparent">
                 Community
               </span>
             </h2>
@@ -496,7 +496,7 @@ function FeaturedEvents() {
                 </div>
                 <a 
                   href={event.registrationUrl} 
-                  className="text-sm font-semibold px-5 py-2.5 rounded-xl text-white bg-gradient-to-r from-green-600 to-cyan-600 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                  className="text-sm font-semibold px-5 py-2.5 rounded-xl text-white bg-cyan-600 hover:shadow-lg hover:-translate-y-0.5 transition-all"
                 >
                   Register
                 </a>
@@ -667,7 +667,7 @@ function Testimonials() {
           </div>
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-5">
             Real Transitions.{" "}
-            <span className="bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-cyan-400 bg-clip-text text-transparent">
               Real Results.
             </span>
           </h2>
@@ -703,7 +703,7 @@ function CTASection() {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full blur-[120px] opacity-20 bg-gradient-to-r from-green-100 via-cyan-100 to-purple-100" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full blur-[120px] opacity-20 bg-cyan-100 to-purple-100" />
       </div>
       <div className="relative max-w-4xl mx-auto px-4 text-center space-y-8">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-medium">
@@ -712,7 +712,7 @@ function CTASection() {
         </div>
         <h2 className="text-5xl md:text-7xl font-bold text-gray-900 leading-tight">
           Your PM Career{" "}
-          <span className="bg-gradient-to-r from-green-600 to-cyan-600 bg-clip-text text-transparent">
+          <span className="bg-cyan-600 bg-clip-text text-transparent">
             Starts Here
           </span>
         </h2>
@@ -722,7 +722,7 @@ function CTASection() {
         <div className="flex flex-wrap gap-4 justify-center">
           <Link 
             href="/learn/beginner"
-            className="inline-flex items-center gap-2 text-base font-semibold text-white shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all rounded-2xl px-10 py-4 bg-gradient-to-r from-green-600 to-cyan-600"
+            className="inline-flex items-center gap-2 text-base font-semibold text-white shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all rounded-2xl px-10 py-4 bg-cyan-600"
           >
             Get Started Free <ArrowRight size={18} />
           </Link>

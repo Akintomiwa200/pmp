@@ -418,8 +418,8 @@ export default function QuizPage() {
               style={{
                 background: p.isYou ? "rgba(255,255,255,.15)" : "rgba(255,255,255,.07)",
                 border: `1px solid ${p.isYou ? "rgba(255,255,255,.3)" : "rgba(255,255,255,.08)"}`,
-                ringColor: "#fff",
-                animation: `slideRight .4s ${i * .07}s ease-out both`
+                boxShadow: p.isYou ? "0 0 0 2px rgba(255,255,255,.9)" : "none",
+                animation: `slideRight .4s ${i * 0.07}s ease-out both`,
               }}>
               <div className="w-7 text-center font-black text-base" style={{ color: medalColors[i] ?? "#94a3b8" }}>
                 {medalEmojis[i] ?? `${i+1}`}
