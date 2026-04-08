@@ -6,8 +6,18 @@ import {
   CheckCircle, XCircle, Flame, Image, ChevronRight, Medal
 } from "lucide-react";
 
+
+
+
+
 // ─── QUIZ DATA ───────────────────────────────────────────────────────────────
-const QUIZ_BANK = {
+const QUIZ_BANK: Record<Level, {
+  title: string;
+  emoji: string;
+  color: string;
+  timePerQ: number;
+  questions: Question[];
+}> = {
   beginner: {
     title: "PM Fundamentals", emoji: "🌱", color: "#16a34a", timePerQ: 20,
     questions: [
@@ -108,6 +118,15 @@ function useAudio(muted: boolean) {
   };
 }
 
+
+interface Question {
+  id: string;
+  question: string;
+  options: string[];
+  correct: number;
+  explanation: string;
+  domain?: string;
+}
 // ─── TYPES ───────────────────────────────────────────────────────────────────
 type Level = "beginner" | "intermediate" | "advanced";
 type Phase = "select" | "countdown" | "question" | "reveal" | "leaderboard" | "results";
@@ -650,10 +669,12 @@ export default function QuizPage() {
           <div className="w-full max-w-2xl rounded-3xl px-6 py-8 sm:px-10 sm:py-12 text-center"
             style={{ background:"rgba(255,255,255,.07)", backdropFilter:"blur(16px)", border:"1px solid rgba(255,255,255,.12)",
               animation: animate ? "slideDown .4s ease-out" : "none" }}>
-            {(question as Record<string,unknown>).domain && (
-              <div className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-4"
-                style={{ background:quiz.color+"35", color:quiz.color }}>
-                {(question as Record<string,unknown>).domain as string}
+           {question.domain && (
+              <div
+                className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider mb-4"
+                style={{ background: quiz.color + "35", color: quiz.color }}
+              >
+                {question.domain}
               </div>
             )}
             <p className="text-xl sm:text-2xl lg:text-3xl font-black text-white leading-snug">{question.question}</p>
