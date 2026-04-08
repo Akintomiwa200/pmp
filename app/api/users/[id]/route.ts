@@ -2,12 +2,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getUserById } from "@/lib/db";
 import { UsersStore } from "@/lib/dataStore";
+import type { User } from "@/types";
 
 type RouteParams = Promise<{ id: string }>;
 
-type SafeUser = Record<string, unknown> & {
-  password?: string;
-};
+type SafeUser = Omit<User, "password">;
+type UserUpdate = Partial<SafeUser>;
 
 export async function GET(
   _req: NextRequest,
@@ -15,7 +15,6 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-
     const user = await getUserById(id);
 
     if (!user) {
@@ -25,11 +24,11 @@ export async function GET(
       );
     }
 
-    const { password: _pw, ...safeUser } = user as SafeUser;
+    const { password: _pw, ...safeUser } = user;
 
     return NextResponse.json({
       success: true,
-      data: safeUser,
+      data: safeUser satisfies SafeUser,
     });
   } catch (error) {
     console.error("GET user error:", error);
@@ -47,7 +46,9 @@ export async function PATCH(
 ) {
   try {
     const { id } = await params;
-    const body = (await req.json()) as Partial<SafeUser>;
+    const body = (await req.json()) as UserUpdate & {
+      password?: never;
+    };
 
     if (!body || Object.keys(body).length === 0) {
       return NextResponse.json(
@@ -56,10 +57,7 @@ export async function PATCH(
       );
     }
 
-    // Prevent password updates here
-    const { password: _pw, ...safeUpdates } = body;
-
-    const updated = UsersStore.update(id, safeUpdates);
+    const updated = UsersStore.update(id, body);
 
     if (!updated) {
       return NextResponse.json(
@@ -68,11 +66,11 @@ export async function PATCH(
       );
     }
 
-    const { password: _p, ...safeUser } = updated as SafeUser;
+    const { password: _pw, ...safeUser } = updated;
 
     return NextResponse.json({
       success: true,
-      data: safeUser,
+      data: safeUser satisfies SafeUser,
       message: "User updated successfully",
     });
   } catch (error) {
@@ -91,7 +89,6 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
-
     const deleted = UsersStore.delete(id);
 
     if (!deleted) {
