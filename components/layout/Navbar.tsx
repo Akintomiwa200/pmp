@@ -64,7 +64,7 @@ export default function Navbar() {
         {/* CTA Desktop + Tablet */}
         <div className="hidden md:block">
           <Link
-            href="/get-started"
+            href="/auth/signup"
             className="rounded-xl bg-cyan-600 px-5 lg:px-6 py-2.5 text-sm font-medium text-black transition hover:bg-cyan-600"
           >
             Get Started
@@ -91,7 +91,7 @@ export default function Navbar() {
             transition={{ duration: 0.25 }}
             className="mx-auto mt-3 max-w-7xl rounded-2xl border border-white/10 bg-white/90 p-4 backdrop-blur-xl shadow-2xl md:hidden"
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col h-[80vh] gap-4">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
@@ -104,7 +104,7 @@ export default function Navbar() {
               ))}
 
               <Link
-                href="/get-started"
+                href="/auth/signup"
                 onClick={() => setMobileOpen(false)}
                 className="mt-2 rounded-xl bg-cyan-600 px-4 py-3 text-center text-sm font-medium text-black transition hover:bg-gradient-to-r from-green-600 to-cyan-800"
               >

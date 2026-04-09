@@ -97,8 +97,8 @@ function Hero() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-36 pb-20">
         {/* Center Hero Content */}
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-2 text-sm font-medium text-green-700">
-            <Sparkles size={14} className="text-green-600" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-2 text-sm font-medium text-cyan-700">
+            <Sparkles size={14} className="text-cyan-600" />
             12,400+ aspiring PMs · Start learning today
           </div>
 
@@ -203,7 +203,7 @@ function Hero() {
 
               <div className="flex h-96">
                 {/* Sidebar */}
-                <div className="w-48 shrink-0 bg-[#1e1f2e] p-3">
+                <div className="w-48 shrink-0 bg-cyan-800 p-3">
                   <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-white/40">Channels</p>
                   {["pm-foundations", "agile-scrum", "stakeholder-maps", "pmp-mock-exams"].map((ch, i) => (
                     <div key={ch} className={`flex items-center gap-1.5 rounded px-2 py-1 text-[13px] ${i === 0 ? "bg-white/10 text-white font-medium" : "text-white/50"}`}>
@@ -380,7 +380,7 @@ function LearningPaths() {
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-medium mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-sm font-medium mb-6">
             <BookOpen size={14} />
             Learning Paths
           </div>
@@ -451,7 +451,7 @@ function FeaturedEvents() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 border border-border-200 text-cyan-700 text-sm font-medium mb-6">
               <Calendar size={14} />
               Upcoming Events
             </div>
@@ -662,7 +662,7 @@ function Testimonials() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white/80 text-sm font-medium mb-6">
-            <Trophy size={14} className="text-green-400" />
+            <Trophy size={14} className="text-cyan-400" />
             Success Stories
           </div>
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-5">
@@ -706,7 +706,7 @@ function CTASection() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full blur-[120px] opacity-20 bg-cyan-100 to-purple-100" />
       </div>
       <div className="relative max-w-4xl mx-auto px-4 text-center space-y-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-700 text-sm font-medium">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-sm font-medium">
           <Zap size={14} />
           Start Your Journey Today
         </div>

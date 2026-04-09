@@ -33,7 +33,7 @@ export default function Footer() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const APP_NAME = "PMPath";
+  const APP_NAME = "Project Management ";
 
   return (
     <footer className="relative bg-cyan-800 text-gray-300 overflow-hidden">
@@ -178,7 +178,7 @@ export default function Footer() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 rounded-r-full transition-colors flex items-center justify-center disabled:opacity-50"
+                className="px-6 py-3 bg-gray-800 hover:bg-emerald-700 rounded-r-full transition-colors flex items-center justify-center disabled:opacity-50"
               >
                 <svg
                   className="w-5 h-5 text-white"
