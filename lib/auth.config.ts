@@ -1,9 +1,9 @@
 // lib/auth.config.ts
-import type { AuthConfig } from "next-auth";
+import type NextAuthConfig from "next-auth";
 import Google from "next-auth/providers/google";
 import GitHub from "next-auth/providers/github";
 
-export const authConfig = {
+export const authConfig: NextAuthConfig = {
   secret: process.env.AUTH_SECRET,
 
   pages: {
@@ -19,12 +19,12 @@ export const authConfig = {
   },
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt(token, user) {
       if (user) {
         token.id = user.id;
-        token.level = (user as any).level;
-        token.subscription = (user as any).subscription;
-        token.role = (user as any).role ?? "user";
+        token.level = user.level;
+        token.subscription = user.subscription;
+        token.role = user.role ?? "user";
       }
       return token;
     },
@@ -32,9 +32,9 @@ export const authConfig = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        (session.user as any).level = token.level;
-        (session.user as any).subscription = token.subscription;
-        (session.user as any).role = token.role;
+        session.user.level = token.level as string;
+        session.user.subscription = token.subscription as string;
+        session.user.role = token.role as string;
       }
       return session;
     },
@@ -42,7 +42,7 @@ export const authConfig = {
     authorized({ auth, request }) {
       const isLoggedIn = !!auth?.user;
       const { pathname } = request.nextUrl;
-      const role = (auth?.user as any)?.role;
+      const role = auth?.user?.role;
 
       const protectedPaths = [
         "/dashboard",
@@ -88,4 +88,4 @@ export const authConfig = {
         ]
       : []),
   ],
-} satisfies AuthConfig;
+};
