@@ -2,6 +2,7 @@
 
 export type Level = "beginner" | "intermediate" | "advanced" | "all";
 export type SubscriptionTier = "free" | "premium";
+export type UserRole = "user" | "admin" | "superadmin";
 export type EventFormat = "virtual" | "in_person" | "hybrid";
 export type EventType = "conference" | "webinar" | "workshop" | "meetup" | "study_group";
 export type JobType = "full_time" | "part_time" | "contract" | "internship" | "freelance";
@@ -26,6 +27,7 @@ export interface User {
   isMentor: boolean;
   menteeIds?: string[];
   subscription: SubscriptionTier;
+  role?: UserRole;
   bio?: string;
   location?: string;
   linkedIn?: string;

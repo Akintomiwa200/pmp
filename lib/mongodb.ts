@@ -1,5 +1,5 @@
 // lib/mongodb.ts
-import { MongoClient, MongoClientOptions } from "mongodb";
+import { MongoClient, type Document, type MongoClientOptions } from "mongodb";
 
 const uri = process.env.MONGODB_URI as string;
 
@@ -39,7 +39,7 @@ if (process.env.NODE_ENV === "development") {
 export default clientPromise;
 
 // Helper: get a typed collection
-export async function getCollection<T>(collectionName: string) {
+export async function getCollection<T extends Document>(collectionName: string) {
   const client = await clientPromise;
   const db = client.db("pmpath");
   return db.collection<T>(collectionName);

@@ -1,7 +1,17 @@
 // lib/db.ts
 // Unified DB service: tries MongoDB first, falls back to JSON store.
 
-import type { User, Course, PMEvent, Post, Job, Mentor, Progress, Quiz } from "@/types";
+import type {
+  Course,
+  Job,
+  Level,
+  Mentor,
+  PMEvent,
+  Post,
+  Progress,
+  Quiz,
+  User,
+} from "@/types";
 
 async function withMongo<T>(
   mongoFn: () => Promise<T>,
@@ -54,7 +64,7 @@ export async function getUserByEmail(email: string): Promise<User | null> {
 }
 
 // ─── Courses ────────────────────────────────────────────────────────────────
-export async function getCourses(level?: string): Promise<Course[]> {
+export async function getCourses(level?: Level): Promise<Course[]> {
   const { CoursesStore } = await import("@/lib/dataStore");
   return withMongo(
     async () => {
@@ -113,7 +123,7 @@ export async function getEvents(filters?: {
 }
 
 // ─── Community Posts ─────────────────────────────────────────────────────────
-export async function getPosts(level?: string): Promise<Post[]> {
+export async function getPosts(level?: Level): Promise<Post[]> {
   const { PostsStore } = await import("@/lib/dataStore");
   return withMongo(
     async () => {

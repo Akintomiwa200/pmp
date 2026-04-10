@@ -1,6 +1,7 @@
 // lib/auth.config.ts
-import Google from "next-auth/providers/google";
+import type { NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
 
 export const authConfig = {
   secret: process.env.AUTH_SECRET,
@@ -18,7 +19,7 @@ export const authConfig = {
   },
 
   callbacks: {
-    async jwt(token, user) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.level = user.level;
@@ -38,34 +39,6 @@ export const authConfig = {
       return session;
     },
 
-    authorized({ auth, request }) {
-      const isLoggedIn = !!auth?.user;
-      const { pathname } = request.nextUrl;
-      const role = auth?.user?.role;
-
-      const protectedPaths = [
-        "/dashboard",
-        "/profile",
-        "/settings",
-        "/progress",
-        "/certificates",
-        "/notifications",
-      ];
-
-      if (pathname.startsWith("/superadmin")) {
-        return role === "superadmin";
-      }
-
-      if (pathname.startsWith("/admin")) {
-        return role === "admin" || role === "superadmin";
-      }
-
-      if (protectedPaths.some((p) => pathname.startsWith(p))) {
-        return isLoggedIn;
-      }
-
-      return true;
-    },
   },
 
   providers: [
@@ -87,4 +60,4 @@ export const authConfig = {
         ]
       : []),
   ],
-};
+} satisfies NextAuthConfig;

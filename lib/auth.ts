@@ -38,7 +38,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           image: user.avatar ?? null,
           level: user.level,
           subscription: user.subscription,
-          role: (user as Record<string, unknown>).role ?? "user",
+          role: user.role ?? "user",
         };
       },
     }),
