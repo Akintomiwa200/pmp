@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { getUserByEmail } from "@/lib/db";
+import type { Level, SubscriptionTier, UserRole } from "@/types";
 
 const credentialsSchema = z.object({
   email: z.string().email(),
@@ -37,9 +38,9 @@ const { handlers } = NextAuth({
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.level = token.level as string;
-        session.user.subscription = token.subscription as string;
-        session.user.role = token.role as string;
+        session.user.level = token.level as Level;
+        session.user.subscription = token.subscription as SubscriptionTier;
+        session.user.role = token.role as UserRole;
       }
       return session;
     },
