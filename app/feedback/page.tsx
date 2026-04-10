@@ -26,7 +26,6 @@ const NPS_LABELS: Record<number, string> = {
 export default function FeedbackPage() {
   const [step, setStep] = useState<Step>("nps");
   const [npsScore, setNpsScore] = useState<number | null>(null);
-  const [hovered, setHovered] = useState<number | null>(null);
   const [ratings, setRatings] = useState<Record<string, number>>({});
   const [comment, setComment] = useState("");
   const [category, setCategory] = useState("general");
@@ -107,10 +106,8 @@ export default function FeedbackPage() {
                   <button
                     key={n}
                     onClick={() => setNpsScore(n)}
-                    onMouseEnter={() => setHovered(n)}
-                    onMouseLeave={() => setHovered(null)}
                     className={`w-10 h-10 rounded-xl text-sm font-bold transition-all ${active ? "text-white shadow-md scale-110" : "border border-surface-3 hover:scale-105"}`}
-                    style={active ? { background: color } : { color: hovered === n ? color : "#94a3b8" }}
+                    style={active ? { background: color } : { color: "#94a3b8" }}
                   >
                     {n}
                   </button>

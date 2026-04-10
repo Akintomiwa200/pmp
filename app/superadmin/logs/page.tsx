@@ -65,9 +65,11 @@ export default function AuditLogsPage() {
             {LOGS.map((log) => {
               const s = SEV[log.severity];
               return (
-                <tr key={log.id} className="transition-colors" style={{ borderBottom: "1px solid #111827" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "#111827")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "")}>
+                <tr
+                  key={log.id}
+                  className="transition-colors hover:bg-[#111827]"
+                  style={{ borderBottom: "1px solid #111827" }}
+                >
                   <td className="px-4 py-3 text-[10px]" style={{ color: "#4a6080" }}>{log.createdAt}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
