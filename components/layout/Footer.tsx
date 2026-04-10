@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Mail, Phone, Facebook, Instagram, Youtube } from "lucide-react";
+import { Mail, Phone, Facebook, Instagram, YoutubeIcon } from "lucide-react";
 
 const links = {
   Learn: [
@@ -144,7 +144,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-emerald-600 transition-colors"
               >
-                <Youtube className="w-5 h-5" />
+                <YoutubeIcon className="w-5 h-5" />
               </a>
             </div>
 

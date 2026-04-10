@@ -12,7 +12,7 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-const handler = NextAuth({
+const { handlers } = NextAuth({
   secret: process.env.AUTH_SECRET,
   pages: {
     signIn: "/auth/login",
@@ -91,4 +91,4 @@ const handler = NextAuth({
   ],
 });
 
-export { handler as GET, handler as POST };
+export const { GET, POST } = handlers;
