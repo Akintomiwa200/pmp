@@ -1,5 +1,6 @@
 // lib/auth.ts
 import NextAuth from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
@@ -11,10 +12,10 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const authOptions: NextAuthOptions = {
   ...authConfig,
   providers: [
-    ...authConfig.providers,
+    ...(authConfig.providers ?? []),
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -43,4 +44,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
-});
+};
+
+export default NextAuth(authOptions);

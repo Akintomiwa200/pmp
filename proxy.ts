@@ -1,11 +1,14 @@
 // proxy.ts
-import { auth } from "@/lib/auth";
+import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import type { UserRole } from "@/types";
 
-export const proxy = auth((req) => {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const isLoggedIn = !!req.auth;
-  const role = req.auth?.user?.role;
+  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  const isLoggedIn = !!token;
+  const role = token?.role as UserRole | undefined;
 
   // Maintenance mode
   if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE === "true") {
@@ -76,7 +79,7 @@ export const proxy = auth((req) => {
   }
 
   return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: [

@@ -1,5 +1,4 @@
 import type { DefaultSession } from "next-auth";
-import type { DefaultJWT } from "next-auth/jwt";
 import type { Level, SubscriptionTier, UserRole } from "@/types";
 
 declare module "next-auth" {
@@ -21,7 +20,7 @@ declare module "next-auth" {
 }
 
 declare module "next-auth/jwt" {
-  interface JWT extends DefaultJWT {
+  interface JWT {
     id?: string;
     level?: Level;
     subscription?: SubscriptionTier;

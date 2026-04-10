@@ -1,5 +1,4 @@
 // lib/auth.config.ts
-import type { NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import type { Level, SubscriptionTier, UserRole } from "@/types";
@@ -61,4 +60,4 @@ export const authConfig = {
         ]
       : []),
   ],
-} satisfies NextAuthConfig;
+} satisfies NextAuthOptions;
