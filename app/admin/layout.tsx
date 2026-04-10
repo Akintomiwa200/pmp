@@ -53,10 +53,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
           {adminNav.map((item) => (
             <Link key={item.href} href={item.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all group"
-              style={{ color: "#6b8aad" }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#1a2840"; (e.currentTarget as HTMLElement).style.color = "#e2e8f0"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = ""; (e.currentTarget as HTMLElement).style.color = "#6b8aad"; }}
+              className="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[#6b8aad] transition-all hover:bg-[#1a2840] hover:text-[#e2e8f0]"
             >
               <item.icon size={16} />
               {item.label}
@@ -74,9 +71,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span className="flex-1">Super Admin</span>
             <Zap size={12} />
           </Link>
-          <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all" style={{ color: "#ef4444" }}
-            onMouseEnter={e => (e.currentTarget.style.background = "#ef444410")}
-            onMouseLeave={e => (e.currentTarget.style.background = "")}
+          <button
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-[#ef4444] transition-all hover:bg-[#ef444410]"
           >
             <LogOut size={16} /><span>Logout</span>
           </button>
