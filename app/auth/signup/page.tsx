@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, ArrowRight, CheckCircle2 } from "lucide-react";
+import { signIn } from "next-auth/react";
 
 const LEVELS = [
   { value: "beginner", label: "Beginner", emoji: "🌱", desc: "New to PM" },
@@ -16,6 +17,7 @@ export default function SignupPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "", level: "", goals: [] as string[] });
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [error, setError] = useState("");
 
   const goalOptions = [
     "Get PMP certified",
@@ -35,13 +37,30 @@ export default function SignupPage() {
 
   const handleSubmit = async () => {
     setLoading(true);
+    setError("");
     try {
-      await fetch("/api/users", {
+      const res = await fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      setDone(true);
+      const data = await res.json();
+      if (!res.ok || !data?.success) {
+        setError(data?.error ?? "Failed to create account.");
+        return;
+      }
+
+      // Sign in immediately so signup/login share same auth backend flow.
+      const authRes = await signIn("credentials", {
+        email: form.email,
+        password: form.password,
+        redirect: false,
+      });
+      if (authRes?.error) {
+        setDone(true);
+        return;
+      }
+      window.location.href = "/dashboard";
     } finally {
       setLoading(false);
     }
@@ -84,6 +103,11 @@ export default function SignupPage() {
         </div>
 
         <div className="card p-6 sm:p-8 space-y-5">
+          {error && (
+            <div className="rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+              {error}
+            </div>
+          )}
           {/* Step 1: Basic info */}
           {step === 1 && (
             <>

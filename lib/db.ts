@@ -63,6 +63,19 @@ export async function getUserByEmail(email: string): Promise<User | null> {
   );
 }
 
+export async function createUser(user: User): Promise<User> {
+  const { UsersStore } = await import("@/lib/dataStore");
+  return withMongo(
+    async () => {
+      const { getCollection } = await import("@/lib/mongodb");
+      const col = await getCollection<User>("users");
+      await col.insertOne(user);
+      return user;
+    },
+    () => UsersStore.create(user)
+  );
+}
+
 // ─── Courses ────────────────────────────────────────────────────────────────
 export async function getCourses(level?: Level): Promise<Course[]> {
   const { CoursesStore } = await import("@/lib/dataStore");

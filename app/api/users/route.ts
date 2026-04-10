@@ -1,9 +1,9 @@
 // app/api/users/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { getUsers } from "@/lib/db";
-import { UsersStore } from "@/lib/dataStore";
+import { createUser, getUserByEmail, getUsers } from "@/lib/db";
 import { generateId } from "@/lib/utils";
 import bcrypt from "bcryptjs";
+import type { Level } from "@/types";
 
 export async function GET() {
   try {
@@ -25,11 +25,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: "Name, email, and password are required" }, { status: 400 });
     }
 
-    // Check if user exists
-    const existing = UsersStore.findOne((u) => u.email === email);
+    // Check if user exists (same source auth login uses)
+    const existing = await getUserByEmail(email);
     if (existing) {
       return NextResponse.json({ success: false, error: "Email already registered" }, { status: 409 });
     }
+
+    const parsedLevel: Level =
+      level === "beginner" || level === "intermediate" || level === "advanced"
+        ? level
+        : "beginner";
 
     const hashed = await bcrypt.hash(password, 10);
     const user = {
@@ -37,7 +42,7 @@ export async function POST(req: NextRequest) {
       name, email,
       password: hashed,
       avatar: undefined,
-      level,
+      level: parsedLevel,
       goals,
       badges: ["first_login"],
       streak: 0,
@@ -51,7 +56,7 @@ export async function POST(req: NextRequest) {
       subscription: "free" as const,
     };
 
-    UsersStore.create(user);
+    await createUser(user);
     const { password: _pw, ...safeUser } = user;
     return NextResponse.json({ success: true, data: safeUser }, { status: 201 });
   } catch {

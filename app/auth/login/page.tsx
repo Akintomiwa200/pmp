@@ -2,14 +2,13 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Eye, EyeOff, ArrowRight, Chrome, Github, Lock, Mail, AlertCircle } from "lucide-react";
+import { Eye, EyeOff, ArrowRight Lock, Mail, AlertCircle } from "lucide-react";
 import type { Metadata } from "next";
 
 export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [form, setForm] = useState({ email: "", password: "", remember: false });
   const [loading, setLoading] = useState(false);
-  const [oauthLoading, setOauthLoading] = useState<"google" | "github" | null>(null);
   const [error, setError] = useState("");
 
   const handleSubmit = async (e?: React.FormEvent) => {
@@ -30,13 +29,7 @@ export default function LoginPage() {
     } finally { setLoading(false); }
   };
 
-  const handleOAuth = async (provider: "google" | "github") => {
-    setOauthLoading(provider);
-    try {
-      const { signIn } = await import("next-auth/react");
-      await signIn(provider, { callbackUrl: "/dashboard" });
-    } catch { setOauthLoading(null); }
-  };
+  
 
   return (
     <div className="min-h-[90vh] flex items-center justify-center px-4 py-12 ">
@@ -57,18 +50,7 @@ export default function LoginPage() {
 
         <div className="card dark:bg-slate-800 dark:border-slate-700 p-8 space-y-5">
           {/* OAuth buttons */}
-          <div className="grid grid-cols-2 gap-3">
-            <button onClick={() => handleOAuth("google")} disabled={!!oauthLoading}
-              className="btn-secondary justify-center text-sm gap-2 disabled:opacity-60 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100">
-              {oauthLoading === "google" ? <span className="w-4 h-4 border-2 border-ink/20 border-t-ink rounded-full animate-spin" /> : <Chrome size={16} />}
-              Google
-            </button>
-            <button onClick={() => handleOAuth("github")} disabled={!!oauthLoading}
-              className="btn-secondary justify-center text-sm gap-2 disabled:opacity-60 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100">
-              {oauthLoading === "github" ? <span className="w-4 h-4 border-2 border-ink/20 border-t-ink rounded-full animate-spin" /> : <Github size={16} />}
-              GitHub
-            </button>
-          </div>
+        
 
           <div className="flex items-center gap-3">
             <div className="flex-1 h-px bg-surface-3 dark:bg-slate-600" />
