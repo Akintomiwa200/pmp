@@ -2,6 +2,7 @@
 import type { NextAuthConfig } from "next-auth";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
+import type { Level, SubscriptionTier, UserRole } from "@/types";
 
 export const authConfig = {
   secret: process.env.AUTH_SECRET,
@@ -32,9 +33,9 @@ export const authConfig = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.level = token.level as string;
-        session.user.subscription = token.subscription as string;
-        session.user.role = token.role as string;
+        session.user.level = token.level as Level;
+        session.user.subscription = token.subscription as SubscriptionTier;
+        session.user.role = token.role as UserRole;
       }
       return session;
     },
