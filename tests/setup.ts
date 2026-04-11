@@ -1,5 +1,5 @@
-// tests/setup.ts
-import "@testing-library/jest-dom";
+// tests/setup.ts — Vitest registers jest-dom matchers via /vitest entry
+import "@testing-library/jest-dom/vitest";
 import { vi } from "vitest";
 
 // Mock Next.js router
