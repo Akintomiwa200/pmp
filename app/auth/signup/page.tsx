@@ -28,12 +28,18 @@ export default function SignupPage() {
     "Prepare for CAPM",
   ];
 
-  const toggleGoal = (goal: string) => {
-    setForm((f) => ({
-      ...f,
-      goals: f.goals.includes(goal) ? f.goals.filter((g) => g !== goal) : [...f.goals, goal],
-    }));
-  };
+ const toggleGoal = (goal: string) => {
+  setForm((prev) => {
+    const exists = prev.goals.includes(goal);
+
+    return {
+      ...prev,
+      goals: exists
+        ? prev.goals.filter((g) => g !== goal)
+        : [...prev.goals, goal],
+    };
+  });
+};
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -180,7 +186,7 @@ export default function SignupPage() {
                     className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left ${
                       form.level === level.value
                         ? "border-brand-500 bg-brand-50"
-                        : "border-surface-3 hover:border-brand-300"
+                        : "border-gray-200 hover:border-brand-300"
                     }`}
                   >
                     <span className="text-2xl">{level.emoji}</span>
@@ -214,36 +220,45 @@ export default function SignupPage() {
                 <h2 className="font-display font-semibold text-lg text-ink mb-1">Your Goals</h2>
                 <p className="text-sm text-ink-subtle">Select all that apply</p>
               </div>
-              <div className="space-y-2">
-              {goalOptions.map((goal) => {
-  const selected = form.goals.includes(goal);
+             <div className="space-y-2">
+  {goalOptions.map((goal) => {
+    const selected = form.goals.includes(goal);
 
-  return (
-    <button
-      key={goal}
-      type="button"
-      onClick={() => toggleGoal(goal)}
-      className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-all text-left text-sm ${
-        selected
-          ? "border-brand-500 bg-brand-50 text-brand-800"
-          : "border-surface-3 text-ink-muted hover:border-brand-300"
-      }`}
-    >
-      <div
-        className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
+    return (
+      <button
+        key={goal}
+        type="button"
+        onClick={() => {
+          setForm((prev) => ({
+            ...prev,
+            goals: selected
+              ? prev.goals.filter((g) => g !== goal)
+              : [...prev.goals, goal],
+          }));
+        }}
+        className={`w-full flex items-center gap-3 rounded-xl border p-3 text-left text-sm transition-all duration-200 ${
           selected
-            ? "bg-brand-500 border-brand-500"
-            : "border-surface-3 bg-white"
+            ? "border-brand-500 bg-brand-50 text-brand-800"
+            : "border-surface-3 bg-white text-ink-muted hover:border-brand-300"
         }`}
       >
-        {selected && <Check size={12} className="text-white" strokeWidth={3} />}
-      </div>
+        <div
+          className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 transition-all ${
+            selected
+              ? "border-brand-500 bg-brand-500"
+              : "border-surface-3 bg-white"
+          }`}
+        >
+          {selected && (
+            <Check size={12} className="text-white" strokeWidth={3} />
+          )}
+        </div>
 
-      <span className="flex-1">{goal}</span>
-    </button>
-  );
-})}
-              </div>
+        <span className="flex-1">{goal}</span>
+      </button>
+    );
+  })}
+</div>
               <div className="flex gap-3">
                 <button onClick={() => setStep(2)} className="btn-secondary flex-1 justify-center">Back</button>
                 <button
