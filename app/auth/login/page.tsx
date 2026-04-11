@@ -48,14 +48,7 @@ export default function LoginPage() {
         </div>
 
         <div className="card dark:bg-slate-800 dark:border-slate-700 p-8 space-y-5">
-          {/* OAuth buttons */}
-        
-
-          <div className="flex items-center gap-3">
-            <div className="flex-1 h-px bg-surface-3 dark:bg-slate-600" />
-            <span className="text-xs text-ink-subtle dark:text-slate-500">or continue with email</span>
-            <div className="flex-1 h-px bg-surface-3 dark:bg-slate-600" />
-          </div>
+  
 
           {/* Error */}
           {error && (
@@ -103,13 +96,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          {/* Demo hint */}
-          <div className="p-3 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800 rounded-xl">
-            <p className="text-xs text-amber-800 dark:text-amber-400 font-medium mb-1">Demo credentials</p>
-            <p className="text-xs text-amber-700 dark:text-amber-500">User: alex@example.com</p>
-            <p className="text-xs text-amber-700 dark:text-amber-500">Admin: admin@pmpath.app</p>
-            <p className="text-xs text-amber-700 dark:text-amber-500">Password: password123 (either)</p>
-          </div>
+         
         </div>
 
         <p className="text-center text-sm text-ink-muted dark:text-slate-400">
