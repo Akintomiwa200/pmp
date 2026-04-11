@@ -3,7 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { createUser, getUserByEmail, getUsers } from "@/lib/db";
 import { generateId } from "@/lib/utils";
 import bcrypt from "bcryptjs";
-import type { Level } from "@/types";
+import type { Level, UserRole } from "@/types";
+
+const ADMIN_SIGNUP_CODE = process.env.ADMIN_SIGNUP_CODE?.trim();
+const SUPERADMIN_SIGNUP_CODE = process.env.SUPERADMIN_SIGNUP_CODE?.trim();
 
 export async function GET() {
   try {
@@ -19,7 +22,45 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { name, email, password, level = "beginner", goals = [] } = body;
+    const { name, email, password, level = "beginner", goals = [], role, accessCode } = body;
+    const requestedRole = typeof role === "string" ? role : "user";
+    const normalizedRole: UserRole =
+      requestedRole === "admin" || requestedRole === "superadmin"
+        ? (requestedRole as UserRole)
+        : "user";
+    const trimmedAccessCode = typeof accessCode === "string" ? accessCode.trim() : "";
+
+    if (normalizedRole === "admin") {
+      if (!ADMIN_SIGNUP_CODE) {
+        return NextResponse.json(
+          { success: false, error: "Admin signup is not configured" },
+          { status: 403 }
+        );
+      }
+
+      if (trimmedAccessCode !== ADMIN_SIGNUP_CODE) {
+        return NextResponse.json(
+          { success: false, error: "Invalid admin access code" },
+          { status: 403 }
+        );
+      }
+    }
+
+    if (normalizedRole === "superadmin") {
+      if (!SUPERADMIN_SIGNUP_CODE) {
+        return NextResponse.json(
+          { success: false, error: "Superadmin signup is not configured" },
+          { status: 403 }
+        );
+      }
+
+      if (trimmedAccessCode !== SUPERADMIN_SIGNUP_CODE) {
+        return NextResponse.json(
+          { success: false, error: "Invalid superadmin access code" },
+          { status: 403 }
+        );
+      }
+    }
 
     if (!name || !email || !password) {
       return NextResponse.json({ success: false, error: "Name, email, and password are required" }, { status: 400 });
@@ -42,6 +83,7 @@ export async function POST(req: NextRequest) {
       name, email,
       password: hashed,
       avatar: undefined,
+      role: normalizedRole,
       level: parsedLevel,
       goals,
       badges: ["first_login"],

@@ -143,5 +143,29 @@
     "location": "Remote",
     "linkedIn": "",
     "timezone": "UTC"
+  },
+  {
+    "_id": "superadmin_001",
+    "name": "admin",
+    "email": "admin@pmp.com",
+    "password": "$2b$10$BgVQVtOPjv4Psd9eofF7qOQl8A4JTs/i.IOp6BkeKx6QfPcezrreu",
+    "avatar": null,
+    "level": "advanced",
+    "role": "superadmin",
+    "goals": [],
+    "badges": ["platform_owner"],
+    "streak": 0,
+    "totalPoints": 0,
+    "joinedAt": "2024-01-01T00:00:00Z",
+    "lastActiveAt": "2025-04-11T00:00:00Z",
+    "completedModules": [],
+    "enrolledCourses": [],
+    "mentorId": null,
+    "isMentor": false,
+    "subscription": "premium",
+    "bio": "Superadmin seeded by the platform.",
+    "location": "Remote",
+    "linkedIn": "",
+    "timezone": "UTC"
   }
 ]
