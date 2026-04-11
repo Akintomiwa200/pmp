@@ -352,48 +352,100 @@ function Hero() {
 } 
 
 
-
 function StatsStrip() {
-
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
-  const partners = [Users, BookOpen, TrendingUp, Calendar, Briefcase, Globe]; // Icons as placeholders
+  const partners = [
+    {
+      name: "Google",
+      logo: "https://cdn.simpleicons.org/google",
+    },
+    {
+      name: "Microsoft",
+      logo: "https://cdn.simpleicons.org/microsoft",
+    },
+    {
+      name: "Amazon",
+      logo: "https://cdn.simpleicons.org/amazon",
+    },
+    {
+      name: "Meta",
+      logo: "https://cdn.simpleicons.org/meta",
+    },
+    {
+      name: "Netflix",
+      logo: "https://cdn.simpleicons.org/netflix",
+    },
+    {
+      name: "Spotify",
+      logo: "https://cdn.simpleicons.org/spotify",
+    },
+  ];
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
-      transition: { staggerChildren: 0.15 },
+      transition: {
+        staggerChildren: 0.12,
+      },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, y: 18 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.45 },
+    },
   };
 
   return (
-    <section className="bg-white py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        <h2 className="text-center text-2xl font-semibold text-gray-900 mb-10">
-          Our Trusted Partners
+    <section className="bg-white py-12 sm:py-16">
+      <div
+        ref={ref}
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+      >
+        <h2 className="mb-8 sm:mb-10 text-center text-xl sm:text-2xl font-semibold text-gray-900">
+          Trusted by teams at
         </h2>
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="flex items-center justify-center space-x-12 overflow-x-auto scrollbar-hide"
+          className="
+            grid grid-cols-2
+            sm:grid-cols-3
+            lg:grid-cols-6
+            gap-4 sm:gap-6
+            items-center
+          "
         >
-          {partners.map((Icon, idx) => (
+          {partners.map((partner) => (
             <motion.div
-              key={idx}
+              key={partner.name}
               variants={itemVariants}
-              className="flex-shrink-0 w-20 h-20 flex items-center justify-center bg-gray-50 rounded-lg shadow-sm"
+              className="
+                flex h-20 sm:h-24
+                items-center justify-center
+                rounded-2xl
+                border border-gray-100
+                bg-gray-50
+                shadow-sm
+                hover:shadow-md
+                transition-all duration-300
+                p-4
+              "
             >
-              <Icon size={32} className="text-gray-700" />
+              <img
+                src={partner.logo}
+                alt={partner.name}
+                className="h-8 sm:h-10 w-auto object-contain"
+                loading="lazy"
+              />
             </motion.div>
           ))}
         </motion.div>
@@ -402,6 +454,7 @@ function StatsStrip() {
   );
 }
 
+export default StatsStrip;
 
 
 function LearningPaths() {
