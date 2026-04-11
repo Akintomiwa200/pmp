@@ -2,8 +2,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Eye, EyeOff, ArrowRight Lock, Mail, AlertCircle } from "lucide-react";
-import type { Metadata } from "next";
+import { Eye, EyeOff, ArrowRight, Lock, Mail, AlertCircle } from "lucide-react";
 
 export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
