@@ -31,6 +31,8 @@ export interface User {
   bio?: string;
   location?: string;
   linkedIn?: string;
+  passwordResetToken?: string;
+  passwordResetExpires?: string;
 }
 
 export interface Course {

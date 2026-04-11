@@ -3,12 +3,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff, ArrowRight, Lock, Mail, AlertCircle } from "lucide-react";
 import { signIn } from "next-auth/react";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [showPass, setShowPass] = useState(false);
   const [form, setForm] = useState({ email: "", password: "", remember: false });
   const [loading, setLoading] = useState(false);
@@ -40,7 +41,8 @@ export default function LoginPage() {
         return;
       }
 
-      router.push("/dashboard");
+      const nextPath = searchParams.get("from") ?? "/dashboard";
+      router.push(nextPath);
     } catch {
       setError("Unable to reach the auth service. Please try again.");
     } finally {

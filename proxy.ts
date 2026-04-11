@@ -65,9 +65,9 @@ export async function proxy(req: NextRequest) {
 
   if (protectedRoutes.some((r) => pathname.startsWith(r))) {
     if (!isLoggedIn) {
-      const callbackUrl = encodeURIComponent(pathname);
+      const from = encodeURIComponent(pathname);
       return NextResponse.redirect(
-        new URL(`/auth/login?callbackUrl=${callbackUrl}`, req.url)
+        new URL(`/auth/login?from=${from}`, req.url)
       );
     }
   }

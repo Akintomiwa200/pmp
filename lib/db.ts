@@ -76,6 +76,23 @@ export async function createUser(user: User): Promise<User> {
   );
 }
 
+export async function updateUserById(id: string, updates: Partial<User>): Promise<User | null> {
+  const { UsersStore } = await import("@/lib/dataStore");
+  return withMongo(
+    async () => {
+      const { getCollection } = await import("@/lib/mongodb");
+      const col = await getCollection<User>("users");
+      const result = await col.findOneAndUpdate(
+        { _id: id as unknown as never },
+        { $set: updates },
+        { returnDocument: "after" }
+      );
+      return result.value ?? null;
+    },
+    () => UsersStore.update(id, updates) ?? null
+  );
+}
+
 // ─── Courses ────────────────────────────────────────────────────────────────
 export async function getCourses(level?: Level): Promise<Course[]> {
   const { CoursesStore } = await import("@/lib/dataStore");
