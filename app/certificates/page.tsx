@@ -2,7 +2,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Award, Download, Share2, Linkedin, Copy, CheckCircle2, Lock, ExternalLink, Trophy, Clock } from "lucide-react";
+import { Award, Download, Share2, Copy, CheckCircle2, Lock, ExternalLink, Trophy, Clock } from "lucide-react";
+import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 
 const EARNED = [
   {
@@ -116,7 +117,7 @@ export default function CertificatesPage() {
                     <a href={`https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(cert.courseTitle)}&organizationName=PMPath&issueYear=2025&certUrl=${encodeURIComponent(`https://pmpath.app/verify/${cert.credentialId}`)}`}
                       target="_blank" rel="noopener noreferrer"
                       className="btn-secondary text-sm gap-2 py-2">
-                      <Linkedin size={14} />Add to LinkedIn
+                      <LinkedInIcon size={14} />Add to LinkedIn
                     </a>
                     <button onClick={() => copyLink(cert.credentialId)} className="btn-secondary text-sm gap-2 py-2">
                       {copied === cert.credentialId ? <><CheckCircle2 size={14} className="text-brand-500" />Copied!</> : <><Copy size={14} />Copy Link</>}

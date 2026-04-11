@@ -1,6 +1,7 @@
 // app/profile/page.tsx
 import type { Metadata } from "next";
-import { User, MapPin, Linkedin, Target, Star, Flame, Edit2, Trophy } from "lucide-react";
+import { User, MapPin, Target, Star, Flame, Edit2, Trophy } from "lucide-react";
+import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 import { BADGES } from "@/types";
 
 export const metadata: Metadata = { title: "My Profile" };
@@ -58,7 +59,7 @@ export default function ProfilePage() {
               )}
               {DEMO_USER.linkedIn && (
                 <a href={DEMO_USER.linkedIn} className="flex items-center justify-center gap-1.5 hover:text-blue-600 transition-colors">
-                  <Linkedin size={13} />
+                  <LinkedInIcon size={13} />
                   LinkedIn Profile
                 </a>
               )}
