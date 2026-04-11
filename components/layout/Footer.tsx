@@ -34,25 +34,25 @@ function InstagramIcon({ className }: { className?: string }) {
 
 const links = {
   Learn: [
+    { label: "All Learning Paths", href: "/learn" },
     { label: "Beginner Path", href: "/learn/beginner" },
-    { label: "Intermediate", href: "/learn/intermediate" },
+    { label: "Intermediate Path", href: "/learn/intermediate" },
     { label: "Advanced & PMP", href: "/learn/advanced" },
     { label: "Resources", href: "/resources" },
-    { label: "External MOOCs", href: "/learn/intermediate/resources" },
   ],
+
   Community: [
-    { label: "Forum", href: "/community" },
+    { label: "Community Hub", href: "/community" },
     { label: "Mentorship", href: "/mentorship" },
     { label: "Events", href: "/events" },
     { label: "Job Board", href: "/jobs" },
-    { label: "Leaderboard", href: "/leaderboard" },
   ],
+
   Tools: [
     { label: "My Roadmap", href: "/roadmap" },
-    { label: "Flashcards", href: "/learn/advanced/flashcards" },
-    { label: "Mock PMP Exam", href: "/learn/advanced/mockexam" },
-    { label: "Kanban Builder", href: "/learn/intermediate/kanban" },
-    { label: "Study Groups", href: "/learn/advanced/studygroups" },
+    { label: "Learning Dashboard", href: "/dashboard" },
+    { label: "Practice Center", href: "/practice" },
+    { label: "Study Groups", href: "/community" },
   ],
 };
 
@@ -73,7 +73,7 @@ export default function Footer() {
       </div>
 
       <div className="relative container mx-auto px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
           {/* Brand Section */}
           <div className="space-y-6">
             <div className="flex items-center gap-2">
@@ -126,22 +126,39 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Community & Tools Links */}
-          <div>
-            <h3 className="text-white font-bold text-lg mb-6">Community & Tools</h3>
-            <ul className="space-y-3">
-              {[...links.Community, ...links.Tools].map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-gray-300 hover:text-emerald-500 transition-colors text-sm"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+         {/* Community */}
+<div>
+  <h3 className="text-white font-bold text-lg mb-6">Community</h3>
+  <ul className="space-y-3">
+    {links.Community.map((item) => (
+      <li key={item.href}>
+        <Link
+          href={item.href}
+          className="text-gray-300 hover:text-emerald-500 transition-colors text-sm"
+        >
+          {item.label}
+        </Link>
+      </li>
+    ))}
+  </ul>
+</div>
+
+{/* Tools */}
+<div>
+  <h3 className="text-white font-bold text-lg mb-6">Tools</h3>
+  <ul className="space-y-3">
+    {links.Tools.map((item) => (
+      <li key={item.href}>
+        <Link
+          href={item.href}
+          className="text-gray-300 hover:text-emerald-500 transition-colors text-sm"
+        >
+          {item.label}
+        </Link>
+      </li>
+    ))}
+  </ul>
+</div>
 
           {/* Newsletter & Socials */}
           <div>
