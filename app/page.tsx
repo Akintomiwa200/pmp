@@ -90,21 +90,21 @@ function Hero() {
       {/* Subtle color splashes */}
       <div className="absolute inset-0">
         <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-emerald-100/40 blur-[120px]" />
-        <div className="absolute right-20 top-40 h-60 w-60 rounded-full bg-cyan-100/30 blur-[100px]" />
+        <div className="absolute right-20 top-40 h-60 w-60 rounded-full bg-[#2563EB]/30 blur-[100px]" />
         <div className="absolute bottom-10 left-10 h-64 w-64 rounded-full bg-green-100/30 blur-[100px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-36 pb-20">
         {/* Center Hero Content */}
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-2 text-sm font-medium text-cyan-700">
-            <Sparkles size={14} className="text-cyan-600" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#2563EB] bg-[#2563EB]px-4 py-2 text-sm font-medium text-[#2563EB]">
+            <Sparkles size={14} className="text-[#2563EB]" />
             12,400+ aspiring PMs · Start learning today
           </div>
 
           <h1 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
             Building{" "}
-            <span className="bg-cyan-600 bg-clip-text text-transparent">
+            <span className="bg-[#2563EB] bg-clip-text text-transparent">
               Confident
             </span>{" "}
             Project Managers.
@@ -122,7 +122,7 @@ function Hero() {
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/learn/beginner"
-              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-600 px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-green-200/50 transition hover:scale-[1.02] hover:shadow-xl"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#2563EB] px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-green-200/50 transition hover:scale-[1.02] hover:shadow-xl"
             >
               Start Learning Now <ArrowRight size={18} />
             </Link>
@@ -141,7 +141,7 @@ function Hero() {
               {["A", "P", "M", "J", "L"].map((l, i) => (
                 <div
                   key={i}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-cyan-500 text-xs font-bold text-white shadow-md"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-[#2563EB] text-xs font-bold text-white shadow-md"
                 >
                   {l}
                 </div>
@@ -176,7 +176,7 @@ function Hero() {
         
           {/* Product showcase card */}
        <div className="mx-auto mt-10 max-w-5xl px-4 sm:mt-16">
-  <div className="relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] bg-cyan-400 p-4 sm:p-10 pb-6 sm:pb-8">
+  <div className="relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] bg-[#2563EB] p-4 sm:p-10 pb-6 sm:pb-8">
     
     {/* Header */}
     <div className="relative my-4 sm:my-5 text-center">
@@ -209,7 +209,7 @@ function Hero() {
       <div className="flex flex-col md:flex-row md:h-96">
         
         {/* Sidebar */}
-        <div className="w-full md:w-48 shrink-0 bg-cyan-800 p-3">
+        <div className="w-full md:w-48 shrink-0 bg-[#2563EB] p-3">
           <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-white/40">
             Channels
           </p>
@@ -500,14 +500,14 @@ function LearningPaths() {
         
         {/* Header */}
         <div className="mb-14 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-2 text-sm font-medium text-cyan-700">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#2563EB] bg-[#2563EB]px-4 py-2 text-sm font-medium text-[#2563EB]">
             <BookOpen size={14} />
             Learning Paths
           </div>
 
           <h2 className="mb-5 text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
             Find Your{" "}
-            <span className="bg-cyan-600 bg-clip-text text-transparent">
+            <span className="bg-[#2563EB] bg-clip-text text-transparent">
               Starting Point
             </span>
           </h2>
@@ -556,7 +556,7 @@ function LearningPaths() {
                       key={item}
                       className="flex items-center gap-2 text-sm text-white/90"
                     >
-                      <CheckCircle2 size={14} className="shrink-0 text-cyan-300" />
+                      <CheckCircle2 size={14} className="shrink-0 text-[#2563EB]" />
                       {item}
                     </li>
                   ))}
@@ -578,6 +578,7 @@ function LearningPaths() {
 
 
 
+
 function FeaturedEvents() {
   const featured = staticEvents.filter(e => e.isFeatured).slice(0, 3);
   return (
@@ -585,13 +586,13 @@ function FeaturedEvents() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-end justify-between mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 border border-border-200 text-cyan-700 text-sm font-medium mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2563EB]border border-border-200 text-[#2563EB] text-sm font-medium mb-6">
               <Calendar size={14} />
               Upcoming Events
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
               Join the{" "}
-              <span className="bg-cyan-600 bg-clip-text text-transparent">
+              <span className="bg-[#2563EB] bg-clip-text text-transparent">
                 Community
               </span>
             </h2>
@@ -630,7 +631,7 @@ function FeaturedEvents() {
                 </div>
                 <a 
                   href={event.registrationUrl} 
-                  className="text-sm font-semibold px-5 py-2.5 rounded-xl text-white bg-cyan-600 hover:shadow-lg hover:-translate-y-0.5 transition-all"
+                  className="text-sm font-semibold px-5 py-2.5 rounded-xl text-white bg-[#2563EB] hover:shadow-lg hover:-translate-y-0.5 transition-all"
                 >
                   Register
                 </a>
@@ -652,13 +653,13 @@ function FeaturedEvents() {
 function FeatureGrid() {
   return (
     <section className="bg-white py-24 px-6 relative overflow-hidden">
-      {/* subtle green/cyan grid */}
+      {/* subtle green/[#2563EB] grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(34,197,94,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
       <div className="max-w-7xl mx-auto relative">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-block bg-emerald-50 text-cyan-700 text-xs font-medium tracking-widest px-6 py-2 rounded-full border border-emerald-100 mb-6">
+          <div className="inline-block bg-emerald-50 text-[#2563EB] text-xs font-medium tracking-widest px-6 py-2 rounded-full border border-emerald-100 mb-6">
             FEATURES
           </div>
 
@@ -673,7 +674,7 @@ function FeatureGrid() {
 
         <div className="space-y-8">
           {/* Card 1 */}
-          <div className="bg-cyan-800 rounded-3xl border border-emerald-500/20 p-8 lg:p-12">
+          <div className="bg-[#2563EB] rounded-3xl border border-emerald-500/20 p-8 lg:p-12">
             <div className="grid lg:grid-cols-2 gap-10 items-center">
               <div>
                 <h3 className="text-3xl md:text-4xl font-semibold leading-tight mb-5 text-white">
@@ -687,14 +688,14 @@ function FeatureGrid() {
                   simulations, and guided progress built specifically for PM career transitions.
                 </p>
 
-                <button className="bg-cyan-800 hover:bg-cyan-500 transition-all duration-200 text-white font-medium px-8 py-3.5 rounded-2xl text-sm">
+                <button className="bg-[#2563EB] hover:bg-[#2563EB] transition-all duration-200 text-white font-medium px-8 py-3.5 rounded-2xl text-sm">
                   Start learning free
                 </button>
               </div>
 
               {/* Right preview */}
-              <div className="bg-slate-950 rounded-2xl overflow-hidden border border-cyan-500/10 shadow-xl">
-                <div className="bg-slate-900 px-5 py-3 flex items-center gap-2 border-b border-cyan-500/10">
+              <div className="bg-slate-950 rounded-2xl overflow-hidden border border-[#2563EB]/10 shadow-xl">
+                <div className="bg-slate-900 px-5 py-3 flex items-center gap-2 border-b border-[#2563EB]/10">
                   <div className="flex gap-1.5">
                     <div className="w-3 h-3 bg-red-500 rounded-full" />
                     <div className="w-3 h-3 bg-yellow-500 rounded-full" />
@@ -705,7 +706,7 @@ function FeatureGrid() {
                 <div className="p-8 space-y-6">
                   {["PM", "AG", "QA"].map((user) => (
                     <div key={user} className="flex items-center gap-4">
-                      <div className="w-10 h-10 bg-cyan-600 rounded-2xl flex items-center justify-center text-sm font-bold text-white">
+                      <div className="w-10 h-10 bg-[#2563EB] rounded-2xl flex items-center justify-center text-sm font-bold text-white">
                         {user}
                       </div>
                       <div className="h-3 bg-slate-700 rounded-full flex-1" />
@@ -717,7 +718,7 @@ function FeatureGrid() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-cyan-800 rounded-3xl border border-emerald-500/20 p-8 lg:p-12">
+          <div className="bg-[#2563EB] rounded-3xl border border-emerald-500/20 p-8 lg:p-12">
             <div className="grid lg:grid-cols-2 gap-10 items-center">
              
 
@@ -729,9 +730,9 @@ function FeatureGrid() {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="bg-slate-900 rounded-2xl px-6 py-5 flex items-center gap-4 border border-cyan-500/10"
+                    className="bg-slate-900 rounded-2xl px-6 py-5 flex items-center gap-4 border border-[#2563EB]/10"
                   >
-                    <div className="w-10 h-10 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-lg text-cyan-300">
+                    <div className="w-10 h-10 bg-[#2563EB]/10 rounded-2xl flex items-center justify-center text-lg text-[#2563EB]">
                       ✓
                     </div>
                     <span className="text-slate-200">{item}</span>
@@ -751,7 +752,7 @@ function FeatureGrid() {
                   and PMP prep environments designed to mirror real PM teams.
                 </p>
 
-                <button className="border border-cyan-500 hover:bg-cyan-500/10 transition-all text-cyan-400 font-medium px-8 py-3.5 rounded-2xl text-sm">
+                <button className="border border-[#2563EB] hover:bg-[#2563EB]/10 transition-all text-[#2563EB] font-medium px-8 py-3.5 rounded-2xl text-sm">
                   Explore simulations
                 </button>
               </div>
@@ -789,19 +790,19 @@ function Testimonials() {
   ];
   
   return (
-    <section className="py-24 bg-cyan-800 relative overflow-hidden">
+    <section className="py-24 bg-[#2563EB] relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(#ffffff 1.5px, transparent 0)", backgroundSize: "40px 40px" }} />
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white/80 text-sm font-medium mb-6">
-            <Trophy size={14} className="text-cyan-400" />
+            <Trophy size={14} className="text-[#2563EB]" />
             Success Stories
           </div>
           <h2 className="text-5xl md:text-6xl font-bold text-white mb-5">
             Real Transitions.{" "}
-            <span className="bg-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-[#2563EB] bg-clip-text text-transparent">
               Real Results.
             </span>
           </h2>
@@ -837,16 +838,16 @@ function CTASection() {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full blur-[120px] opacity-20 bg-cyan-100 to-purple-100" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full blur-[120px] opacity-20 bg-[#2563EB] to-purple-100" />
       </div>
       <div className="relative max-w-4xl mx-auto px-4 text-center space-y-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-sm font-medium">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2563EB]border border-[#2563EB] text-[#2563EB] text-sm font-medium">
           <Zap size={14} />
           Start Your Journey Today
         </div>
         <h2 className="text-5xl md:text-7xl font-bold text-gray-900 leading-tight">
           Your PM Career{" "}
-          <span className="bg-cyan-600 bg-clip-text text-transparent">
+          <span className="bg-[#2563EB] bg-clip-text text-transparent">
             Starts Here
           </span>
         </h2>
@@ -856,7 +857,7 @@ function CTASection() {
         <div className="flex flex-wrap gap-4 justify-center">
           <Link 
             href="/learn/beginner"
-            className="inline-flex items-center gap-2 text-base font-semibold text-white shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all rounded-2xl px-10 py-4 bg-cyan-600"
+            className="inline-flex items-center gap-2 text-base font-semibold text-white shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all rounded-2xl px-10 py-4 bg-[#2563EB]"
           >
             Get Started Free <ArrowRight size={18} />
           </Link>

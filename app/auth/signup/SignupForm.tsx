@@ -103,6 +103,10 @@ export default function SignupForm({
       setError("Access code is required for this role.");
       return;
     }
+    if (form.goals.length === 0) {
+      setError("Select at least one goal before creating your account.");
+      return;
+    }
 
     setLoading(true);
 

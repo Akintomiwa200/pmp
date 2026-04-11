@@ -1,10 +1,11 @@
 // app/events/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Calendar, MapPin, Globe, Users, Clock, ExternalLink, Plus, Filter, ArrowRight } from "lucide-react";
+import { Calendar, MapPin, Globe, Users, Clock, ExternalLink, Plus, ArrowRight } from "lucide-react";
 import { getEvents } from "@/lib/db";
 import { formatDate, formatTime, getLevelColor } from "@/lib/utils";
 import type { PMEvent } from "@/types";
+import MarketingShell from "@/components/layout/MarketingShell";
 
 export const metadata: Metadata = { title: "Events & Activities" };
 
@@ -88,7 +89,8 @@ export default async function EventsPage() {
   const free = events.filter(e => Object.values(e.price).some(v => v === 0)).length;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <MarketingShell>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
       {/* Header */}
       <div className="mb-10">
@@ -198,6 +200,7 @@ export default async function EventsPage() {
           <Plus size={15} />Submit Your Event
         </Link>
       </section>
-    </div>
+      </div>
+    </MarketingShell>
   );
 }

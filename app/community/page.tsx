@@ -5,6 +5,7 @@ import { Users, MessageSquare, ThumbsUp, Pin, Award, Plus, Search, TrendingUp, Z
 import { getPosts } from "@/lib/db";
 import { timeAgo, getLevelColor, truncate } from "@/lib/utils";
 import type { Post } from "@/types";
+import MarketingShell from "@/components/layout/MarketingShell";
 
 export const metadata: Metadata = { title: "Community Forum" };
 
@@ -71,7 +72,8 @@ export default async function CommunityPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <MarketingShell>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
       {/* Header */}
       <div className="mb-10">
@@ -223,6 +225,7 @@ export default async function CommunityPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </MarketingShell>
   );
 }

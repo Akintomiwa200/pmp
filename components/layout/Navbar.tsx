@@ -27,7 +27,7 @@ export default function Navbar() {
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-600">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#2563EB]">
             <Briefcase className="h-4 w-4 text-black" />
           </div>
           <span className="text-lg sm:text-xl font-semibold tracking-tight text-black">
@@ -65,7 +65,7 @@ export default function Navbar() {
         <div className="hidden md:block">
           <Link
             href="/auth/signup"
-            className="rounded-xl bg-cyan-600 px-5 lg:px-6 py-2.5 text-sm font-medium text-black transition hover:bg-cyan-600"
+            className="rounded-xl bg-[#2563EB] px-5 lg:px-6 py-2.5 text-sm font-medium text-black transition hover:bg-[#2563EB]"
           >
             Get Started
           </Link>
@@ -106,7 +106,7 @@ export default function Navbar() {
               <Link
                 href="/auth/signup"
                 onClick={() => setMobileOpen(false)}
-                className="mt-2 rounded-xl bg-cyan-600 px-4 py-3 text-center text-sm font-medium text-black transition hover:bg-gradient-to-r from-green-600 to-cyan-800"
+                className="mt-2 rounded-xl bg-[#2563EB] px-4 py-3 text-center text-sm font-medium text-black transition hover:bg-gradient-to-r from-green-600 to-[#2563EB]"
               >
                 Get Started
               </Link>

@@ -204,17 +204,17 @@ p {
 
 
 ::-webkit-scrollbar-thumb{
-  background: linear-gradient(to bottom, #06b6d4, #0891b2);
+  background: linear-gradient(to bottom, #2563EB, #0891b2);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover{
-  background: linear-gradient(to bottom, #0891b2, #0e7490);
+  background: linear-gradient(to bottom, #2563EB, #0e7490);
 }
 
 
 .dark{
-  scrollbar-color: #06b6d4 #0f172a;
+  scrollbar-color: ##2563EB #0f172a;
 }
 
 .dark ::-webkit-scrollbar-track{
@@ -222,7 +222,7 @@ p {
 }
 
 .dark ::-webkit-scrollbar-thumb{
-  background: #06b6d4;
+  background: #2563EB;
 }
 
 /* =========================

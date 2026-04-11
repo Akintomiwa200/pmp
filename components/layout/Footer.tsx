@@ -64,7 +64,7 @@ export default function Footer() {
   const APP_NAME = "Project Management ";
 
   return (
-    <footer className="relative bg-cyan-800 text-gray-300 overflow-hidden">
+    <footer className="relative bg-[#2563EB] text-gray-300 overflow-hidden">
       {/* Background Large Text */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <span className="text-[10rem] font-bold text-white/5 select-none tracking-wider whitespace-nowrap">
