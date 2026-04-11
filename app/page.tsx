@@ -454,7 +454,7 @@ function StatsStrip() {
   );
 }
 
-export default StatsStrip;
+
 
 
 function LearningPaths() {
