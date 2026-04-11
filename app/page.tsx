@@ -459,107 +459,117 @@ function StatsStrip() {
 
 function LearningPaths() {
   const paths = [
-    { 
-      level:"beginner", 
-      emoji:"🌱", 
-      title:"Beginner Path", 
-      sub:"Start from zero", 
-      desc:"No experience needed. Build the PM foundation from fundamentals to your first project simulation.",
-      color:"#16a34a", 
-      bg:"from-green-50 to-emerald-50/80", 
-      border:"border-green-100", 
-      href:"/learn/beginner", 
-      outcomes:["PM Lifecycle & Roles","Agile vs Waterfall","Project Charter","First Simulation"],
-      courses: 3
+    {
+      level: "beginner",
+      title: "Beginner Path",
+      sub: "Start from zero",
+      desc: "Build your PM foundation from scratch with beginner-friendly simulations and guided lessons.",
+      href: "/learn/beginner",
+      image:
+        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
+      outcomes: ["PM Basics", "Agile Intro", "Project Charter"],
+      courses: 3,
     },
-    { 
-      level:"intermediate", 
-      emoji:"📈", 
-      title:"Intermediate", 
-      sub:"Level up", 
-      desc:"Deepen expertise with risk management, stakeholder strategy, and advanced Agile with real case studies.",
-      color:"#2563eb", 
-      bg:"from-blue-50 to-cyan-50/80", 
-      border:"border-blue-100", 
-      href:"/learn/intermediate", 
-      outcomes:["Risk Register","Stakeholder Maps","Kanban Builder","Resource Planning"],
-      courses: 4
+    {
+      level: "intermediate",
+      title: "Intermediate",
+      sub: "Level up",
+      desc: "Master stakeholder mapping, Agile delivery, risk planning, and resource strategy.",
+      href: "/learn/intermediate",
+      image:
+        "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop",
+      outcomes: ["Risk Register", "Kanban", "Stakeholder Maps"],
+      courses: 4,
     },
-    { 
-      level:"advanced", 
-      emoji:"🏆", 
-      title:"Advanced & PMP", 
-      sub:"Get certified", 
-      desc:"Comprehensive PMP prep: 200+ practice questions, mock exams, flashcards, and PMBOK 7 mastery.",
-      color:"#7c3aed", 
-      bg:"from-purple-50 to-pink-50/80", 
-      border:"border-purple-100", 
-      href:"/learn/advanced", 
-      outcomes:["PMBOK 7 Deep Dive","Mock PMP Exams","EVM Calculations","Study Groups"],
-      courses: 2
+    {
+      level: "advanced",
+      title: "Advanced & PMP",
+      sub: "Get certified",
+      desc: "Deep PMP preparation with mock exams, PMBOK mastery, and exam simulations.",
+      href: "/learn/advanced",
+      image:
+        "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop",
+      outcomes: ["PMBOK 7", "Mock Exams", "EVM"],
+      courses: 2,
     },
   ];
 
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-sm font-medium mb-6">
+    <section className="bg-gray-50 py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Header */}
+        <div className="mb-14 text-center">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-200 bg-cyan-50 px-4 py-2 text-sm font-medium text-cyan-700">
             <BookOpen size={14} />
             Learning Paths
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-5">
+
+          <h2 className="mb-5 text-4xl font-bold text-gray-900 sm:text-5xl lg:text-6xl">
             Find Your{" "}
             <span className="bg-cyan-600 bg-clip-text text-transparent">
               Starting Point
             </span>
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-lg">
+
+          <p className="mx-auto max-w-2xl text-base text-gray-500 sm:text-lg">
             Every path is tailored to where you are now — not where you think you should be.
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
+        <div className="grid gap-6 md:grid-cols-3">
           {paths.map((path) => (
-            <Link 
-              href={path.href} 
-              key={path.level} 
-              className={`relative bg-gradient-to-br ${path.bg} border ${path.border} rounded-3xl p-7 space-y-5 hover:-translate-y-2 transition-all duration-300 group cursor-pointer block`}
+            <Link
+              key={path.level}
+              href={path.href}
+              className="group relative min-h-[460px] overflow-hidden rounded-[2rem] shadow-lg"
             >
-              <div className="flex items-start justify-between">
-                <span className="text-5xl group-hover:scale-110 transition-transform">{path.emoji}</span>
-                <span className="text-[10px] font-bold px-2.5 py-1 rounded-full border bg-white/60" style={{ color: path.color, borderColor: path.color+"30" }}>
+              {/* Background image */}
+              <img
+                src={path.image}
+                alt={path.title}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+
+              {/* Dark overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" />
+
+              {/* Content */}
+              <div className="relative flex h-full flex-col justify-end p-6 sm:p-7">
+                
+                <div className="mb-4 inline-flex w-fit rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold text-white backdrop-blur-md">
                   {path.sub}
-                </span>
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{path.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{path.desc}</p>
-              </div>
-              <ul className="space-y-2">
-                {path.outcomes.map(o => (
-                  <li key={o} className="flex items-center gap-2 text-sm text-gray-900">
-                    <CheckCircle2 size={13} style={{ color: path.color }} className="shrink-0" />
-                    {o}
-                  </li>
-                ))}
-              </ul>
-              <div className="pt-2 border-t border-gray-200">
-                <span className="text-xs text-gray-400">{path.courses} courses available</span>
+                </div>
+
+                <h3 className="mb-2 text-2xl font-bold text-white">
+                  {path.title}
+                </h3>
+
+                <p className="mb-5 text-sm leading-relaxed text-white/80">
+                  {path.desc}
+                </p>
+
+                <ul className="space-y-2">
+                  {path.outcomes.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-2 text-sm text-white/90"
+                    >
+                      <CheckCircle2 size={14} className="shrink-0 text-cyan-300" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-5 border-t border-white/10 pt-4">
+                  <span className="text-xs font-medium text-white/70">
+                    {path.courses} courses available
+                  </span>
+                </div>
               </div>
             </Link>
           ))}
-        </div>
-
-        {/* Central Explore Button */}
-        <div className="text-center">
-          <Link 
-            href="/learn" 
-            className="inline-flex items-center gap-2 px-8 py-4 bg-cyan-600 text-white font-semibold rounded-full shadow-lg hover:scale-105 transition-transform duration-300"
-          >
-            Explore All Paths <ArrowRight size={16} />
-          </Link>
         </div>
       </div>
     </section>
