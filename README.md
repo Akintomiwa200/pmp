@@ -46,7 +46,7 @@ Open [http://localhost:3000](http://localhost:3000)
 | Animation | Framer Motion 12 |
 | Database | MongoDB 6 + Mongoose 8 |
 | Data Fallback | JSON files (.data/ directory) |
-| Auth | NextAuth v5 (credentials + OAuth) |
+| Auth | NextAuth v4 (credentials + OAuth) |
 | State | Zustand 5 + SWR 2 |
 | Forms | React Hook Form + Zod |
 | Charts | Recharts 2 |
@@ -134,7 +134,7 @@ pmpath-app/
 │   │   └── system/           # Feature flags, system config
 │   │
 │   ├── api/                  # API Routes (17 route groups)
-│   │   ├── auth/[...nextauth]/
+│   │   ├── auth/[...nextauth]/  # NextAuth v4 (route.ts → GET/POST)
 │   │   ├── users/ + [id]/
 │   │   ├── courses/
 │   │   ├── events/
@@ -168,7 +168,6 @@ pmpath-app/
 │       └── QuizEngine.tsx    # Reusable quiz: timer, flagging, review
 │
 ├── lib/
-│   ├── auth.ts               # NextAuth v5 config
 │   ├── db.ts                 # Unified DB service (MongoDB + JSON fallback)
 │   ├── dataStore.ts          # Generic JSON CRUD store
 │   ├── mongodb.ts            # MongoDB singleton connection

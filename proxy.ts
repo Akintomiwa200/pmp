@@ -6,7 +6,10 @@ import type { UserRole } from "@/types";
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+  const token = await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET,
+  });
   const isLoggedIn = !!token;
   const role = token?.role as UserRole | undefined;
 

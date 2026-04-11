@@ -1,5 +1,6 @@
 // app/api/auth/[...nextauth]/route.ts
-import NextAuth from "next-auth";
+// next-auth v4: export GET/POST from a single handler (v5 uses { handlers } from NextAuth(...)).
+import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
@@ -13,8 +14,10 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-const { handlers } = NextAuth({
-  secret: process.env.AUTH_SECRET,
+const authSecret = process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET;
+
+export const authOptions: NextAuthOptions = {
+  secret: authSecret,
   pages: {
     signIn: "/auth/login",
     signOut: "/",
@@ -90,6 +93,7 @@ const { handlers } = NextAuth({
       },
     }),
   ],
-});
+};
 
-export const { GET, POST } = handlers;
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
