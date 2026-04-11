@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Star, CheckCircle2, MessageSquare, Send } from "lucide-react";
+import MarketingShell from "@/components/layout/MarketingShell";
 
 type Step = "nps" | "details" | "thanks";
 
@@ -49,15 +50,16 @@ export default function FeedbackPage() {
 
   if (step === "thanks") {
     return (
-      <div className="max-w-xl mx-auto px-4 py-24 text-center space-y-6">
+      <MarketingShell>
+      <div className="max-w-xl mx-auto px-4 pb-24 text-center space-y-6">
         <div className="text-7xl">🙏</div>
         <h1 className="text-4xl font-display font-bold text-ink">Thank You!</h1>
         <p className="text-ink-muted text-lg leading-relaxed">
           Your feedback helps us build a better platform for every aspiring PM. We read every response.
         </p>
         {npsScore !== null && npsScore >= 9 && (
-          <div className="card p-5 bg-brand-50 border-brand-100">
-            <p className="text-sm font-semibold text-brand-800 mb-2">Since you love PMPath...</p>
+          <div className="card p-5 bg-cyan-50 border-cyan-100 dark:bg-cyan-950/40 dark:border-cyan-800/50">
+            <p className="text-sm font-semibold text-cyan-900 dark:text-cyan-100 mb-2">Since you love PMPath...</p>
             <p className="text-sm text-ink-muted mb-4">Would you share it with a colleague or friend who's interested in PM?</p>
             <div className="flex gap-3 justify-center">
               <button className="btn-primary text-sm">Share with a Friend</button>
@@ -67,13 +69,15 @@ export default function FeedbackPage() {
         )}
         <Link href="/dashboard" className="btn-secondary inline-flex">Back to Dashboard</Link>
       </div>
+      </MarketingShell>
     );
   }
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-10">
+    <MarketingShell>
+    <div className="max-w-xl mx-auto px-4 pb-16">
       <div className="text-center mb-8">
-        <MessageSquare size={28} className="text-brand-600 mx-auto mb-3" />
+        <MessageSquare size={28} className="text-cyan-600 dark:text-cyan-400 mx-auto mb-3" />
         <h1 className="text-3xl font-display font-bold text-ink mb-2">Share Your Feedback</h1>
         <p className="text-ink-muted">Help us improve PMPath. Takes 2 minutes.</p>
       </div>
@@ -81,7 +85,7 @@ export default function FeedbackPage() {
       {/* Progress */}
       <div className="flex gap-2 mb-8">
         {["nps", "details"].map((s, i) => (
-          <div key={s} className={`flex-1 h-1.5 rounded-full transition-all ${step === "nps" && i === 0 ? "bg-brand-600" : step === "details" ? "bg-brand-500" : "bg-surface-2"}`} />
+          <div key={s} className={`flex-1 h-1.5 rounded-full transition-all ${step === "nps" && i === 0 ? "bg-cyan-600" : step === "details" ? "bg-cyan-500" : "bg-surface-2"}`} />
         ))}
       </div>
 
@@ -101,7 +105,7 @@ export default function FeedbackPage() {
             <div className="flex gap-1.5 flex-wrap justify-between">
               {Array.from({ length: 11 }, (_, i) => i).map(n => {
                 const active = npsScore === n;
-                const color = n >= 9 ? "#16a34a" : n >= 7 ? "#2563eb" : "#ef4444";
+                const color = n >= 9 ? "#0891b2" : n >= 7 ? "#2563eb" : "#ef4444";
                 return (
                   <button
                     key={n}
@@ -121,7 +125,7 @@ export default function FeedbackPage() {
           </div>
 
           {npsScore !== null && (
-            <div className={`p-3 rounded-xl text-sm font-medium text-center ${npsScore >= 9 ? "bg-brand-50 text-brand-800" : npsScore >= 7 ? "bg-blue-50 text-blue-800" : "bg-red-50 text-red-800"}`}>
+            <div className={`p-3 rounded-xl text-sm font-medium text-center ${npsScore >= 9 ? "bg-cyan-50 text-cyan-900 dark:bg-cyan-950/50 dark:text-cyan-100" : npsScore >= 7 ? "bg-blue-50 text-blue-800" : "bg-red-50 text-red-800"}`}>
               {NPS_LABELS[npsScore]} — {npsCategory}
             </div>
           )}
@@ -193,5 +197,6 @@ export default function FeedbackPage() {
         </div>
       )}
     </div>
+    </MarketingShell>
   );
 }

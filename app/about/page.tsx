@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Target, Users, BookOpen, Award, Globe, Heart, ArrowRight, CheckCircle2, Zap, Star } from "lucide-react";
+import MarketingShell from "@/components/layout/MarketingShell";
 
 export const metadata: Metadata = {
   title: "About PMPath",
@@ -10,17 +11,20 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+    <MarketingShell>
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-24">
 
       {/* Hero */}
       <section className="text-center space-y-6">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200 text-sm font-medium text-brand-700">
-          <Heart size={14} className="text-brand-500" />
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-200 bg-cyan-50 text-sm font-medium text-cyan-800 dark:border-cyan-800/50 dark:bg-cyan-950/40 dark:text-cyan-200">
+          <Heart size={14} className="text-cyan-600 dark:text-cyan-400" />
           Built for aspiring PMs, by former career switchers
         </div>
-        <h1 className="text-6xl font-display font-bold text-ink leading-tight">
+        <h1 className="text-6xl font-display font-bold text-ink dark:text-slate-100 leading-tight">
           We Believe Everyone<br />
-          <span className="italic" style={{ color: "#16a34a" }}>Deserves a PM Career.</span>
+          <span className="italic bg-gradient-to-r from-cyan-600 to-cyan-500 bg-clip-text text-transparent">
+            Deserves a PM Career.
+          </span>
         </h1>
         <p className="text-xl text-ink-muted font-light max-w-2xl mx-auto leading-relaxed">
           PMPath was born from frustration. When our founders tried to transition into project management,
@@ -32,7 +36,7 @@ export default function AboutPage() {
       <section className="grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-5">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-brand-600 mb-3">Our Mission</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-3">Our Mission</p>
             <h2 className="text-4xl font-display font-bold text-ink mb-4">
               Democratise Access to PM Knowledge
             </h2>
@@ -50,7 +54,7 @@ export default function AboutPage() {
               "Community built on mutual support",
             ].map((item) => (
               <li key={item} className="flex items-center gap-3">
-                <CheckCircle2 size={15} className="text-brand-500 shrink-0" />
+                <CheckCircle2 size={15} className="text-cyan-600 dark:text-cyan-400 shrink-0" />
                 <span className="text-sm text-ink">{item}</span>
               </li>
             ))}
@@ -58,7 +62,7 @@ export default function AboutPage() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           {[
-            { value: "12,400+", label: "Active Learners", icon: Users, color: "text-brand-600 bg-brand-50" },
+            { value: "12,400+", label: "Active Learners", icon: Users, color: "text-cyan-700 bg-cyan-50 dark:text-cyan-300 dark:bg-cyan-950/50" },
             { value: "87%", label: "Career Transition Rate", icon: Target, color: "text-teal-600 bg-teal-50" },
             { value: "5", label: "Structured Courses", icon: BookOpen, color: "text-blue-600 bg-blue-50" },
             { value: "200+", label: "PM Events Tracked", icon: Globe, color: "text-purple-600 bg-purple-50" },
@@ -75,9 +79,9 @@ export default function AboutPage() {
       </section>
 
       {/* Story */}
-      <section className="card p-10 bg-gradient-to-br from-brand-50 to-emerald-50 border-brand-100">
+      <section className="card p-10 bg-gradient-to-br from-cyan-50 to-sky-50 border-cyan-100 dark:from-cyan-950/40 dark:to-slate-900 dark:border-cyan-900/40">
         <div className="max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand-600 mb-3">Our Story</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-3">Our Story</p>
           <h2 className="text-3xl font-display font-bold text-ink mb-5">From Frustrated Learners to Platform Builders</h2>
           <div className="space-y-4 text-ink-muted leading-relaxed">
             <p>
@@ -100,12 +104,12 @@ export default function AboutPage() {
       {/* What we offer */}
       <section>
         <div className="text-center mb-12">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand-600 mb-3">Platform Features</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-3">Platform Features</p>
           <h2 className="text-4xl font-display font-bold text-ink">Everything You Need in One Place</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {[
-            { icon: BookOpen, title: "3 Learning Paths", desc: "Beginner → Intermediate → Advanced/PMP. Each level builds on the last with courses, videos, and downloadable resources.", color: "text-brand-600 bg-brand-50" },
+            { icon: BookOpen, title: "3 Learning Paths", desc: "Beginner → Intermediate → Advanced/PMP. Each level builds on the last with courses, videos, and downloadable resources.", color: "text-cyan-700 bg-cyan-50 dark:text-cyan-300 dark:bg-cyan-950/50" },
             { icon: Zap, title: "Adaptive Quizzes", desc: "Every module ends with a quiz. Our engine tracks weak areas and surfaces personalised recommendations.", color: "text-amber-600 bg-amber-50" },
             { icon: Target, title: "Visual Roadmap", desc: "See exactly where you are in your PM journey and what milestone comes next.", color: "text-teal-600 bg-teal-50" },
             { icon: Users, title: "AI Mentorship Matching", desc: "Get matched with experienced PM mentors based on your goals, industry, and learning style.", color: "text-purple-600 bg-purple-50" },
@@ -126,7 +130,7 @@ export default function AboutPage() {
       {/* Team values */}
       <section>
         <div className="text-center mb-12">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand-600 mb-3">Our Values</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-3">Our Values</p>
           <h2 className="text-4xl font-display font-bold text-ink">What We Stand For</h2>
         </div>
         <div className="grid sm:grid-cols-2 gap-5">
@@ -156,9 +160,10 @@ export default function AboutPage() {
           Join 12,400+ learners building their PM careers with PMPath. Free to start, structured to succeed.
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
-          <Link href="/auth/signup"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
-            style={{ background: "linear-gradient(135deg, #16a34a, #0d9488)" }}>
+          <Link
+            href="/auth/signup"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-cyan-600 text-white font-semibold shadow-lg hover:bg-cyan-700 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+          >
             Get Started Free <ArrowRight size={18} />
           </Link>
           <Link href="/onboarding" className="btn-secondary px-8 py-4 rounded-2xl">
@@ -167,5 +172,6 @@ export default function AboutPage() {
         </div>
       </section>
     </div>
+    </MarketingShell>
   );
 }

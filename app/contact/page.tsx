@@ -2,6 +2,7 @@
 "use client";
 import { useState } from "react";
 import { Mail, MessageSquare, Book, Zap, Send, CheckCircle2 } from "lucide-react";
+import MarketingShell from "@/components/layout/MarketingShell";
 
 const TOPICS = ["General Question", "Technical Issue", "Course Content", "Billing & Subscription", "Mentorship", "Report Abuse", "Partner / Press", "Other"];
 
@@ -18,7 +19,8 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <MarketingShell>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-display font-bold text-ink mb-3">Get in Touch</h1>
         <p className="text-ink-muted text-lg max-w-xl mx-auto">
@@ -30,7 +32,7 @@ export default function ContactPage() {
         {/* Contact options */}
         <div className="space-y-4">
           {[
-            { icon: Book, title: "Help Center", desc: "Browse FAQs and guides.", href: "/resources", color: "text-brand-600 bg-brand-50" },
+            { icon: Book, title: "Help Center", desc: "Browse FAQs and guides.", href: "/resources", color: "text-cyan-700 bg-cyan-50 dark:text-cyan-300 dark:bg-cyan-950/50" },
             { icon: MessageSquare, title: "Community Forum", desc: "Ask the PMPath community.", href: "/community", color: "text-blue-600 bg-blue-50" },
             { icon: Zap, title: "Feedback", desc: "Rate your PMPath experience.", href: "/feedback", color: "text-amber-600 bg-amber-50" },
             { icon: Mail, title: "Email Us", desc: "hello@pmpath.app", href: "mailto:hello@pmpath.app", color: "text-purple-600 bg-purple-50" },
@@ -94,12 +96,13 @@ export default function ContactPage() {
                 <Send size={15} /> {loading ? "Sending..." : "Send Message"}
               </button>
               <p className="text-xs text-center text-ink-subtle">
-                For urgent issues, email directly: <a href="mailto:hello@pmpath.app" className="text-brand-600 hover:underline">hello@pmpath.app</a>
+                For urgent issues, email directly: <a href="mailto:hello@pmpath.app" className="text-cyan-600 dark:text-cyan-400 hover:underline">hello@pmpath.app</a>
               </p>
             </div>
           )}
         </div>
       </div>
     </div>
+    </MarketingShell>
   );
 }

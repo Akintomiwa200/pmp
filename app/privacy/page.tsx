@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Shield, Eye, Database, Trash2, Download, Mail } from "lucide-react";
+import MarketingShell from "@/components/layout/MarketingShell";
 
 export const metadata: Metadata = { title: "Privacy Policy | PMPath" };
 
@@ -58,14 +59,15 @@ const SECTIONS = [
 
 export default function PrivacyPage() {
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
+    <MarketingShell>
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-20">
       <div className="mb-10">
         <p className="text-xs font-bold uppercase tracking-widest text-ink-subtle mb-3">Legal</p>
         <h1 className="text-4xl font-display font-bold text-ink mb-3">Privacy Policy</h1>
         <p className="text-ink-muted">Last updated: March 28, 2025 · GDPR Compliant</p>
-        <div className="mt-4 p-4 bg-brand-50 border border-brand-200 rounded-2xl flex items-start gap-3">
-          <Shield size={16} className="text-brand-600 shrink-0 mt-0.5" />
-          <p className="text-sm text-brand-800">
+        <div className="mt-4 p-4 bg-cyan-50 border border-cyan-200 dark:bg-cyan-950/40 dark:border-cyan-800/50 rounded-2xl flex items-start gap-3">
+          <Shield size={16} className="text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
+          <p className="text-sm text-cyan-900 dark:text-cyan-100">
             <strong>Plain English Summary:</strong> We collect only what's needed to run PMPath.
             We never sell your data. You can export or delete everything at any time from your Settings page.
           </p>
@@ -78,8 +80,8 @@ export default function PrivacyPage() {
         <div className="grid sm:grid-cols-2 gap-4">
           {RIGHTS.map((right) => (
             <div key={right.title} className="flex items-start gap-3">
-              <div className="w-9 h-9 rounded-xl bg-brand-50 flex items-center justify-center shrink-0">
-                <right.icon size={16} className="text-brand-600" />
+              <div className="w-9 h-9 rounded-xl bg-cyan-50 dark:bg-cyan-950/50 flex items-center justify-center shrink-0">
+                <right.icon size={16} className="text-cyan-600 dark:text-cyan-400" />
               </div>
               <div>
                 <p className="text-sm font-semibold text-ink">{right.title}</p>
@@ -120,10 +122,11 @@ export default function PrivacyPage() {
       <div className="mt-8 pt-6 border-t border-surface-3 flex flex-wrap gap-4 justify-between items-center">
         <p className="text-sm text-ink-subtle">© 2025 PMPath</p>
         <div className="flex gap-4">
-          <Link href="/terms" className="text-sm text-brand-600 hover:underline">Terms of Service</Link>
-          <Link href="/contact" className="text-sm text-brand-600 hover:underline">Contact Us</Link>
+          <Link href="/terms" className="text-sm text-cyan-600 dark:text-cyan-400 hover:underline">Terms of Service</Link>
+          <Link href="/contact" className="text-sm text-cyan-600 dark:text-cyan-400 hover:underline">Contact Us</Link>
         </div>
       </div>
     </div>
+    </MarketingShell>
   );
 }

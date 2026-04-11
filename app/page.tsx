@@ -175,106 +175,177 @@ function Hero() {
 
         
           {/* Product showcase card */}
-        <div className="mx-auto mt-16 max-w-5xl">
-          <div className="relative overflow-hidden rounded-[2rem] bg-cyan-400 p-10 pb-8">
-              <div className="relative my-5 text-center">
-                 <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-2 text-sm font-medium text-green-700">
-                    Wall of Love
-                </div>
-                <h2 className="text-4xl w-96 mx-auto my-2 text-white text-center font-bold">
-                  Powering the world's most productive teams
-                </h2>
+       <div className="mx-auto mt-10 max-w-5xl px-4 sm:mt-16">
+  <div className="relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] bg-cyan-400 p-4 sm:p-10 pb-6 sm:pb-8">
+    
+    {/* Header */}
+    <div className="relative my-4 sm:my-5 text-center">
+      <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-green-700">
+        Wall of Love
+      </div>
+
+      <h2 className="mx-auto my-3 max-w-xs sm:max-w-md text-2xl sm:text-4xl text-white text-center font-bold leading-tight">
+        Powering the world's most productive teams
+      </h2>
+    </div>
+
+    {/* Grid overlay */}
+    <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:40px_40px]" />
+
+    {/* App window */}
+    <div className="relative overflow-hidden rounded-xl bg-white shadow-2xl">
+      
+      {/* Title bar */}
+      <div className="flex items-center gap-1.5 border-b border-gray-200 bg-gray-100 px-4 py-2.5">
+        <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
+        <div className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
+        <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
+        <span className="mx-auto text-[10px] sm:text-xs font-medium text-gray-500">
+          PMPath Learning Hub
+        </span>
+      </div>
+
+      {/* Main content */}
+      <div className="flex flex-col md:flex-row md:h-96">
+        
+        {/* Sidebar */}
+        <div className="w-full md:w-48 shrink-0 bg-cyan-800 p-3">
+          <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-white/40">
+            Channels
+          </p>
+
+          <div className="grid grid-cols-2 gap-1 md:block">
+            {["pm-foundations", "agile-scrum", "stakeholder-maps", "pmp-mock-exams"].map((ch, i) => (
+              <div
+                key={ch}
+                className={`flex items-center gap-1.5 rounded px-2 py-1 text-[12px] md:text-[13px] ${
+                  i === 0
+                    ? "bg-white/10 text-white font-medium"
+                    : "text-white/60"
+                }`}
+              >
+                <span className="opacity-60">#</span> {ch}
               </div>
+            ))}
+          </div>
 
+          <p className="mb-2 mt-4 px-2 text-[10px] font-semibold uppercase tracking-widest text-white/40">
+            Direct Messages
+          </p>
 
-            {/* Grid overlay */}
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:40px_40px]" />
+          <div className="grid grid-cols-1 gap-1">
+            {[["Coach Sarah", true], ["Study Group", true], ["Alex M.", false]].map(
+              ([name, online]) => (
+                <div key={String(name)} className="flex items-center gap-2 px-2 py-1">
+                  <div
+                    className={`h-2 w-2 rounded-full ${
+                      online ? "bg-green-400" : "bg-gray-500"
+                    }`}
+                  />
+                  <span className="text-[12px] md:text-[13px] text-white/70">
+                    {name}
+                  </span>
+                </div>
+              )
+            )}
+          </div>
+        </div>
 
-            {/* App window */}
-            <div className="relative overflow-hidden rounded-xl bg-white shadow-2xl">
-              
-              {/* Title bar */}
-              <div className="flex items-center gap-1.5 border-b border-gray-200 bg-gray-100 px-4 py-2.5">
-                <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
-                <div className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
-                <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
-                <span className="mx-auto text-xs font-medium text-gray-500">PMPath Learning Hub</span>
-              </div>
+        {/* Chat area */}
+        <div className="flex flex-1 flex-col">
+          <div className="flex items-center justify-between border-b border-gray-100 px-4 py-2.5">
+            <span className="text-sm font-semibold text-gray-900">
+              # pm-foundations
+            </span>
+            <span className="text-xs text-gray-400">4 learners</span>
+          </div>
 
-              <div className="flex h-96">
-                {/* Sidebar */}
-                <div className="w-48 shrink-0 bg-cyan-800 p-3">
-                  <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-white/40">Channels</p>
-                  {["pm-foundations", "agile-scrum", "stakeholder-maps", "pmp-mock-exams"].map((ch, i) => (
-                    <div key={ch} className={`flex items-center gap-1.5 rounded px-2 py-1 text-[13px] ${i === 0 ? "bg-white/10 text-white font-medium" : "text-white/50"}`}>
-                      <span className="opacity-60">#</span> {ch}
-                    </div>
-                  ))}
-                  <p className="mb-2 mt-3 px-2 text-[10px] font-semibold uppercase tracking-widest text-white/40">Direct Messages</p>
-                  {[["Coach Sarah", true], ["Study Group", true], ["Alex M.", false]].map(([name, online]) => (
-                    <div key={String(name)} className="flex items-center gap-2 px-2 py-1">
-                      <div className={`h-2 w-2 rounded-full ${online ? "bg-green-400" : "bg-gray-500"}`} />
-                      <span className="text-[13px] text-white/60">{name}</span>
-                    </div>
-                  ))}
+          <div className="flex flex-1 flex-col gap-4 px-4 py-3 max-h-[420px] overflow-y-auto">
+            {[
+              {
+                init: "SS",
+                color: "bg-indigo-600",
+                name: "Coach Sarah",
+                time: "10:02 AM",
+                msg: "Module 2 is live — Stakeholder Mapping with the power-interest matrix. Start when ready!",
+              },
+              {
+                init: "AM",
+                color: "bg-sky-500",
+                name: "Alex M.",
+                time: "10:04 AM",
+                msg: "Done the exercise — mapped 6 stakeholders for my mock project.",
+                file: "stakeholder-matrix-draft.pdf",
+              },
+              {
+                init: "NJ",
+                color: "bg-emerald-500",
+                name: "Nina J.",
+                time: "10:08 AM",
+                msg: "PMP mock exam scores attached. Let me know if we need another session!",
+              },
+            ].map(({ init, color, name, time, msg, file }) => (
+              <div key={name} className="flex gap-2.5">
+                <div
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${color} text-[11px] font-bold text-white`}
+                >
+                  {init}
                 </div>
 
-                {/* Chat area */}
-                <div className="flex flex-1 flex-col">
-                  <div className="flex items-center justify-between border-b border-gray-100 px-4 py-2.5">
-                    <span className="text-sm font-semibold text-gray-900"># pm-foundations</span>
-                    <span className="text-xs text-gray-400">4 learners</span>
+                <div className="min-w-0">
+                  <div className="mb-1 flex flex-wrap items-baseline gap-2">
+                    <span className="text-[13px] font-semibold text-gray-900">
+                      {name}
+                    </span>
+                    <span className="text-[11px] text-gray-400">{time}</span>
                   </div>
 
-                  <div className="flex flex-1 flex-col gap-4 overflow-hidden px-4 py-3">
-                    {[
-                      { init: "SS", color: "bg-indigo-600", name: "Coach Sarah", time: "10:02 AM", msg: "Module 2 is live — Stakeholder Mapping with the power-interest matrix. Start when ready!" },
-                      { init: "AM", color: "bg-sky-500", name: "Alex M.", time: "10:04 AM", msg: "Done the exercise — mapped 6 stakeholders for my mock project.", file: "stakeholder-matrix-draft.pdf" },
-                      { init: "NJ", color: "bg-emerald-500", name: "Nina J.", time: "10:08 AM", msg: "PMP mock exam scores attached. Let me know if we need another session!" },
-                    ].map(({ init, color, name, time, msg, file }) => (
-                      <div key={name} className="flex gap-2.5">
-                        <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${color} text-[11px] font-bold text-white`}>{init}</div>
-                        <div>
-                          <div className="mb-1 flex items-baseline gap-2">
-                            <span className="text-[13px] font-semibold text-gray-900">{name}</span>
-                            <span className="text-[11px] text-gray-400">{time}</span>
-                          </div>
-                          <p className="text-[13px] leading-relaxed text-gray-700">{msg}</p>
-                          {file && (
-                            <div className="mt-1.5 inline-flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-2.5 py-1.5">
-                              <div className="flex h-5 w-5 items-center justify-center rounded bg-indigo-600 text-white">
-                                <FileText size={10} />
-                              </div>
-                              <span className="text-[12px] text-gray-600">{file}</span>
-                            </div>
-                          )}
-                        </div>
+                  <p className="text-[13px] leading-relaxed text-gray-700">
+                    {msg}
+                  </p>
+
+                  {file && (
+                    <div className="mt-1.5 inline-flex max-w-full items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-2.5 py-1.5">
+                      <div className="flex h-5 w-5 items-center justify-center rounded bg-indigo-600 text-white">
+                        <FileText size={10} />
                       </div>
-                    ))}
-                  </div>
-
-                  <div className="border-t border-gray-100 px-4 py-2.5">
-                    <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-[13px] text-gray-400">
-                      Message #pm-foundations...
+                      <span className="truncate text-[12px] text-gray-600">
+                        {file}
+                      </span>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
-            </div>
+            ))}
+          </div>
 
-            {/* Customer logos */}
-            <div className="relative mt-5 text-center">
-              <p className="mb-3 text-[11px] text-white/50">Our learners come from</p>
-              <div className="flex flex-wrap justify-center gap-2">
-                {["KPMG", "Deloitte", "Shell", "MTN", "Access Bank", "GTB", "UBA"].map((co) => (
-                  <div key={co} className="rounded-md border border-white/20 bg-white/15 px-3 py-1 text-[12px] font-semibold text-white/85">
-                    {co}
-                  </div>
-                ))}
-              </div>
+          <div className="border-t border-gray-100 px-4 py-2.5">
+            <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-[13px] text-gray-400">
+              Message #pm-foundations...
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    {/* Company logos */}
+    <div className="relative mt-5 text-center">
+      <p className="mb-3 text-[11px] text-white/60">Our learners come from</p>
+      <div className="flex flex-wrap justify-center gap-2">
+        {["KPMG", "Deloitte", "Shell", "MTN", "Access Bank", "GTB", "UBA"].map(
+          (co) => (
+            <div
+              key={co}
+              className="rounded-md border border-white/20 bg-white/15 px-3 py-1 text-[11px] sm:text-[12px] font-semibold text-white/85"
+            >
+              {co}
+            </div>
+          )
+        )}
+      </div>
+    </div>
+  </div>
+</div>
       </div>
     </section>
   );

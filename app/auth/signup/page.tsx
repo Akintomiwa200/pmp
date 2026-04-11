@@ -2,7 +2,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { Eye, EyeOff, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Eye, EyeOff, ArrowRight, CheckCircle2, Check } from "lucide-react";
 import { signIn } from "next-auth/react";
 
 const LEVELS = [
@@ -215,24 +215,34 @@ export default function SignupPage() {
                 <p className="text-sm text-ink-subtle">Select all that apply</p>
               </div>
               <div className="space-y-2">
-                {goalOptions.map((goal) => (
-                  <button
-                    key={goal}
-                    onClick={() => toggleGoal(goal)}
-                    className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-all text-left text-sm ${
-                      form.goals.includes(goal)
-                        ? "border-brand-500 bg-brand-50 text-brand-800"
-                        : "border-surface-3 text-ink-muted hover:border-brand-300"
-                    }`}
-                  >
-                    <div className={`w-4 h-4 rounded border-2 flex items-center justify-center shrink-0 ${
-                      form.goals.includes(goal) ? "bg-brand-500 border-brand-500" : "border-surface-3"
-                    }`}>
-                      {form.goals.includes(goal) && <CheckCircle2 size={10} className="text-white" />}
-                    </div>
-                    {goal}
-                  </button>
-                ))}
+              {goalOptions.map((goal) => {
+  const selected = form.goals.includes(goal);
+
+  return (
+    <button
+      key={goal}
+      type="button"
+      onClick={() => toggleGoal(goal)}
+      className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-all text-left text-sm ${
+        selected
+          ? "border-brand-500 bg-brand-50 text-brand-800"
+          : "border-surface-3 text-ink-muted hover:border-brand-300"
+      }`}
+    >
+      <div
+        className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
+          selected
+            ? "bg-brand-500 border-brand-500"
+            : "border-surface-3 bg-white"
+        }`}
+      >
+        {selected && <Check size={12} className="text-white" strokeWidth={3} />}
+      </div>
+
+      <span className="flex-1">{goal}</span>
+    </button>
+  );
+})}
               </div>
               <div className="flex gap-3">
                 <button onClick={() => setStep(2)} className="btn-secondary flex-1 justify-center">Back</button>

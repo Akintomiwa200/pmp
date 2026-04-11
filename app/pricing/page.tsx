@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { CheckCircle2, X, Zap, Star, ArrowRight, Shield } from "lucide-react";
 import type { Metadata } from "next";
+import MarketingShell from "@/components/layout/MarketingShell";
 
 export const metadata: Metadata = { title: "Pricing" };
 
@@ -40,10 +41,11 @@ const FREE_NOT_INCLUDED = [
 
 export default function PricingPage() {
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <MarketingShell>
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
       {/* Header */}
       <div className="text-center mb-14">
-        <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-600 mb-4">
+        <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-4">
           <Zap size={12} /> Pricing
         </p>
         <h1 className="text-5xl font-display font-bold text-ink mb-4">
@@ -75,7 +77,7 @@ export default function PricingPage() {
             <p className="text-xs font-semibold text-ink-subtle uppercase tracking-wide">What's included</p>
             {FREE_FEATURES.map((f) => (
               <div key={f} className="flex items-start gap-2">
-                <CheckCircle2 size={14} className="text-brand-500 shrink-0 mt-0.5" />
+                <CheckCircle2 size={14} className="text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
                 <span className="text-sm text-ink">{f}</span>
               </div>
             ))}
@@ -92,16 +94,16 @@ export default function PricingPage() {
         </div>
 
         {/* Premium */}
-        <div className="card p-8 space-y-6 border-2 border-brand-400 relative overflow-hidden">
+        <div className="card p-8 space-y-6 border-2 border-cyan-400 dark:border-cyan-600 relative overflow-hidden">
           <div className="absolute top-4 right-4">
-            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-600 text-white text-xs font-bold shadow-sm">
+            <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-600 text-white text-xs font-bold shadow-sm">
               <Star size={11} className="fill-white" /> Most Popular
             </span>
           </div>
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-brand-400/10 rounded-full" />
+          <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-400/10 rounded-full" />
 
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-brand-600 mb-2">Premium</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-2">Premium</p>
             <div className="flex items-end gap-1 mb-3">
               <span className="text-5xl font-display font-bold text-ink">$9</span>
               <span className="text-ink-muted mb-2">/ month</span>
@@ -109,14 +111,15 @@ export default function PricingPage() {
             <div className="flex items-center gap-2 text-sm text-ink-muted">
               <span>or</span>
               <span className="font-semibold text-ink">$89/year</span>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 border border-brand-200">Save 17%</span>
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-200 dark:bg-cyan-950/50 dark:text-cyan-200 dark:border-cyan-800">Save 17%</span>
             </div>
             <p className="text-sm text-ink-muted mt-2">Full platform access with everything you need for PMP success.</p>
           </div>
 
-          <Link href="/auth/signup?plan=premium"
-            className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-2xl text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
-            style={{ background: "linear-gradient(135deg,#16a34a,#0d9488)" }}>
+          <Link
+            href="/auth/signup?plan=premium"
+            className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-cyan-600 text-white font-semibold shadow-lg hover:bg-cyan-700 hover:shadow-xl hover:-translate-y-0.5 transition-all"
+          >
             Start 7-Day Free Trial <ArrowRight size={16} />
           </Link>
           <p className="text-center text-xs text-ink-subtle">No credit card required for trial · Cancel anytime</p>
@@ -125,7 +128,7 @@ export default function PricingPage() {
             <p className="text-xs font-semibold text-ink-subtle uppercase tracking-wide">Everything included</p>
             {PREMIUM_FEATURES.map((f) => (
               <div key={f} className="flex items-start gap-2">
-                <CheckCircle2 size={14} className="text-brand-500 shrink-0 mt-0.5" />
+                <CheckCircle2 size={14} className="text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5" />
                 <span className="text-sm text-ink">{f}</span>
               </div>
             ))}
@@ -167,5 +170,6 @@ export default function PricingPage() {
         </div>
       </div>
     </div>
+    </MarketingShell>
   );
 }

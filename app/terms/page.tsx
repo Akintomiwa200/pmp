@@ -1,6 +1,7 @@
 // app/terms/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
+import MarketingShell from "@/components/layout/MarketingShell";
 
 export const metadata: Metadata = { title: "Terms of Service | PMPath" };
 
@@ -19,7 +20,8 @@ const SECTIONS = [
 
 export default function TermsPage() {
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16">
+    <MarketingShell>
+    <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-20">
       <div className="mb-10">
         <p className="text-xs font-bold uppercase tracking-widest text-ink-subtle mb-3">Legal</p>
         <h1 className="text-4xl font-display font-bold text-ink mb-3">Terms of Service</h1>
@@ -37,7 +39,7 @@ export default function TermsPage() {
         <p className="text-xs font-semibold text-ink-subtle mb-2 uppercase tracking-wide">Jump to Section</p>
         <div className="flex flex-wrap gap-2">
           {SECTIONS.map(s => (
-            <a key={s.id} href={`#${s.id}`} className="text-xs px-2.5 py-1 rounded-lg bg-surface-1 border border-surface-3 text-ink-muted hover:text-brand-600 hover:border-brand-300 transition-all">
+            <a key={s.id} href={`#${s.id}`} className="text-xs px-2.5 py-1 rounded-lg bg-surface-1 border border-surface-3 text-ink-muted hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-300 dark:hover:border-cyan-700 transition-all">
               {s.title.split(". ")[1]}
             </a>
           ))}
@@ -56,10 +58,11 @@ export default function TermsPage() {
       <div className="mt-12 pt-8 border-t border-surface-3 flex flex-wrap gap-4 justify-between items-center">
         <p className="text-sm text-ink-subtle">© 2025 PMPath. All rights reserved.</p>
         <div className="flex gap-4">
-          <Link href="/privacy" className="text-sm text-brand-600 hover:underline">Privacy Policy</Link>
-          <Link href="/contact" className="text-sm text-brand-600 hover:underline">Contact Us</Link>
+          <Link href="/privacy" className="text-sm text-cyan-600 dark:text-cyan-400 hover:underline">Privacy Policy</Link>
+          <Link href="/contact" className="text-sm text-cyan-600 dark:text-cyan-400 hover:underline">Contact Us</Link>
         </div>
       </div>
     </div>
+    </MarketingShell>
   );
 }

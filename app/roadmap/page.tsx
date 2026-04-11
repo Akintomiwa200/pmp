@@ -6,6 +6,7 @@ import {
   CheckCircle2, Circle, Lock, ChevronRight, Target,
   BookOpen, Award, Users, Zap, Star, Clock, ArrowRight
 } from "lucide-react";
+import MarketingShell from "@/components/layout/MarketingShell";
 
 type Level = "beginner" | "intermediate" | "advanced";
 
@@ -18,7 +19,7 @@ const ROADMAPS: Record<Level, {
 }> = {
   beginner: {
     title: "Beginner Roadmap",
-    color: "#16a34a", bg: "bg-green-50", border: "border-green-200", textColor: "text-green-800",
+    color: "#0891b2", bg: "bg-cyan-50", border: "border-cyan-200", textColor: "text-cyan-800 dark:text-cyan-200",
     phases: [
       {
         id: "p1", title: "Foundation", emoji: "🌱", duration: "Week 1–2",
@@ -138,7 +139,8 @@ export default function RoadmapPage() {
   const doneMilestones = roadmap.phases.reduce((a, p) => a + p.milestones.filter((m) => m.done).length, 0);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <MarketingShell>
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
       {/* Header */}
       <div className="mb-10">
         <p className="section-tag mb-3"><Target size={12} />Your Roadmap</p>
@@ -267,7 +269,7 @@ export default function RoadmapPage() {
                             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${typeConfig.bg} ${typeConfig.color}`}>
                               {typeConfig.label}
                             </span>
-                            {milestone.done && <CheckCircle2 size={15} className="text-brand-500" />}
+                            {milestone.done && <CheckCircle2 size={15} className="text-cyan-600 dark:text-cyan-400" />}
                             {milestone.locked && <Lock size={13} className="text-slate-300" />}
                           </div>
                         </div>
@@ -283,7 +285,7 @@ export default function RoadmapPage() {
                         )}
                         {milestone.done && (
                           <span className="inline-flex items-center gap-1 mt-1 text-xs text-ink-subtle">
-                            <CheckCircle2 size={11} className="text-brand-500" /> Completed
+                            <CheckCircle2 size={11} className="text-cyan-600 dark:text-cyan-400" /> Completed
                           </span>
                         )}
                       </div>
@@ -313,5 +315,6 @@ export default function RoadmapPage() {
         </Link>
       </div>
     </div>
+    </MarketingShell>
   );
 }
