@@ -12,20 +12,41 @@ export default function LoginPage() {
 
   const handleSubmit = async (e?: React.FormEvent) => {
     e?.preventDefault();
-    if (!form.email || !form.password) { setError("Please fill in all fields."); return; }
-    setLoading(true); setError("");
+    const normalizedEmail = form.email.trim().toLowerCase();
+    if (!normalizedEmail || !form.password) {
+      setError("Please fill in all fields.");
+      return;
+    }
+    setLoading(true);
+    setError("");
     try {
       // NextAuth credentials sign-in
       const { signIn } = await import("next-auth/react");
       const result = await signIn("credentials", {
-        email: form.email, password: form.password, redirect: false,
+        email: normalizedEmail,
+        password: form.password,
+        redirect: false,
       });
-      if (result?.error) { setError("Invalid email or password. Try alex@example.com / password123"); }
-      else { window.location.href = "/dashboard"; }
+
+      if (result?.error) {
+        const message =
+          result.error === "CredentialsSignin"
+            ? "Invalid email or password."
+            : result.error;
+        setError(message);
+        return;
+      }
+
+      window.location.href = "/dashboard";
     } catch {
       // Fallback for demo (when NextAuth not configured)
-      setTimeout(() => { window.location.href = "/dashboard"; }, 600);
-    } finally { setLoading(false); }
+      setError("Unable to reach the auth service. Redirecting...");
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 600);
+    } finally {
+      setLoading(false);
+    }
   };
 
   
@@ -89,8 +110,11 @@ export default function LoginPage() {
                 className="w-4 h-4 rounded border-surface-3 text-brand-600 focus:ring-brand-500" />
               <span className="text-sm text-ink-muted dark:text-slate-400">Remember me for 30 days</span>
             </label>
-            <button type="submit" disabled={loading}
-              className="btn-primary w-full justify-center py-3 text-base disabled:opacity-60">
+            <button
+              type="submit"
+              disabled={loading || !form.email.trim() || !form.password}
+              className="btn-primary w-full justify-center py-3 text-base disabled:opacity-60"
+            >
               {loading ? <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 : <><ArrowRight size={16} />Sign In</>}
             </button>

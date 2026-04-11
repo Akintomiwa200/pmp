@@ -16,7 +16,6 @@ export default function SignupPage() {
   const [showPass, setShowPass] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", password: "", level: "", goals: [] as string[] });
   const [loading, setLoading] = useState(false);
-  const [done, setDone] = useState(false);
   const [error, setError] = useState("");
 
   const goalOptions = [
@@ -28,7 +27,7 @@ export default function SignupPage() {
     "Prepare for CAPM",
   ];
 
- const toggleGoal = (goal: string) => {
+  const toggleGoal = (goal: string) => {
   setForm((prev) => {
     const exists = prev.goals.includes(goal);
 
@@ -44,50 +43,40 @@ export default function SignupPage() {
   const handleSubmit = async () => {
     setLoading(true);
     setError("");
+    const normalizedEmail = form.email.trim().toLowerCase();
+    const payload = { ...form, email: normalizedEmail };
+
     try {
       const res = await fetch("/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
+
       const data = await res.json();
       if (!res.ok || !data?.success) {
         setError(data?.error ?? "Failed to create account.");
         return;
       }
 
-      // Sign in immediately so signup/login share same auth backend flow.
       const authRes = await signIn("credentials", {
-        email: form.email,
+        email: normalizedEmail,
         password: form.password,
         redirect: false,
       });
-      if (authRes?.error) {
-        setDone(true);
+
+      if (!authRes?.ok) {
+        setError(
+          "Account created but signing you in failed. Please log in manually."
+        );
         return;
       }
+
       window.location.href = "/dashboard";
     } finally {
       setLoading(false);
     }
   };
-
-  if (done) {
-    return (
-      <div className="min-h-[80vh] flex items-center justify-center px-4">
-        <div className="text-center space-y-4 max-w-md">
-          <div className="w-20 h-20 rounded-full bg-brand-50 border-4 border-brand-200 flex items-center justify-center mx-auto text-4xl">
-            🎉
-          </div>
-          <h1 className="text-3xl font-display font-bold text-ink">Welcome to PMPath!</h1>
-          <p className="text-ink-muted">Your account is created. Start your PM journey today.</p>
-          <Link href="/dashboard" className="btn-primary mx-auto">
-            Go to Dashboard <ArrowRight size={16} />
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-[90vh] flex items-center justify-center px-4 py-12 bg-surface-1">
@@ -162,6 +151,7 @@ export default function SignupPage() {
                 </div>
               </div>
               <button
+                type="button"
                 onClick={() => setStep(2)}
                 disabled={!form.name || !form.email || form.password.length < 8}
                 className="btn-primary w-full justify-center"
@@ -201,8 +191,15 @@ export default function SignupPage() {
                 ))}
               </div>
               <div className="flex gap-3">
-                <button onClick={() => setStep(1)} className="btn-secondary flex-1 justify-center">Back</button>
                 <button
+                  type="button"
+                  onClick={() => setStep(1)}
+                  className="btn-secondary flex-1 justify-center"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
                   onClick={() => setStep(3)}
                   disabled={!form.level}
                   className="btn-primary flex-1 justify-center"
@@ -220,48 +217,48 @@ export default function SignupPage() {
                 <h2 className="font-display font-semibold text-lg text-ink mb-1">Your Goals</h2>
                 <p className="text-sm text-ink-subtle">Select all that apply</p>
               </div>
-             <div className="space-y-2">
-  {goalOptions.map((goal) => {
-    const selected = form.goals.includes(goal);
+              <div className="space-y-2">
+                {goalOptions.map((goal) => {
+                  const selected = form.goals.includes(goal);
 
-    return (
-      <button
-        key={goal}
-        type="button"
-        onClick={() => {
-          setForm((prev) => ({
-            ...prev,
-            goals: selected
-              ? prev.goals.filter((g) => g !== goal)
-              : [...prev.goals, goal],
-          }));
-        }}
-        className={`w-full flex items-center gap-3 rounded-xl border p-3 text-left text-sm transition-all duration-200 ${
-          selected
-            ? "border-brand-500 bg-brand-50 text-brand-800"
-            : "border-surface-3 bg-white text-ink-muted hover:border-brand-300"
-        }`}
-      >
-        <div
-          className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 transition-all ${
-            selected
-              ? "border-brand-500 bg-brand-500"
-              : "border-surface-3 bg-white"
-          }`}
-        >
-          {selected && (
-            <Check size={12} className="text-white" strokeWidth={3} />
-          )}
-        </div>
+                  return (
+                    <button
+                      key={goal}
+                      type="button"
+                      onClick={() => toggleGoal(goal)}
+                      className={`w-full flex items-center gap-3 rounded-xl border p-3 text-left text-sm transition-all duration-200 ${
+                        selected
+                          ? "border-brand-500 bg-brand-50 text-brand-800"
+                          : "border-surface-3 bg-white text-ink-muted hover:border-brand-300"
+                      }`}
+                    >
+                      <div
+                        className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 transition-all ${
+                          selected
+                            ? "border-brand-500 bg-brand-500"
+                            : "border-surface-3 bg-white"
+                        }`}
+                      >
+                        {selected && (
+                          <Check size={12} className="text-white" strokeWidth={3} />
+                        )}
+                      </div>
 
-        <span className="flex-1">{goal}</span>
-      </button>
-    );
-  })}
-</div>
+                      <span className="flex-1">{goal}</span>
+                    </button>
+                  );
+                })}
+              </div>
               <div className="flex gap-3">
-                <button onClick={() => setStep(2)} className="btn-secondary flex-1 justify-center">Back</button>
                 <button
+                  type="button"
+                  onClick={() => setStep(2)}
+                  className="btn-secondary flex-1 justify-center"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
                   onClick={handleSubmit}
                   disabled={loading}
                   className="btn-primary flex-1 justify-center"
