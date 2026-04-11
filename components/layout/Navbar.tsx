@@ -6,11 +6,11 @@ import Link from "next/link";
 import { Menu, X, Briefcase } from "lucide-react";
 
 const navItems = [
-  { label: "Features", href: "/features" },
-  { label: "Learning Paths", href: "/learning-paths" },
-  { label: "Mentorship", href: "/mentorship" },
+  { label: "About", href: "/about" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Events", href: "/events" },
   { label: "Community", href: "/community" },
-
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
