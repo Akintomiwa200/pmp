@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider, ThemeScript } from "@/components/providers/ThemeProvider";
 import { TTSProvider, TTSBar } from "@/components/providers/TTSProvider";
-import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: {
@@ -71,12 +70,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="transition-colors duration-200">
+      <body className="bg-slate-50 text-slate-900 transition-colors duration-200">
         <ThemeScript />
         <ThemeProvider>
           <TTSProvider>
-            <main className="min-h-screen">{children}</main>
-            <TTSBar />
+            <div className="flex min-h-screen flex-col">
+              <main className="flex-1">{children}</main>
+              <TTSBar />
+            </div>
           </TTSProvider>
         </ThemeProvider>
       </body>
