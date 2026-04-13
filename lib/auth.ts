@@ -1,5 +1,5 @@
 // lib/auth.ts
-import NextAuth, { type NextAuthConfig } from "next-auth";
+import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
@@ -12,7 +12,7 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-const authConfig: NextAuthConfig = {
+const authConfig = {
   secret: process.env.AUTH_SECRET,
 
   pages: {
@@ -21,7 +21,7 @@ const authConfig: NextAuthConfig = {
   },
 
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
     maxAge: 30 * 24 * 60 * 60,
   },
 
@@ -92,7 +92,7 @@ const authConfig: NextAuthConfig = {
       return session;
     },
   },
-};
+} satisfies Parameters<typeof NextAuth>[0];
 
 export const {
   handlers: { GET, POST },
