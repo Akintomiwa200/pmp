@@ -1,18 +1,54 @@
 // lib/auth.ts
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { getUserByEmail } from "@/lib/db";
+import type { JWT } from "next-auth/jwt";
+import type { User as NextAuthUser } from "next-auth";
+
+// Import your custom types
+import type { Level, SubscriptionTier, UserRole } from "@/types";
 
 const credentialsSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
 });
 
-export const authOptions = {
+// Extend types (this should already be in your types/next-auth.d.ts)
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      level: Level;
+      subscription: SubscriptionTier;
+      role: UserRole;
+    };
+  }
+
+  interface User {
+    id: string;
+    level: Level;
+    subscription: SubscriptionTier;
+    role: UserRole;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string;
+    level: Level;
+    subscription: SubscriptionTier;
+    role: UserRole;
+  }
+}
+
+export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 
   pages: {
@@ -27,15 +63,13 @@ export const authOptions = {
 
   providers: [
     Google({
-      clientId: process.env.AUTH_GOOGLE_ID || process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET || process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.AUTH_GOOGLE_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
     }),
-
     GitHub({
-      clientId: process.env.AUTH_GITHUB_ID || process.env.GITHUB_ID!,
-      clientSecret: process.env.AUTH_GITHUB_SECRET || process.env.GITHUB_SECRET!,
+      clientId: process.env.AUTH_GITHUB_ID!,
+      clientSecret: process.env.AUTH_GITHUB_SECRET!,
     }),
-
     Credentials({
       credentials: {
         email: {},
@@ -64,13 +98,13 @@ export const authOptions = {
           level: user.level,
           subscription: user.subscription,
           role: user.role ?? "user",
-        };
+        } as NextAuthUser;
       },
     }),
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: JWT; user?: NextAuthUser }) {
       if (user) {
         token.id = user.id;
         token.level = user.level;
@@ -80,9 +114,9 @@ export const authOptions = {
       return token;
     },
 
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: JWT }) {
       if (session.user) {
-        session.user.id = token.id as string;
+        session.user.id = token.id;
         session.user.level = token.level;
         session.user.subscription = token.subscription;
         session.user.role = token.role;
@@ -92,7 +126,7 @@ export const authOptions = {
   },
 };
 
-// For v4 + App Router, we export the handler like this
+// For App Router with v4
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
