@@ -214,7 +214,7 @@ p {
 
 
 .dark{
-  scrollbar-color: ##2563EB #0f172a;
+  scrollbar-color: #2563EB #0f172a;
 }
 
 .dark ::-webkit-scrollbar-track{
@@ -223,6 +223,22 @@ p {
 
 .dark ::-webkit-scrollbar-thumb{
   background: #2563EB;
+}
+
+/* =========================
+   Mobile Sidebar Drawer
+========================= */
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.25s ease-out;
 }
 
 /* =========================

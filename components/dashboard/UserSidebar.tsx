@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { LogOut, Settings } from "lucide-react";
+import { signOut } from "next-auth/react";
 import { DashboardSidebar } from "@/components/layout/DashboardSidebar";
 import { dashboardNav } from "./nav";
 
@@ -12,10 +14,14 @@ type UserSidebarProps = {
 export function UserSidebar({ userName = "Learner", userRoleLabel = "Beginner" }: UserSidebarProps) {
   const initials = userName.charAt(0).toUpperCase();
 
+  const handleLogout = () => {
+    signOut({ callbackUrl: "/auth/login" });
+  };
+
   return (
     <DashboardSidebar
       nav={dashboardNav}
-      className="hidden lg:flex w-56 shrink-0 flex-col rounded-3xl border border-slate-200/70 bg-white shadow-sm overflow-hidden"
+      className="flex w-full h-full flex-col rounded-3xl border border-slate-200/70 bg-white shadow-sm overflow-hidden"
       linkClassName="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all text-slate-500"
       activeLinkClassName="bg-brand-600 text-white shadow-sm"
       header={
@@ -40,11 +46,14 @@ export function UserSidebar({ userName = "Learner", userRoleLabel = "Beginner" }
             href="/settings"
             className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-slate-50"
           >
-            <span className="text-brand-500">⚙️</span>
+            <Settings size={16} className="text-brand-500" />
             <span>Settings</span>
           </Link>
-          <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-colors">
-            <span>🔓</span>
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-colors"
+          >
+            <LogOut size={16} />
             Logout
           </button>
         </div>

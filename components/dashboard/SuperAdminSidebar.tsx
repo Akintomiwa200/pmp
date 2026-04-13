@@ -1,15 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { AlertOctagon, Zap, LogOut, ChevronRight } from "lucide-react";
+import { AlertOctagon, Zap, LogOut, ChevronRight, X } from "lucide-react";
 import { DashboardSidebar } from "@/components/layout/DashboardSidebar";
 import { superAdminNav } from "./nav";
 
-export function SuperAdminSidebar() {
+type SuperAdminSidebarProps = {
+  open?: boolean;
+  onClose?: () => void;
+};
+
+function SidebarContent() {
   return (
     <DashboardSidebar
       nav={superAdminNav}
-      className="hidden lg:flex w-60 shrink-0 flex-col border-r bg-[#090d18]"
+      className="flex w-full h-full flex-col bg-[#090d18]"
       linkClassName="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[#6b7faa] transition-all"
       activeLinkClassName="bg-[#1a2236] text-[#e2e8f0]"
       header={
@@ -67,5 +72,39 @@ export function SuperAdminSidebar() {
         </div>
       }
     />
+  );
+}
+
+export function SuperAdminSidebar({ open = false, onClose }: SuperAdminSidebarProps) {
+  return (
+    <>
+      {/* Desktop sidebar */}
+      <aside className="hidden lg:flex w-60 shrink-0 flex-col border-r bg-[#090d18]" style={{ borderColor: "#1a2236" }}>
+        <SidebarContent />
+      </aside>
+
+      {/* Mobile overlay */}
+      {open && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          {/* Drawer */}
+          <aside className="relative w-72 h-full flex flex-col bg-[#090d18] shadow-2xl animate-slide-in-left">
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 p-1.5 rounded-lg z-10 transition-all"
+              style={{ background: "#111827" }}
+              aria-label="Close sidebar"
+            >
+              <X size={16} style={{ color: "#a78bfa" }} />
+            </button>
+            <SidebarContent />
+          </aside>
+        </div>
+      )}
+    </>
   );
 }

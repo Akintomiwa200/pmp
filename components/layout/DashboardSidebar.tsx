@@ -30,7 +30,7 @@ export function DashboardSidebar({
   return (
     <aside className={className}>
       {header}
-      <nav className="flex-1 overflow-y-auto space-y-1">
+      <nav className="flex-1 overflow-y-auto space-y-1 px-3 py-2">
         {nav.map((item) => (
           <Link
             key={item.href}

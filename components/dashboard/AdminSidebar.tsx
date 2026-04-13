@@ -6,15 +6,21 @@ import {
   Zap,
   LogOut,
   ChevronDown,
+  X,
 } from "lucide-react";
 import { DashboardSidebar } from "@/components/layout/DashboardSidebar";
 import { adminNav } from "./nav";
 
-export function AdminSidebar() {
+type AdminSidebarProps = {
+  open?: boolean;
+  onClose?: () => void;
+};
+
+function SidebarContent() {
   return (
     <DashboardSidebar
       nav={adminNav}
-      className="hidden lg:flex w-60 shrink-0 flex-col border-r bg-[#0d1424]"
+      className="flex w-full h-full flex-col bg-[#0d1424]"
       linkClassName="group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-[#6b8aad] transition-all"
       activeLinkClassName="bg-[#1a2840] text-[#e2e8f0]"
       header={
@@ -77,5 +83,39 @@ export function AdminSidebar() {
         </div>
       }
     />
+  );
+}
+
+export function AdminSidebar({ open = false, onClose }: AdminSidebarProps) {
+  return (
+    <>
+      {/* Desktop sidebar */}
+      <aside className="hidden lg:flex w-60 shrink-0 flex-col border-r bg-[#0d1424]" style={{ borderColor: "#1e2a3d" }}>
+        <SidebarContent />
+      </aside>
+
+      {/* Mobile overlay */}
+      {open && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={onClose}
+          />
+          {/* Drawer */}
+          <aside className="relative w-72 h-full flex flex-col bg-[#0d1424] shadow-2xl animate-slide-in-left">
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 p-1.5 rounded-lg z-10 transition-all"
+              style={{ background: "#151f30" }}
+              aria-label="Close sidebar"
+            >
+              <X size={16} style={{ color: "#6b8aad" }} />
+            </button>
+            <SidebarContent />
+          </aside>
+        </div>
+      )}
+    </>
   );
 }

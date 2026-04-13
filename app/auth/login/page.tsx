@@ -41,8 +41,29 @@ export default function LoginPage() {
         return;
       }
 
-      const nextPath = searchParams.get("from") ?? "/dashboard";
-      router.push(nextPath);
+      // Determine redirect path based on user role
+      const fromParam = searchParams.get("from");
+      if (fromParam) {
+        router.push(fromParam);
+        return;
+      }
+
+      // Fetch session to get the role for correct redirect
+      try {
+        const sessionRes = await fetch("/api/auth/session");
+        const session = await sessionRes.json();
+        const role = session?.user?.role;
+
+        if (role === "superadmin") {
+          router.push("/superadmin/dashboard");
+        } else if (role === "admin") {
+          router.push("/admin/dashboard");
+        } else {
+          router.push("/dashboard");
+        }
+      } catch {
+        router.push("/dashboard");
+      }
     } catch {
       setError("Unable to reach the auth service. Please try again.");
     } finally {
