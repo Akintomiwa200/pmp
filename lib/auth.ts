@@ -9,44 +9,13 @@ import { getUserByEmail } from "@/lib/db";
 import type { JWT } from "next-auth/jwt";
 import type { User as NextAuthUser } from "next-auth";
 
-// Import your custom types
+// Your custom types (already defined in @/types)
 import type { Level, SubscriptionTier, UserRole } from "@/types";
 
 const credentialsSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
 });
-
-// Extend types (this should already be in your types/next-auth.d.ts)
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id: string;
-      name?: string | null;
-      email?: string | null;
-      image?: string | null;
-      level: Level;
-      subscription: SubscriptionTier;
-      role: UserRole;
-    };
-  }
-
-  interface User {
-    id: string;
-    level: Level;
-    subscription: SubscriptionTier;
-    role: UserRole;
-  }
-}
-
-declare module "next-auth/jwt" {
-  interface JWT {
-    id: string;
-    level: Level;
-    subscription: SubscriptionTier;
-    role: UserRole;
-  }
-}
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -104,7 +73,7 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, user }: { token: JWT; user?: NextAuthUser }) {
+    async jwt({ token, user }: { token: JWT; user?: NextAuthUser | undefined }) {
       if (user) {
         token.id = user.id;
         token.level = user.level;
@@ -126,7 +95,6 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-// For App Router with v4
+// App Router handler for v4
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };
