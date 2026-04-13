@@ -12,9 +12,8 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  // Do NOT add secret here — v5 reads AUTH_SECRET automatically
-  // Do NOT add baseUrl or url here unless you have a special case
+export const authOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
 
   pages: {
     signIn: "/auth/login",
@@ -28,13 +27,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
   providers: [
     Google({
-      clientId: process.env.AUTH_GOOGLE_ID!,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
+      clientId: process.env.AUTH_GOOGLE_ID || process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET || process.env.GOOGLE_CLIENT_SECRET!,
     }),
 
     GitHub({
-      clientId: process.env.AUTH_GITHUB_ID!,
-      clientSecret: process.env.AUTH_GITHUB_SECRET!,
+      clientId: process.env.AUTH_GITHUB_ID || process.env.GITHUB_ID!,
+      clientSecret: process.env.AUTH_GITHUB_SECRET || process.env.GITHUB_SECRET!,
     }),
 
     Credentials({
@@ -91,4 +90,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
   },
-});
+};
+
+// For v4 + App Router, we export the handler like this
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
