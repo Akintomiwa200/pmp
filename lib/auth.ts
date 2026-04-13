@@ -12,7 +12,7 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+const authConfig = {
   secret: process.env.AUTH_SECRET,
 
   pages: {
@@ -21,7 +21,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
 
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
     maxAge: 30 * 24 * 60 * 60,
   },
 
@@ -77,7 +77,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.subscription = user.subscription;
         token.role = user.role;
       }
-
       return token;
     },
 
@@ -88,8 +87,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.subscription = token.subscription;
         session.user.role = token.role;
       }
-
       return session;
     },
   },
-});
+};
+
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} = NextAuth(authConfig);
