@@ -1,3 +1,4 @@
+// types/next-auth.d.ts
 import type { DefaultSession } from "next-auth";
 import type { Level, SubscriptionTier, UserRole } from "@/types";
 
@@ -15,15 +16,15 @@ declare module "next-auth" {
     id: string;
     level: Level;
     subscription: SubscriptionTier;
-    role?: UserRole;
+    role: UserRole;
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    id?: string;
-    level?: Level;
-    subscription?: SubscriptionTier;
-    role?: UserRole;
+    id: string;
+    level: Level;
+    subscription: SubscriptionTier;
+    role: UserRole;
   }
 }
