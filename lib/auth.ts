@@ -1,5 +1,7 @@
 // lib/auth.ts
 import NextAuth from "next-auth";
+import type { Session, User } from "next-auth";
+import type { JWT } from "next-auth/jwt";
 import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
@@ -12,7 +14,12 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-const authConfig = {
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} = NextAuth({
   secret: process.env.AUTH_SECRET,
 
   pages: {
@@ -21,7 +28,7 @@ const authConfig = {
   },
 
   session: {
-    strategy: "jwt" as const,
+    strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60,
   },
 
@@ -70,7 +77,13 @@ const authConfig = {
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({
+      token,
+      user,
+    }: {
+      token: JWT;
+      user?: User;
+    }) {
       if (user) {
         token.id = user.id;
         token.level = user.level;
@@ -81,7 +94,13 @@ const authConfig = {
       return token;
     },
 
-    async session({ session, token }) {
+    async session({
+      session,
+      token,
+    }: {
+      session: Session;
+      token: JWT;
+    }) {
       if (session.user) {
         session.user.id = token.id;
         session.user.level = token.level;
@@ -92,11 +111,4 @@ const authConfig = {
       return session;
     },
   },
-} satisfies Parameters<typeof NextAuth>[0];
-
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth(authConfig);
+});
