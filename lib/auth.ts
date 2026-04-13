@@ -1,7 +1,5 @@
 // lib/auth.ts
 import NextAuth from "next-auth";
-import type { Session, User } from "next-auth";
-import type { JWT } from "next-auth/jwt";
 import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
@@ -14,13 +12,9 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth({
-  secret: process.env.AUTH_SECRET,
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  // Do NOT add secret here — v5 reads AUTH_SECRET automatically
+  // Do NOT add baseUrl or url here unless you have a special case
 
   pages: {
     signIn: "/auth/login",
@@ -77,37 +71,23 @@ export const {
   ],
 
   callbacks: {
-    async jwt({
-      token,
-      user,
-    }: {
-      token: JWT;
-      user?: User;
-    }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
         token.level = user.level;
         token.subscription = user.subscription;
         token.role = user.role;
       }
-
       return token;
     },
 
-    async session({
-      session,
-      token,
-    }: {
-      session: Session;
-      token: JWT;
-    }) {
+    async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id;
+        session.user.id = token.id as string;
         session.user.level = token.level;
         session.user.subscription = token.subscription;
         session.user.role = token.role;
       }
-
       return session;
     },
   },

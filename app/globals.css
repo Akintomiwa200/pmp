@@ -59,7 +59,7 @@
 
 /*scroll bar*/
 
-html{
+html {
   scrollbar-width: thin;
   scroll-behavior: smooth;
   scrollbar-color: #0891b2 #ffffff;
@@ -192,36 +192,36 @@ p {
 /* =========================
    Scrollbar
 ========================= */
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 12px;
   height: 4px;
 }
 
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   background: #c3c3c3;
 }
 
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   background: linear-gradient(to bottom, #2563EB, #0891b2);
   border-radius: 9999px;
 }
 
-::-webkit-scrollbar-thumb:hover{
+::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #2563EB, #0e7490);
 }
 
 
-.dark{
+.dark {
   scrollbar-color: #2563EB #0f172a;
 }
 
-.dark ::-webkit-scrollbar-track{
+.dark ::-webkit-scrollbar-track {
   background: #0f172a;
 }
 
-.dark ::-webkit-scrollbar-thumb{
+.dark ::-webkit-scrollbar-thumb {
   background: #2563EB;
 }
 
@@ -232,6 +232,7 @@ p {
   from {
     transform: translateX(-100%);
   }
+
   to {
     transform: translateX(0);
   }
@@ -245,6 +246,7 @@ p {
    Reduced Motion
 ========================= */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -252,7 +254,3 @@ p {
     transition-duration: 0.01ms !important;
   }
 }
-
-
-
-
