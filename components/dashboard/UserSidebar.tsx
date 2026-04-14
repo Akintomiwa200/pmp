@@ -43,7 +43,7 @@ export function UserSidebar({ userName = "Learner", userRoleLabel = "Beginner" }
       footer={
         <div className="p-3 space-y-1 border-t border-slate-100">
           <Link
-            href="/settings"
+            href="/dashboard/settings"
             className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-slate-50"
           >
             <Settings size={16} className="text-brand-500" />

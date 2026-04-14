@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Bell, Flame, Search, Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { DashboardSidebar, type SidebarNavItem } from "./DashboardSidebar";
 
 type DashboardShellProps = {
@@ -32,6 +33,7 @@ export function DashboardShell({
 }: DashboardShellProps) {
   const navList = nav ?? [];
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   const defaultSidebar = (
     <DashboardSidebar
@@ -58,7 +60,7 @@ export function DashboardShell({
       footer={
         <div className="p-3 space-y-1 border-t border-slate-100">
           <Link
-            href="/settings"
+            href="/dashboard/settings"
             className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-slate-50"
           >
             <span className="text-brand-500">⚙️</span>
@@ -130,7 +132,7 @@ export function DashboardShell({
                 <Flame size={13} className="text-orange-500" />
                 <span className="text-[11px] font-bold text-orange-700">{badgeLabel}</span>
               </div>
-              <Link href="/notifications" className="relative rounded-xl p-2.5 text-slate-500 transition-colors hover:bg-slate-50">
+              <Link href="/dashboard/notifications" className="relative rounded-xl p-2.5 text-slate-500 transition-colors hover:bg-slate-50">
                 <Bell size={17} />
                 <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full border-2 border-white bg-red-500" />
               </Link>
@@ -144,7 +146,7 @@ export function DashboardShell({
                 key={item.href}
                 href={item.href}
                 className={`rounded-xl px-3 py-1.5 transition-colors hover:bg-slate-100 ${
-                  item.active ? "bg-brand-600 text-white" : "bg-slate-50"
+                  pathname === item.href || pathname.startsWith(`${item.href}/`) ? "bg-brand-600 text-white" : "bg-slate-50"
                 }`}
               >
                 {item.label}
