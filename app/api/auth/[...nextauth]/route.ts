@@ -6,6 +6,8 @@ import Google from "next-auth/providers/google";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { UsersStore } from "@/lib/dataStore";
+import type { JWT } from "next-auth/jwt";
+import type { User as NextAuthUser } from "next-auth";
 import type { Level, SubscriptionTier, UserRole } from "@/types";
 
 const credentialsSchema = z.object({
@@ -23,7 +25,7 @@ const authOptions = {
 
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 30 * 24 * 60 * 60,
   },
 
   providers: [
@@ -51,7 +53,6 @@ const authOptions = {
         const parsed = credentialsSchema.safeParse(credentials);
         if (!parsed.success) return null;
 
-        // Find user from your JSON data store
         const user = UsersStore.findOne(
           (u) => u.email.toLowerCase() === parsed.data.email.toLowerCase()
         );
@@ -65,7 +66,6 @@ const authOptions = {
 
         if (!isPasswordValid) return null;
 
-        // Return user object that will be saved in JWT
         return {
           id: String(user._id),
           name: user.name,
@@ -74,13 +74,13 @@ const authOptions = {
           level: user.level,
           subscription: user.subscription,
           role: user.role ?? "user",
-        };
+        } as NextAuthUser;
       },
     }),
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: JWT; user?: NextAuthUser }) {
       if (user) {
         token.id = user.id;
         token.level = user.level;
@@ -90,8 +90,8 @@ const authOptions = {
       return token;
     },
 
-    async session({ session, token }) {
-      if (session.user) {
+    async session({ session, token }: { session: any; token: JWT }) {
+      if (session?.user) {
         session.user.id = token.id as string;
         session.user.level = token.level;
         session.user.subscription = token.subscription;
