@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider, ThemeScript } from "@/components/providers/ThemeProvider";
 import { TTSProvider, TTSBar } from "@/components/providers/TTSProvider";
+import AuthProvider from "@/components/providers/AuthProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -72,14 +73,16 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="bg-slate-50 text-slate-900 transition-colors duration-200">
         <ThemeScript />
-        <ThemeProvider>
-          <TTSProvider>
-            <div className="flex min-h-screen flex-col">
-              <main className="flex-1">{children}</main>
-              <TTSBar />
-            </div>
-          </TTSProvider>
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <TTSProvider>
+              <div className="flex min-h-screen flex-col">
+                <main className="flex-1">{children}</main>
+                <TTSBar />
+              </div>
+            </TTSProvider>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

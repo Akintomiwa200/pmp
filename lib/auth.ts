@@ -1,0 +1,92 @@
+// lib/auth.ts
+// Centralised NextAuth v5 configuration.
+// v5 returns { handlers, auth, signIn, signOut } — NOT a single handler function.
+
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import { z } from "zod";
+import bcrypt from "bcryptjs";
+import { UsersStore } from "@/lib/dataStore";
+import type { Level, SubscriptionTier, UserRole } from "@/types";
+
+const credentialsSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+export const { handlers, auth, signIn, signOut } = NextAuth({
+  secret: process.env.NEXTAUTH_SECRET,
+
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/login",
+  },
+
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
+  },
+
+  providers: [
+    Credentials({
+      credentials: {
+        email: {},
+        password: {},
+      },
+
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          return null;
+        }
+
+        const parsed = credentialsSchema.safeParse(credentials);
+        if (!parsed.success) return null;
+
+        const user = UsersStore.findOne(
+          (u) => u.email.toLowerCase() === parsed.data.email.toLowerCase()
+        );
+
+        if (!user || !user.password) return null;
+
+        const isPasswordValid = await bcrypt.compare(
+          parsed.data.password,
+          user.password
+        );
+
+        if (!isPasswordValid) return null;
+
+        return {
+          id: String(user._id),
+          name: user.name,
+          email: user.email,
+          image: user.avatar ?? null,
+          level: user.level,
+          subscription: user.subscription,
+          role: user.role ?? "user",
+        };
+      },
+    }),
+  ],
+
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id as string;
+        token.level = (user as any).level as Level;
+        token.subscription = (user as any).subscription as SubscriptionTier;
+        token.role = (user as any).role as UserRole;
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      if (session?.user) {
+        session.user.id = token.id as string;
+        (session.user as any).level = token.level;
+        (session.user as any).subscription = token.subscription;
+        (session.user as any).role = token.role;
+      }
+      return session;
+    },
+  },
+});
