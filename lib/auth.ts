@@ -1,6 +1,7 @@
 // lib/auth.ts
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import type { NextAuthOptions } from "next-auth";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { getUserByEmail } from "@/lib/db";
@@ -11,14 +12,14 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-const authOptions = {
+export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/auth/login",
     error: "/auth/login",
   },
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,   // ← This is the key fix for the type error
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   providers: [
@@ -80,6 +81,7 @@ const authOptions = {
   },
 };
 
+// Create the handler
 const handler = NextAuth(authOptions);
 
 export const { auth, signIn, signOut } = handler;
