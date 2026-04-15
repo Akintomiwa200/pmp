@@ -58,7 +58,7 @@ const authOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user?: any }) {
       if (user) {
         token.id = user.id as string;
         token.level = (user as any).level as Level;
@@ -67,7 +67,8 @@ const authOptions = {
       }
       return token;
     },
-    async session({ session, token }) {
+
+    async session({ session, token }: { session: any; token: any }) {
       if (session?.user) {
         session.user.id = token.id as string;
         (session.user as any).level = token.level;
@@ -79,12 +80,8 @@ const authOptions = {
   },
 };
 
-// Create the handler once
 const handler = NextAuth(authOptions);
 
-// Export what your layout and other server components need
 export const { auth, signIn, signOut } = handler;
-
-// Export the handler for the route file
 export { handler };
-export default handler; // fallback
+export default handler;
