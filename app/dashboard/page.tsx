@@ -1,20 +1,24 @@
-"use client";
+"use client";   // ← This must stay at the very top
 
+import { useState } from "react";
 import Link from "next/link";
-import { 
-  ArrowRight, 
-  BookOpen, 
-  Flame, 
-  Trophy, 
-  TrendingUp, 
-  Calendar, 
-  Clock, 
+import { cn } from "@/lib/utils";
+
+import {
+  ArrowRight,
+  BookOpen,
+  Flame,
+  Trophy,
+  TrendingUp,
+  Calendar,
+  Clock,
   Target,
   Award,
   BarChart3,
   CheckCircle2,
-  Zap
+  Zap,
 } from "lucide-react";
+
 import {
   LineChart,
   Line,
@@ -27,12 +31,10 @@ import {
   ResponsiveContainer,
   PieChart,
   Pie,
-  Cell
+  Cell,
 } from "recharts";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
 
-// Mock data - replace with real API calls
+// Mock data (you can later replace with real data fetched via SWR or React Query)
 const weeklyActivity = [
   { day: "Mon", minutes: 45, completed: 2 },
   { day: "Tue", minutes: 30, completed: 1 },
@@ -53,7 +55,7 @@ const studyStreak = {
   current: 7,
   longest: 12,
   lastActive: "2024-01-15",
-  target: 30
+  target: 30,
 };
 
 const upcomingTasks = [
@@ -96,7 +98,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="rounded-2xl bg-gradient-to-r from-brand-600 to-brand-800 p-6 text-black">
+      <div className="rounded-2xl bg-gradient-to-r from-brand-600 to-brand-800 p-6 text-white">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">Welcome back, PMP Candidate! 👋</h1>
@@ -115,13 +117,7 @@ export default function DashboardPage() {
 
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <StatCard
-          title="Total Study Time"
-          value="225"
-          subtitle="minutes this week"
-          icon={Clock}
-          trend="+12%"
-        />
+        <StatCard title="Total Study Time" value="225" subtitle="minutes this week" icon={Clock} trend="+12%" />
         <StatCard
           title="Current Streak"
           value={`${studyStreak.current} days`}
@@ -129,20 +125,8 @@ export default function DashboardPage() {
           icon={Flame}
           trend="🔥 On fire!"
         />
-        <StatCard
-          title="Modules Completed"
-          value="8"
-          subtitle="of 24 total"
-          icon={CheckCircle2}
-          trend="+2 this week"
-        />
-        <StatCard
-          title="Practice Score"
-          value="78%"
-          subtitle="Average on mock exams"
-          icon={Target}
-          trend="+5% improvement"
-        />
+        <StatCard title="Modules Completed" value="8" subtitle="of 24 total" icon={CheckCircle2} trend="+2 this week" />
+        <StatCard title="Practice Score" value="78%" subtitle="Average on mock exams" icon={Target} trend="+5% improvement" />
       </div>
 
       {/* Charts Section */}
@@ -232,7 +216,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Bottom Section */}
+      {/* Bottom Section - Upcoming Tasks + Achievements */}
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Upcoming Tasks */}
         <div className="rounded-2xl border border-slate-200/70 bg-white p-6">
@@ -300,6 +284,7 @@ export default function DashboardPage() {
               </div>
             ))}
           </div>
+
           <div className="mt-4 rounded-xl bg-gradient-to-r from-brand-50 to-purple-50 p-4">
             <div className="flex items-center gap-3">
               <div className="rounded-full bg-brand-100 p-2">
@@ -322,7 +307,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Quick Actions Row */}
+      {/* Quick Actions */}
       <div className="grid gap-4 md:grid-cols-3">
         <Link
           href="/learn/beginner"
