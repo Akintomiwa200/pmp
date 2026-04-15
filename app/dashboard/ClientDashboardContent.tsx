@@ -2,11 +2,13 @@
 
 import dynamic from "next/dynamic";
 
-// Dynamically import the actual dashboard page (your Recharts-heavy page)
-// with SSR completely disabled
+// Force the entire dashboard page (with Recharts) to load ONLY on the client
 const DashboardPage = dynamic(
   () => import("./page"),
-  { ssr: false }
+  { 
+    ssr: false,
+    loading: () => <div className="p-8 text-center">Loading dashboard...</div> // optional nice loading state
+  }
 );
 
 export default function ClientDashboardContent() {

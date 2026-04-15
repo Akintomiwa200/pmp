@@ -4,14 +4,9 @@ import { dashboardNav } from "@/components/dashboard/nav";
 import { UserSidebar } from "@/components/dashboard/UserSidebar";
 import { auth } from "@/lib/auth";
 
-// Import the client wrapper (this is a Client Component)
 import ClientDashboardContent from "./ClientDashboardContent";
 
-export default async function DashboardLayout({
-  children, // We can keep the prop for type safety, but we won't use it
-}: {
-  children: React.ReactNode;
-}) {
+export default async function DashboardLayout() {
   const session = await auth();
 
   if (!session?.user) {
@@ -33,7 +28,6 @@ export default async function DashboardLayout({
       userRoleLabel={session.user.level ?? "Member"}
       badgeLabel="7 days"
     >
-      {/* Use the client wrapper that disables SSR for the Recharts page */}
       <ClientDashboardContent />
     </DashboardShell>
   );

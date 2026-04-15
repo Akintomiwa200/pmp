@@ -68,6 +68,12 @@ const recentAchievements = [
   { id: 3, title: "Module Master", earned: "2024-01-05", icon: Award },
 ];
 
+
+// Add this line
+export const dynamic = "force-dynamic"; // optional but helps in some cases
+
+
+
 export default function DashboardPage() {
   const [timeRange, setTimeRange] = useState<"week" | "month" | "year">("week");
 
