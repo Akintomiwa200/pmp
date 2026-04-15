@@ -3,6 +3,14 @@ import { DashboardShell } from "@/components/layout/DashboardShell";
 import { dashboardNav } from "@/components/dashboard/nav";
 import { UserSidebar } from "@/components/dashboard/UserSidebar";
 import { auth } from "@/lib/auth";
+import dynamic from "next/dynamic";
+
+// Dynamically import the children (dashboard page content) with SSR disabled
+// This prevents Recharts from running on the server during build
+const DynamicDashboardContent = dynamic(
+  () => import("./page"), // Adjust the path if your page file is named differently
+  { ssr: false }
+);
 
 export default async function DashboardLayout({
   children,
@@ -30,7 +38,8 @@ export default async function DashboardLayout({
       userRoleLabel={session.user.level ?? "Member"}
       badgeLabel="7 days"
     >
-      {children}
+      {/* Replace {children} with the dynamic wrapper */}
+      <DynamicDashboardContent />
     </DashboardShell>
   );
 }

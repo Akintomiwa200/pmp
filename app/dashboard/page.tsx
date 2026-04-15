@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { cn } from "@/lib/utils";
-
 import {
   ArrowRight,
   BookOpen,
@@ -20,58 +18,21 @@ import {
   Zap,
 } from "lucide-react";
 
-// Dynamically import recharts components with SSR disabled
-const ResponsiveContainer = dynamic(
-  () => import("recharts").then((mod) => mod.ResponsiveContainer),
-  { ssr: false }
-);
+// Import Recharts normally now (since the whole component is client-only)
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 
-const LineChart = dynamic(
-  () => import("recharts").then((mod) => mod.LineChart),
-  { ssr: false }
-);
-
-const Line = dynamic(
-  () => import("recharts").then((mod) => mod.Line),
-  { ssr: false }
-);
-
-const XAxis = dynamic(
-  () => import("recharts").then((mod) => mod.XAxis),
-  { ssr: false }
-);
-
-const YAxis = dynamic(
-  () => import("recharts").then((mod) => mod.YAxis),
-  { ssr: false }
-);
-
-const CartesianGrid = dynamic(
-  () => import("recharts").then((mod) => mod.CartesianGrid),
-  { ssr: false }
-);
-
-const Tooltip = dynamic(
-  () => import("recharts").then((mod) => mod.Tooltip),
-  { ssr: false }
-);
-
-const PieChart = dynamic(
-  () => import("recharts").then((mod) => mod.PieChart),
-  { ssr: false }
-);
-
-const Pie = dynamic(
-  () => import("recharts").then((mod) => mod.Pie),
-  { ssr: false }
-);
-
-const Cell = dynamic(
-  () => import("recharts").then((mod) => mod.Cell),
-  { ssr: false }
-);
-
-// Mock data (you can later replace with real data fetched via SWR or React Query)
+// Mock data (unchanged)
 const weeklyActivity = [
   { day: "Mon", minutes: 45, completed: 2 },
   { day: "Tue", minutes: 30, completed: 1 },
@@ -152,7 +113,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Stats Grid */}
+      {/* Stats Grid - unchanged */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatCard title="Total Study Time" value="225" subtitle="minutes this week" icon={Clock} trend="+12%" />
         <StatCard
