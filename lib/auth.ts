@@ -1,7 +1,7 @@
 // lib/auth.ts
-// NextAuth v4 configuration - stable for production with Next.js 16
+// NextAuth v4 - Production-ready configuration with proper TypeScript types
 
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthOptions } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
@@ -13,7 +13,7 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 
   pages: {
@@ -22,8 +22,8 @@ export const authOptions = {
   },
 
   session: {
-    strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    strategy: "jwt" as const,        // ← This fixes the TypeScript error
+    maxAge: 30 * 24 * 60 * 60,       // 30 days
   },
 
   providers: [
@@ -86,5 +86,5 @@ export const authOptions = {
   },
 };
 
-// Export auth, signIn, signOut for use in Server Components / API routes
+// Export for use in Server Components / API routes
 export const { auth, signIn, signOut } = NextAuth(authOptions);
