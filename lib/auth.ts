@@ -6,7 +6,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
-import { UsersStore } from "@/lib/dataStore";
+import { getUserByEmail } from "@/lib/db";
 import type { Level, SubscriptionTier, UserRole } from "@/types";
 
 const credentialsSchema = z.object({
@@ -42,9 +42,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const parsed = credentialsSchema.safeParse(credentials);
         if (!parsed.success) return null;
 
-        const user = UsersStore.findOne(
-          (u) => u.email.toLowerCase() === parsed.data.email.toLowerCase()
-        );
+        const user = await getUserByEmail(parsed.data.email.toLowerCase());
 
         if (!user || !user.password) return null;
 

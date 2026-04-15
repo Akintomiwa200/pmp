@@ -5,7 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff, ArrowRight, Lock, Mail, AlertCircle } from "lucide-react";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -48,10 +48,8 @@ export default function LoginPage() {
         return;
       }
 
-      // Fetch session to get the role for correct redirect
       try {
-        const sessionRes = await fetch("/api/auth/session");
-        const session = await sessionRes.json();
+        const session = await getSession();
         const role = session?.user?.role;
 
         if (role === "superadmin") {
@@ -176,4 +174,3 @@ export default function LoginPage() {
     </div>
   );
 }
-

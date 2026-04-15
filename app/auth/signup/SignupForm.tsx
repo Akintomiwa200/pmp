@@ -310,10 +310,11 @@ export default function SignupForm({
                       key={goal}
                       type="button"
                       onClick={() => toggleGoal(goal)}
-                      className={`w-full flex items-center gap-3 rounded-xl border p-3 text-left text-sm transition-all duration-200 ${
+                      aria-pressed={selected}
+                      className={`w-full cursor-pointer flex items-center gap-3 rounded-xl border p-3 text-left text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-300 ${
                         selected
-                          ? "border-brand-500 bg-brand-50 text-brand-800"
-                          : "border-surface-3 bg-white text-ink-muted hover:border-brand-300"
+                          ? "border-brand-500 bg-brand-50 text-brand-800 shadow-sm"
+                          : "border-surface-3 bg-white text-ink hover:border-brand-300 hover:bg-brand-50/40"
                       }`}
                     >
                       <div
@@ -331,6 +332,9 @@ export default function SignupForm({
                   );
                 })}
               </div>
+              <p className="text-xs text-ink-subtle">
+                Pick one or more goals to personalize your account setup.
+              </p>
               <div className="flex gap-3">
                 <button
                   type="button"
@@ -342,8 +346,8 @@ export default function SignupForm({
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  disabled={loading}
-                  className="btn-primary flex-1 justify-center"
+                  disabled={loading || form.goals.length === 0}
+                  className="btn-primary flex-1 justify-center disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {loading ? "Creating..." : "Create Account"}
                 </button>
