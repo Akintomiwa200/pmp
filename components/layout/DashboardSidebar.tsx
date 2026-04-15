@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { LucideIcon } from "lucide-react";
-import { IconMapper } from "../dsashboard/IconMapper";   // ← Make sure path is correct
+import { IconMapper } from "../dashboard/IconMapper";   // ← Make sure path is correct
 
 export type SidebarNavItem = {
   href: string;
