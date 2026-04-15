@@ -11,7 +11,7 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/auth/login",
@@ -77,4 +77,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
   },
-});
+};
+
+// Create the handler once
+const handler = NextAuth(authOptions);
+
+// Export what your layout and other server components need
+export const { auth, signIn, signOut } = handler;
+
+// Export the handler for the route file
+export { handler };
+export default handler; // fallback
