@@ -20,17 +20,18 @@ import {
 import type { SidebarNavItem } from "@/components/layout/DashboardSidebar";
 
 export const dashboardNav: SidebarNavItem[] = [
-  { href: "/", label: "Home", icon: Home },
-  { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
-  { href: "/dashboard/progress", label: "Progress", icon: TrendingUp },
-  { href: "/dashboard/profile", label: "Profile", icon: CircleUserRound },
-  { href: "/dashboard/notifications", label: "Notifications", icon: Bell },
-  { href: "/dashboard/settings", label: "Settings", icon: Settings },
-  { href: "/learn/beginner", label: "Learn", icon: BookOpen },
-  { href: "/events", label: "Events", icon: Calendar },
-  { href: "/community", label: "Community", icon: MessageSquare },
-  { href: "/mentorship", label: "Mentorship", icon: Users },
+  { href: "/", label: "Home", icon: "Home" },
+  { href: "/dashboard", label: "Overview", icon: "LayoutDashboard" },
+  { href: "/dashboard/progress", label: "Progress", icon: "TrendingUp" },
+  { href: "/dashboard/profile", label: "Profile", icon: "CircleUserRound" },
+  { href: "/dashboard/notifications", label: "Notifications", icon: "Bell" },
+  { href: "/dashboard/settings", label: "Settings", icon: "Settings" },
+  { href: "/learn/beginner", label: "Learn", icon: "BookOpen" },
+  { href: "/events", label: "Events", icon: "Calendar" },
+  { href: "/community", label: "Community", icon: "MessageSquare" },
+  { href: "/mentorship", label: "Mentorship", icon: "Users" },
 ];
+
 
 export const adminNav: SidebarNavItem[] = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },

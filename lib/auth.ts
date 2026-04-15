@@ -1,6 +1,5 @@
 // lib/auth.ts
-// Centralised NextAuth v5 configuration.
-// v5 returns { handlers, auth, signIn, signOut } — NOT a single handler function.
+// NextAuth v4 configuration - stable for production with Next.js 16
 
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
@@ -14,7 +13,7 @@ const credentialsSchema = z.object({
   password: z.string().min(6),
 });
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 
   pages: {
@@ -24,7 +23,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60,
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
 
   providers: [
@@ -33,7 +32,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         email: {},
         password: {},
       },
-
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           return null;
@@ -43,7 +41,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!parsed.success) return null;
 
         const user = await getUserByEmail(parsed.data.email.toLowerCase());
-
         if (!user || !user.password) return null;
 
         const isPasswordValid = await bcrypt.compare(
@@ -87,4 +84,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
   },
-});
+};
+
+// Export auth, signIn, signOut for use in Server Components / API routes
+export const { auth, signIn, signOut } = NextAuth(authOptions);
