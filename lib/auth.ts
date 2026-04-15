@@ -1,7 +1,7 @@
 // lib/auth.ts
-import NextAuth from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import { getServerSession } from "next-auth";
 import type { NextAuthOptions } from "next-auth";
+import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { getUserByEmail } from "@/lib/db";
@@ -19,8 +19,8 @@ export const authOptions: NextAuthOptions = {
     error: "/auth/login",
   },
   session: {
-    strategy: "jwt" as const,   // ← This is the key fix for the type error
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
   },
   providers: [
     Credentials({
@@ -59,18 +59,18 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }: { token: any; user?: any }) {
+    async jwt({ token, user }) {
       if (user) {
-        token.id = user.id as string;
-        token.level = (user as any).level as Level;
-        token.subscription = (user as any).subscription as SubscriptionTier;
-        token.role = (user as any).role as UserRole;
+        token.id = user.id;
+        token.level = user.level;
+        token.subscription = user.subscription;
+        token.role = user.role;
       }
       return token;
     },
 
-    async session({ session, token }: { session: any; token: any }) {
-      if (session?.user) {
+    async session({ session, token }) {
+      if (session.user) {
         session.user.id = token.id as string;
         (session.user as any).level = token.level;
         (session.user as any).subscription = token.subscription;
@@ -81,9 +81,6 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-// Create the handler
-const handler = NextAuth(authOptions);
-
-export const { auth, signIn, signOut } = handler;
-export { handler };
-export default handler;
+export function auth() {
+  return getServerSession(authOptions);
+}
