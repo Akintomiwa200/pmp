@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconMapper } from "../dashboard/IconMapper";
+import type { LucideIcon } from "lucide-react";
+import { IconMapper } from "../dsashboard/IconMapper";   // ← Make sure path is correct
 
 export type SidebarNavItem = {
   href: string;
   label: string;
-  icon: string;
+  icon: string | LucideIcon;     // Supports both string and Lucide component
   active?: boolean;
 };
 
@@ -34,27 +35,44 @@ export function DashboardSidebar({
     if (href === "/") {
       return pathname === "/";
     }
-
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
   return (
     <div className={className}>
       {header && <div className="flex-shrink-0">{header}</div>}
+
       <div className="flex-1 overflow-y-auto">
         <nav className="space-y-1 p-3">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`${linkClassName} ${isActive(item.href) ? activeLinkClassName : "text-slate-500 hover:bg-slate-50 hover:text-ink"}`}
-            >
-              <IconMapper name={item.icon} size={16} />
-              {item.label}
-            </Link>
-          ))}
+          {nav.map((item) => {
+            const Icon = item.icon;   // This can be string or LucideIcon
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`${linkClassName} ${
+                  isActive(item.href)
+                    ? activeLinkClassName
+                    : "text-slate-500 hover:bg-slate-50 hover:text-ink"
+                }`}
+              >
+                {/* Improved Icon Rendering */}
+                <div className="flex h-5 w-5 items-center justify-center">
+                  {typeof Icon === "string" ? (
+                    <IconMapper name={Icon} size={16} />
+                  ) : (
+                    <Icon size={16} strokeWidth={2.5} />
+                  )}
+                </div>
+
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
         </nav>
       </div>
+
       {footer && <div className="flex-shrink-0">{footer}</div>}
     </div>
   );

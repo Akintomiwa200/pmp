@@ -1,3 +1,4 @@
+// components/dashboard/nav.ts
 import {
   Activity,
   BarChart3,
@@ -17,8 +18,10 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+
 import type { SidebarNavItem } from "@/components/layout/DashboardSidebar";
 
+// Dashboard navigation - using string icons (as before)
 export const dashboardNav: SidebarNavItem[] = [
   { href: "/", label: "Home", icon: "Home" },
   { href: "/dashboard", label: "Overview", icon: "LayoutDashboard" },
@@ -32,7 +35,7 @@ export const dashboardNav: SidebarNavItem[] = [
   { href: "/mentorship", label: "Mentorship", icon: "Users" },
 ];
 
-
+// Admin navigation - using actual Lucide components
 export const adminNav: SidebarNavItem[] = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/users", label: "Users", icon: Users },
@@ -46,6 +49,7 @@ export const adminNav: SidebarNavItem[] = [
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
+// Super Admin navigation
 export const superAdminNav: SidebarNavItem[] = [
   { href: "/superadmin/dashboard", label: "SA Dashboard", icon: LayoutDashboard },
   { href: "/superadmin/admins", label: "Manage Admins", icon: Users },
