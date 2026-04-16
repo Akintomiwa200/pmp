@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, ArrowRight, CheckCircle2, Check } from "lucide-react";
 import { signIn } from "next-auth/react";
@@ -82,6 +82,14 @@ export default function SignupForm({
 
   const normalizedRole = role ?? "user";
   const requireAccessCode = normalizedRole === "admin" || normalizedRole === "superadmin";
+  const steps = useMemo(
+    () => [
+      { id: 1, title: "Basic Info" },
+      { id: 2, title: "Your Level" },
+      { id: 3, title: "Your Goals" },
+    ],
+    []
+  );
 
   const toggleGoal = (goal: string) => {
     setForm((prev) => {
@@ -99,10 +107,24 @@ export default function SignupForm({
     const normalizedEmail = form.email.trim().toLowerCase();
     const trimmedAccessCode = accessCode.trim();
 
-    if (requireAccessCode && !trimmedAccessCode) {
-      setError("Access code is required for this role.");
+    if (!form.name.trim() || !normalizedEmail || form.password.length < 8) {
+      setError("Complete your basic information before creating your account.");
+      setStep(1);
       return;
     }
+
+    if (!form.level) {
+      setError("Select your current level before creating your account.");
+      setStep(2);
+      return;
+    }
+
+    if (requireAccessCode && !trimmedAccessCode) {
+      setError("Access code is required for this role.");
+      setStep(1);
+      return;
+    }
+
     if (form.goals.length === 0) {
       setError("Select at least one goal before creating your account.");
       return;
@@ -112,6 +134,7 @@ export default function SignupForm({
 
     const payload = {
       ...form,
+      name: form.name.trim(),
       email: normalizedEmail,
       role: normalizedRole,
       ...(requireAccessCode ? { accessCode: trimmedAccessCode } : {}),
@@ -124,7 +147,7 @@ export default function SignupForm({
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
       if (!res.ok || !data?.success) {
         setError(data?.error ?? "Failed to create account.");
         return;
@@ -134,14 +157,19 @@ export default function SignupForm({
         email: normalizedEmail,
         password: form.password,
         redirect: false,
+        callbackUrl: getRedirectPath(normalizedRole, successRedirect ?? null),
       });
 
       if (!authRes?.ok) {
-        setError("Account created but signing you in failed. Please log in manually.");
+        setError(authRes?.error ?? "Account created but signing you in failed. Please log in manually.");
         return;
       }
 
-      window.location.href = getRedirectPath(normalizedRole, successRedirect ?? null);
+      window.location.assign(
+        authRes.url ?? getRedirectPath(normalizedRole, successRedirect ?? null)
+      );
+    } catch {
+      setError("Something went wrong while creating your account. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -158,10 +186,46 @@ export default function SignupForm({
           <p className="text-sm text-ink-muted mt-1">{getSubtitle(normalizedRole, subtitle)}</p>
         </div>
 
-        <div className="flex items-center gap-2 mb-8">
-          {[1, 2, 3].map((s) => (
-            <div key={s} className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${s <= step ? "bg-brand-500" : "bg-surface-3"}`} />
-          ))}
+        <div className="mb-8">
+          <div className="flex items-center gap-2">
+            {steps.map((item, index) => {
+              const completed = step > item.id;
+              const active = step === item.id;
+
+              return (
+                <div key={item.id} className="flex flex-1 items-center gap-2">
+                  <div className="flex items-center gap-2">
+                    <div
+                      className={`flex h-7 w-7 items-center justify-center rounded-full border text-xs font-semibold transition-all duration-300 ${
+                        completed
+                          ? "border-brand-500 bg-brand-500 text-white"
+                          : active
+                            ? "border-brand-500 bg-brand-50 text-brand-700"
+                            : "border-surface-3 bg-white text-ink-subtle"
+                      }`}
+                    >
+                      {completed ? <Check size={14} strokeWidth={3} /> : item.id}
+                    </div>
+                    <span
+                      className={`hidden text-xs font-medium sm:inline ${
+                        active || completed ? "text-ink" : "text-ink-subtle"
+                      }`}
+                    >
+                      {item.title}
+                    </span>
+                  </div>
+
+                  {index < steps.length - 1 && (
+                    <div
+                      className={`h-1 flex-1 rounded-full transition-all duration-300 ${
+                        step > item.id ? "bg-brand-500" : "bg-surface-3"
+                      }`}
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
         <div className="card p-6 sm:p-8 space-y-5">
@@ -257,6 +321,7 @@ export default function SignupForm({
                 {LEVELS.map((level) => (
                   <button
                     key={level.value}
+                    type="button"
                     onClick={() => setForm((f) => ({ ...f, level: level.value }))}
                     className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left ${
                       form.level === level.value

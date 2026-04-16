@@ -16,7 +16,6 @@
     "jsx": "react-jsx",
     "esModuleInterop": true,
 
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     },
