@@ -1,0 +1,56 @@
+Inspected files:
+- app/superadmin/layout.tsx
+- components/dashboard/SuperAdminSidebar.tsx
+- components/dashboard/nav.ts
+
+Summary of how superadmin child routes are linked/rendered:
+- app/superadmin/layout.tsx exports the shared SuperAdminLayout wrapper for all app/superadmin/* routes.
+- It is a client component ("use client") because it manages local mobile sidebar state with useState.
+- It renders SuperAdminSidebar alongside the main content area.
+- Nested child routes are rendered directly through {children} inside the scrollable content pane.
+- So every child page under app/superadmin/... inherits the same shell:
+  - left sidebar on desktop
+  - mobile drawer sidebar
+  - sticky top bar
+  - shared main content container
+
+How the sidebar/nav is actually wired:
+- app/superadmin/layout.tsx itself does not define nav items directly.
+- It delegates all navigation rendering to components/dashboard/SuperAdminSidebar.tsx.
+- SuperAdminSidebar.tsx passes nav={superAdminNav} into DashboardSidebar from @/components/layout/DashboardSidebar.
+- The nav data source is components/dashboard/nav.ts.
+- Therefore, superadmin child route links are centrally defined in superAdminNav, then rendered by the shared DashboardSidebar component.
+
+Sidebar/nav items currently defined for superadmin:
+From components/dashboard/nav.ts:
+- /superadmin/dashboard -> label: SA Dashboard
+- /superadmin/admins -> label: Manage Admins
+- /superadmin/security -> label: Security Center
+- /superadmin/logs -> label: Audit Logs
+- /superadmin/system -> label: System Config
+- /superadmin/settings -> label: SA Settings
+
+Additional sidebar footer link in components/dashboard/SuperAdminSidebar.tsx:
+- /admin/dashboard -> label: Admin Panel
+- There is also a Logout button with no route attached.
+
+Route naming conventions observed:
+- All superadmin routes use the /superadmin/ prefix.
+- Route path segments are lowercase.
+- Existing segments are single words:
+  - dashboard
+  - admins
+  - security
+  - logs
+  - system
+  - settings
+- Labels in the UI are more descriptive than the actual route segment names.
+- The route naming pattern aligns with simple top-level child folders under app/superadmin.
+
+Other implementation notes relevant to parent agent:
+- app/superadmin/layout.tsx only controls shell/layout behavior and mobile sidebar toggling.
+- The actual sidebar content is encapsulated in components/dashboard/SuperAdminSidebar.tsx.
+- The nav config the parent agent would likely need to extend is components/dashboard/nav.ts -> superAdminNav.
+- SuperAdminSidebar is a named export.
+- No new exports, interfaces, endpoints, or CSS contracts were introduced by this inspection.
+- No blockers encountered.
