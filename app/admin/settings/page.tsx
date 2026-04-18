@@ -16,7 +16,7 @@ function DCard({ children, title }: { children: React.ReactNode; title: string }
 
 export default function AdminSettingsPage() {
   return (
-    <div className="p-6 space-y-6 max-w-4xl">
+    <div className="p-6 space-y-6 ">
       <div>
         <h1 className="text-2xl font-display font-bold text-white flex items-center gap-2">
           <Settings size={20} style={{ color: "#22c55e" }} /> Admin Settings

@@ -23,7 +23,7 @@ const FORMAT_ICON = { virtual: Globe, in_person: MapPin, hybrid: Calendar };
 
 export default function AdminEventsPage() {
   return (
-    <div className="p-6 space-y-6 max-w-6xl">
+    <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-display font-bold text-white">Events</h1>

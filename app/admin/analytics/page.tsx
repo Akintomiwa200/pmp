@@ -33,7 +33,7 @@ export default function AdminAnalyticsPage() {
   const maxSignup = Math.max(...SIGNUPS);
 
   return (
-    <div className="p-6 space-y-8 max-w-7xl">
+    <div className="p-6 space-y-6">
       <div>
         <h1 className="text-2xl font-display font-bold text-ink mb-1">Analytics</h1>
         <p className="text-sm text-ink-muted">Platform performance · March 2025</p>

@@ -56,7 +56,7 @@ export default function NewExamPage() {
     : "—";
 
   return (
-    <div className="p-6 max-w-4xl">
+    <div className="p-6">
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div className="flex items-center gap-3">
           <Link href="/admin/quizzes" className="flex items-center gap-1.5 text-sm hover:text-white transition-colors" style={{ color:"#4a6080" }}>

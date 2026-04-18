@@ -24,7 +24,7 @@ const LEVEL_COLOR: Record<string, string> = { intern: "#22c55e", entry: "#3b82f6
 
 export default function AdminJobsPage() {
   return (
-    <div className="p-6 space-y-6 max-w-6xl">
+    <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-display font-bold text-white">Jobs</h1>

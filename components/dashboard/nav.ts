@@ -25,7 +25,7 @@ import type { SidebarNavItem } from "@/components/layout/DashboardSidebar";
 export const dashboardNav: SidebarNavItem[] = [
   { href: "/", label: "Home", icon: "Home" },
   { href: "/dashboard", label: "Overview", icon: "LayoutDashboard" },
-  { href: "/dashboard/progress", label: "Progress", icon: "TrendingUp" },
+  // { href: "/dashboard/progress", label: "Progress", icon: "TrendingUp" },
   { href: "/dashboard/profile", label: "Profile", icon: "CircleUserRound" },
   { href: "/dashboard/notifications", label: "Notifications", icon: "Bell" },
   { href: "/dashboard/settings", label: "Settings", icon: "Settings" },

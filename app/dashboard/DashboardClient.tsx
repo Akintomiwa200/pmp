@@ -118,7 +118,7 @@ export default function DashboardClient() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl bg-gradient-to-r from-brand-600 to-brand-800 p-6 text-white">
+      <div className="rounded-2xl bg-gradient-to-r from-brand-600 to-brand-800 p-6 text-black">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold">Welcome back, PMP Candidate! 👋</h1>

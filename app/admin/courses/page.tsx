@@ -17,7 +17,7 @@ const LEVEL_STYLES = { beginner: { bg: "#16a34a18", color: "#16a34a", label: "Be
 
 export default function AdminCoursesPage() {
   return (
-    <div className="p-6 space-y-6 max-w-7xl">
+    <div className="p-6 space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-display font-bold text-white">Courses</h1>
