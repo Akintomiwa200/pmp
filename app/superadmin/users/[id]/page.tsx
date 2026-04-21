@@ -47,7 +47,7 @@ export default function AdminUserDetailPage({ params }: { params: { id: string }
   const lc = LEVEL_COLOR[DEMO_USER.level];
 
   return (
-    <div className="p-6 space-y-6 max-w-5xl">
+    <div className="p-6 space-y-6">
       <div className="flex items-center gap-3">
         <Link href="/admin/users" className="flex items-center gap-2 text-sm transition-all" style={{ color: "#4a6080" }}>
           <ChevronLeft size={14} /> All Users

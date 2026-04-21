@@ -56,7 +56,7 @@ export default function EditQuizPage({ params }: { params: { id: string } }) {
   const removeQ = (id: string) => { if (questions.length <= 1) return; setQuestions(prev => prev.filter(q => q.id !== id)); };
 
   return (
-    <div className="p-6 max-w-4xl">
+    <div className="p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div className="flex items-center gap-3">

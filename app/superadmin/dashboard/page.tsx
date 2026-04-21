@@ -47,7 +47,7 @@ const SEV_STYLES: Record<string, { bg: string; color: string; label: string }> =
 
 export default function SuperAdminDashboard() {
   return (
-    <div className="p-6 space-y-6 max-w-[1200px]">
+    <div className="p-6 space-y-6">
       {/* Header */}
       <div className="flex items-end justify-between">
         <div>

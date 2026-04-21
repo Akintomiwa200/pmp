@@ -19,7 +19,7 @@ const Toggle = ({ on, label }: { on: boolean; label: string }) => (
 
 export default function SystemConfigPage() {
   return (
-    <div className="p-6 space-y-6 max-w-5xl">
+    <div className="p-6 space-y-6">
       <div>
         <p className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: "#4a5568" }}>Super Admin</p>
         <h1 className="text-2xl font-display font-bold text-white flex items-center gap-2">

@@ -35,7 +35,7 @@ function DCard({ children, className = "" }: { children: React.ReactNode; classN
 
 export default function SecurityPage() {
   return (
-    <div className="p-6 space-y-6 max-w-6xl">
+    <div className="p-6 space-y-6 ">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-2xl flex items-center justify-center" style={{ background: "linear-gradient(135deg, #7c3aed, #1d4ed8)" }}>
           <Shield size={20} className="text-white" />

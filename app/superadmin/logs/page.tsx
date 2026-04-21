@@ -23,7 +23,7 @@ const SEV: Record<string, { bg: string; color: string; label: string }> = {
 
 export default function AuditLogsPage() {
   return (
-    <div className="p-6 space-y-6 max-w-6xl">
+    <div className="p-6 space-y-6 ">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: "#4a5568" }}>Security</p>

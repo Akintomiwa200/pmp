@@ -21,15 +21,6 @@ const ThemeContext = createContext<ThemeContextValue>({
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("light");
   const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    const stored = localStorage.getItem("pmpath-theme") as Theme | null;
-    const initial = stored ?? "light";
-    setThemeState(initial);
-    applyTheme(initial);
-    setMounted(true);
-  }, []);
 
   const applyTheme = (t: Theme) => {
     const isDark =
@@ -38,6 +29,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.classList.toggle("dark", isDark);
     setResolvedTheme(isDark ? "dark" : "light");
   };
+
+  useEffect(() => {
+    const stored = localStorage.getItem("pmpath-theme") as Theme | null;
+    const initial = stored ?? "light";
+    setThemeState(initial);
+    applyTheme(initial);
+  }, []);
 
   const setTheme = (t: Theme) => {
     setThemeState(t);
@@ -48,9 +46,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const toggleTheme = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
-
-  // Prevent flash of wrong theme
-  if (!mounted) return null;
 
   return (
     <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme }}>

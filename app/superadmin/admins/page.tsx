@@ -17,7 +17,7 @@ function DCard({ children, className = "" }: { children: React.ReactNode; classN
 
 export default function ManageAdminsPage() {
   return (
-    <div className="p-6 space-y-6 max-w-5xl">
+    <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-[10px] font-bold uppercase tracking-wider mb-1" style={{ color: "#4a5568" }}>Access Control</p>
