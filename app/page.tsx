@@ -97,7 +97,7 @@ function Hero() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-36 pb-20">
         {/* Center Hero Content */}
         <div className="mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#2563EB] bg-[#2563EB]px-4 py-2 text-sm font-medium text-[#2563EB]">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#2563EB] px-4 py-2 text-sm font-medium text-[#2563EB]">
             <Sparkles size={14} className="text-[#2563EB]" />
             12,400+ aspiring PMs · Start learning today
           </div>
@@ -118,7 +118,7 @@ function Hero() {
             </span>
           </p>
 
-          {/* CTA */}
+         
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/learn/beginner"
@@ -135,7 +135,7 @@ function Hero() {
             </Link>
           </div>
 
-          {/* Social proof */}
+        
           <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
             <div className="flex -space-x-2">
               {["A", "P", "M", "J", "L"].map((l, i) => (
@@ -174,11 +174,11 @@ function Hero() {
         </div>
 
         
-          {/* Product showcase card */}
-       <div className="mx-auto mt-10 max-w-5xl px-4 sm:mt-16">
+          
+       {/* <div className="mx-auto mt-10 max-w-5xl px-4 sm:mt-16">
   <div className="relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] bg-[#2563EB] p-4 sm:p-10 pb-6 sm:pb-8">
     
-    {/* Header */}
+ 
     <div className="relative my-4 sm:my-5 text-center">
       <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-green-700">
         Wall of Love
@@ -189,13 +189,13 @@ function Hero() {
       </h2>
     </div>
 
-    {/* Grid overlay */}
+    
     <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-    {/* App window */}
+    
     <div className="relative overflow-hidden rounded-xl bg-white shadow-2xl">
       
-      {/* Title bar */}
+      
       <div className="flex items-center gap-1.5 border-b border-gray-200 bg-gray-100 px-4 py-2.5">
         <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
         <div className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
@@ -205,10 +205,10 @@ function Hero() {
         </span>
       </div>
 
-      {/* Main content */}
+     
       <div className="flex flex-col md:flex-row md:h-96">
         
-        {/* Sidebar */}
+        
         <div className="w-full md:w-48 shrink-0 bg-[#2563EB] p-3">
           <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-white/40">
             Channels
@@ -251,7 +251,7 @@ function Hero() {
           </div>
         </div>
 
-        {/* Chat area */}
+       
         <div className="flex flex-1 flex-col">
           <div className="flex items-center justify-between border-b border-gray-100 px-4 py-2.5">
             <span className="text-sm font-semibold text-gray-900">
@@ -328,7 +328,6 @@ function Hero() {
       </div>
     </div>
 
-    {/* Company logos */}
     <div className="relative mt-5 text-center">
       <p className="mb-3 text-[11px] text-white/60">Our learners come from</p>
       <div className="flex flex-wrap justify-center gap-2">
@@ -345,7 +344,7 @@ function Hero() {
       </div>
     </div>
   </div>
-</div>
+</div> */}
       </div>
     </section>
   );
@@ -353,9 +352,6 @@ function Hero() {
 
 
 function StatsStrip() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-
   const partners = [
     {
       name: "Google",
@@ -383,72 +379,52 @@ function StatsStrip() {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 18 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.45 },
-    },
-  };
-
   return (
-    <section className="bg-white py-12 sm:py-16">
-      <div
-        ref={ref}
-        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-      >
-        <h2 className="mb-8 sm:mb-10 text-center text-xl sm:text-2xl font-semibold text-gray-900">
+    <section className="border-y border-gray-100 bg-gray-50/50 py-10 overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 className="mb-8 text-center text-xl sm:text-2xl font-semibold text-gray-900">
           Trusted by teams at
         </h2>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="
-            grid grid-cols-2
-            sm:grid-cols-3
-            lg:grid-cols-6
-            gap-4 sm:gap-6
-            items-center
-          "
-        >
-          {partners.map((partner) => (
-            <motion.div
-              key={partner.name}
-              variants={itemVariants}
-              className="
-                flex h-20 sm:h-24
-                items-center justify-center
-                rounded-2xl
-                border border-gray-100
-                bg-gray-50
-                shadow-sm
-                hover:shadow-md
-                transition-all duration-300
-                p-4
-              "
-            >
-              <img
-                src={partner.logo}
-                alt={partner.name}
-                className="h-8 sm:h-10 w-auto object-contain"
-                loading="lazy"
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="relative overflow-hidden">
+          {/* Scrolling logos */}
+          <motion.div
+            className="flex items-center gap-6 sm:gap-8 whitespace-nowrap"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              repeat: Infinity,
+              duration: 28,
+              ease: "linear",
+            }}
+          >
+            {[...partners, ...partners].map((partner, index) => (
+              <div
+                key={`${partner.name}-${index}`}
+                className="
+                  flex h-20 w-40 sm:h-24 sm:w-48
+                  flex-shrink-0
+                  items-center justify-center
+                  hover:shadow-md
+                  transition-all duration-300
+                  p-4
+                "
+              >
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-8 sm:h-10 w-auto object-contain grayscale hover:grayscale-0 transition duration-300"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Left fade */}
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+
+          {/* Right fade */}
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-gray-50 to-transparent z-10" />
+        </div>
       </div>
     </section>
   );
@@ -500,7 +476,7 @@ function LearningPaths() {
         
         {/* Header */}
         <div className="mb-14 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#2563EB] bg-[#2563EB]px-4 py-2 text-sm font-medium text-[#2563EB]">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#2563EB] px-4 py-2 text-sm font-medium text-[#2563EB]">
             <BookOpen size={14} />
             Learning Paths
           </div>
